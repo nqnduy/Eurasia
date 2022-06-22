@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from "prop-types";
 
-Home.propTypes = {};
+HomePage.propTypes = {};
 
-export default function Home() {
+export default function HomePage() {
    return (
       <>
          <div>Home</div>
       </>
-   );
+   )
 }

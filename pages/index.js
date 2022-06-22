@@ -1,7 +1,11 @@
 import MasterPageBasic from '@/components/website/master/MasterPageBasic';
+import HomePage from '@/components/website/pages/HomePage';
 
 export default function Home(props) {
-	// const router = useRouter();
+	return (
+        <MasterPageBasic hidePrevButton pageName="Homepage">
+            <HomePage />
+        </MasterPageBasic>
+    );
 
-	return <MasterPageBasic hidePrevButton pageName="Homepage"></MasterPageBasic>;
 }
