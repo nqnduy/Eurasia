@@ -1,0 +1,35 @@
+{
+  "isDebugging": false,
+  "framework": "diginext",
+  "git": {
+    "creator": "nqnduy",
+    "repoURL": "https://bitbucket.org/digitopvn/eurasia-duy/src"
+  },
+  "env": "dev",
+  "shoudInherit": false,
+  "namespace": {
+    "dev": "eurasia-duy-ns",
+    "prod": "eurasia-duy-ns"
+  },
+  "ssl": true,
+  "username": "nqnduy",
+  "code": "3tMPuZ8Xjn5eU6Xndb",
+  "refreshToken": "mEgcnkvDXPhZBtfaFQ",
+  "projectSlug": "eurasia-duy",
+  "remoteURL": "",
+  "projectName": "Eurasia-duy",
+  "diginext-cli": "1.0.2",
+  "domain": {
+    "staging": [],
+    "prod": []
+  },
+  "cdn": {
+    "dev": false,
+    "staging": false,
+    "prod": false
+  },
+  "pipeline": {
+    "prod": true
+  },
+  "version": "2.0.4"
+}

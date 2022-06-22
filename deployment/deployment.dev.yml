@@ -1,0 +1,92 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: eurasia-duy-ns
+  labels:
+    project: eurasia-duy
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: eurasia-duy-ingress
+  namespace: eurasia-duy-ns
+  labels:
+    project: eurasia-duy
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/proxy-body-size: 50m
+    nginx.ingress.kubernetes.io/from-to-www-redirect: 'true'
+    nginx.ingress.kubernetes.io/affinity: cookie
+    nginx.ingress.kubernetes.io/session-cookie-name: route
+    nginx.ingress.kubernetes.io/session-cookie-hash: sha1
+spec:
+  rules:
+    - host: dev1.digitop.vn
+      http:
+        paths:
+          - path: /eurasia-duy
+            pathType: Prefix
+            backend:
+              service:
+                name: eurasia-duy-svc
+                port:
+                  number: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eurasia-duy-svc
+  namespace: eurasia-duy-ns
+  labels:
+    app: eurasia-duy
+    project: eurasia-duy
+spec:
+  ports:
+    - port: 80
+      targetPort: 3000
+  selector:
+    app: eurasia-duy
+  sessionAffinity: ClientIP
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eurasia-duy
+  namespace: eurasia-duy-ns
+  labels:
+    project: eurasia-duy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eurasia-duy
+  template:
+    metadata:
+      labels:
+        app: eurasia-duy
+        project: eurasia-duy
+    spec:
+      containers:
+        - name: eurasia-duy
+          image: 'asia.gcr.io/top-group-k8s/eurasia-duy:2022-06-22-11-51-29'
+          ports:
+            - containerPort: 3000
+          resources: {}
+          env:
+            - name: NEXT_PUBLIC_ENV
+              value: development
+            - name: NEXT_PUBLIC_BASE_PATH
+              value: eurasia-duy
+            - name: NEXT_PUBLIC_API_BASE_PATH
+              value: 'https://dev1.digitop.vn/eurasia-duy/backend'
+            - name: NEXT_PUBLIC_CDN_BASE_PATH
+              value: 'https://google-cdn.digitop.vn/eurasia-duy/dev'
+            - name: NEXT_PUBLIC_BASE_URL
+              value: 'https://dev1.digitop.vn/eurasia-duy'
+            - name: IRON_SESSION_SECRET
+              value: SHPfrs9nuSdutAw2mn8trxCVG93YVGVR
+
+---
