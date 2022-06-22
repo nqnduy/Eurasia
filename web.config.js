@@ -66,7 +66,7 @@ export const Environment = {
 const CONFIG = {
 	environment: process.env.NEXT_PUBLIC_ENV || "development",
 	site: {
-		title: "Diginext Website",
+		title: "Eurasia Website",
 		description: "Description goes here",
 		type: "article",
 	},
