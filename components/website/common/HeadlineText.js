@@ -3,19 +3,19 @@ import PropTypes from "prop-types";
 import { variable } from "styles/variable";
 
 const HeadlineText = (props) => {
-	const { className, children, color, fontWeight, margin, padding } = props;
+	const { className, children, colorTitle, fontWeight, margin, padding } = props;
 	return (
 		<>
-			<h3 className={className}>{children}</h3>
+			<h3 className={`HeadlineText ${className}`}>{children}</h3>
 			<style jsx>{`
-				h3 {
+				.HeadlineText {
 					font-family: "Lexend";
 					font-weight: ${fontWeight};
 					font-size: 1.4rem;
 					line-height: 1.3;
 					letter-spacing: 0.3em;
 					text-transform: uppercase;
-					color: ${color};
+					color: ${colorTitle};
 					margin: ${margin};
 					padding: ${padding};
 				}
@@ -24,14 +24,14 @@ const HeadlineText = (props) => {
 	);
 };
 HeadlineText.propTypes = {
-	color: PropTypes.string,
+	colorTitle: PropTypes.string,
 	fontWeight: PropTypes.number,
 	className: PropTypes.string,
 	margin: PropTypes.string,
 	padding: PropTypes.string,
 };
 HeadlineText.defaultProps = {
-	color: variable.color.white,
+	colorTitle: variable.color.white,
 	margin: "0",
 	padding: "0",
 	fontWeight: 400,

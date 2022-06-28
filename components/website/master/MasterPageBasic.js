@@ -10,7 +10,10 @@ const Providers = dynamic(() => import('components/website/contexts/Providers'))
 const GlobalStyle = dynamic(() => import('styles/global'));
 const CommonStyle = dynamic(() => import('styles/common'));
 const Variable = dynamic(() => import("styles/variable"));
-const Footer = dynamic(() => import("@/website/elements/Footer"));
+const Body = dynamic(() => import("@/website/elements/Body"));
+const Header = dynamic(() => import("@/website/elements/Header"));
+const Footer = dynamic(() => import("@/components/website/elements/Footer"));
+const ContactGroup = dynamic(() => import("@/components/website/elements/ContactGroup"));
 
 const MasterPageBasic = ({ pageName, children }) => {
 	const router = useRouter();
@@ -38,9 +41,8 @@ const MasterPageBasic = ({ pageName, children }) => {
 
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-				{ /* Do not add stylesheets using next/head
+				{/* Do not add stylesheets using next/head
 				Use Document instead. See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component*/}
-
 			</Head>
 
 			{/* TRACKING SCRIPTS - CHANGE THE ID TO THE CORRECT ONE*/}
@@ -49,11 +51,15 @@ const MasterPageBasic = ({ pageName, children }) => {
 			{/* - STYLE OF THE WEBSITE */}
 			<GlobalStyle />
 			<CommonStyle />
-			<Variable/>
+			<Variable />
 			{/* - ADD MORE PROVIDER INSIDE THIS COMPONENT */}
 			<Providers>
-				<main className={[device, orientation, breakpoint].join(" ")}>{children}</main>
-				<Footer/>
+				<Body>
+					<Header/>
+					<main className={[device, orientation, breakpoint].join(" ")}>{children}</main>
+					<Footer />
+					<ContactGroup/>
+				</Body>
 			</Providers>
 		</>
 	);

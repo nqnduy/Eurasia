@@ -2,10 +2,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@/website/*": ["components/website/*"],
       "@/components/*": ["components/*"],
       "@/dashkit/*": ["components/dashkit/*"],
       "@/diginext/*": ["components/diginext/*"],
-      "@/website/*": ["components/website/*"],
       "@/helpers/*": ["modules/helpers/*"],
       "@/constants/*": ["modules/constants/*"],
       "@/plugins/*": ["plugins/*"]

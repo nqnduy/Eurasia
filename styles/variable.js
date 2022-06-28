@@ -1,6 +1,7 @@
 export const variable = {
 	color: {
 		white: "#fff",
+		black: "#000",
 		grey: "#414141",
 		violet: "#3B2D53",
 		gold: "#CAB3AA",
