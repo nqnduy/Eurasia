@@ -3,18 +3,20 @@ import PropTypes from "prop-types";
 import { variable } from "styles/variable";
 
 const MainTitle = (props) => {
-	const { className, children, colorTitle, fontFamily, margin, padding, textTransform, ...e } = props;
+	const { className, children, colorTitle, fontFamily, margin, padding, textTransform, inTextWrap = false, ...e } = props;
 	return (
 		<>
-			<h3 className={`MainTitle ${className}`} {...e}>{children}</h3>
+			<h3 className={`MainTitle ${className ? className : ""}`} {...e}>
+				{children}
+			</h3>
 			<style jsx>{`
 				.MainTitle {
 					font-family: ${fontFamily};
-					font-size: 1.4rem;
+					font-size: ${inTextWrap ? "1" : "1.4rem"};
 					line-height: 1.3;
 					letter-spacing: 0.3em;
 					text-transform: ${textTransform};
-					color: ${colorTitle};
+					color: ${inTextWrap ? "inherit" : colorTitle};
 					margin: ${margin};
 					padding: ${padding};
 				}

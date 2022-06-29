@@ -33,6 +33,7 @@ export default function ContactGroup() {
 						.icon {
 							padding: 1.2rem;
 							background-color: ${variable.color.white};
+							mix-blend-mode: difference;
 							border-radius: 50%;
 							transition: 0.4s background-color cubic-bezier(0.66, 0, 0.15, 1);
 							&:hover {

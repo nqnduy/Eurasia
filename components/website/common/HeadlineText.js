@@ -3,15 +3,15 @@ import PropTypes from "prop-types";
 import { variable } from "styles/variable";
 
 const HeadlineText = (props) => {
-	const { className, children, colorTitle, fontWeight, margin, padding } = props;
+	const { className, children, colorTitle, fontWeight, margin, padding, inTextWrap = false } = props;
 	return (
 		<>
-			<h3 className={`HeadlineText ${className}`}>{children}</h3>
+			<h3 className={`HeadlineText ${className ? className : ""}`}>{children}</h3>
 			<style jsx>{`
 				.HeadlineText {
 					font-family: "Lexend";
 					font-weight: ${fontWeight};
-					font-size: 1.4rem;
+					font-size: ${inTextWrap ? "1" : "1.4rem"};
 					line-height: 1.3;
 					letter-spacing: 0.3em;
 					text-transform: uppercase;

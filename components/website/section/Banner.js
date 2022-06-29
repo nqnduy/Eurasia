@@ -6,7 +6,7 @@ import GridLayout from "@/website/elements/GridLayout";
 import { ArrowRightBannerIcon, ArrowLeftBannerIcon, ArrowDownBannerIcon } from "@/website/elements/Icons";
 import { variable } from 'styles/variable';
 
-export default function Banner() {
+export default function Banner({headline, title, image}) {
 return (
 	<>
 		<div className="Banner">
@@ -16,8 +16,8 @@ return (
 						<div>
 							<ArrowLeftBannerIcon style={{ fontSize: 30, cursor: "pointer" }} />
 							<div className="textWrap">
-								<HeadlineText className="headline">Furniture</HeadlineText>
-								<MainTitle className="title">Fendi Casa</MainTitle>
+								<HeadlineText className="headline">{headline}</HeadlineText>
+								<MainTitle className="title">{title}</MainTitle>
 							</div>
 						</div>
 						<ArrowRightBannerIcon style={{ fontSize: 30, cursor: "pointer" }} />
@@ -37,7 +37,7 @@ return (
 					position: relative;
 					width: 100%;
 					height: 70vh;
-					background: url(${asset("/images/home_banner.png")}) no-repeat center center/cover;
+					background: url(${asset(image)}) no-repeat center center/cover;
 					.headline {
 						font-size: 1rem;
 						line-height: 1.2em;

@@ -54,7 +54,7 @@ export default function CardList({ data }) {
 						<Slider {...settings}>
 							{renderDataFilter.map((item, index) => (
 								<React.Fragment key={index}>
-									<TextInsideCard image={item.image} title={item.title} />
+									<TextInsideCard data={item} />
 								</React.Fragment>
 							))}
 						</Slider>

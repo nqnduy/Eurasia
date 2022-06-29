@@ -3,7 +3,7 @@ import ImageWrap from '@/website/common/ImageWrap';
 import MainTitle from '@/website/common/MainTitle';
 import { ArrowMoreIcon } from '@/website/elements/Icons';
 
-export default function TextInsideCard(data) {
+export default function TextInsideCard({data}) {
 	const { image, title } = data;
 return (
 	<>

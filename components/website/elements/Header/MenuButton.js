@@ -72,9 +72,7 @@ const MenuButton = () => {
 		<>
 			<button className="MenuButton unbutton">
 				<Hamburger />
-				<HeadlineText className="text">
-					Menu
-				</HeadlineText>
+				<HeadlineText className="text">Menu</HeadlineText>
 			</button>
 			<style jsx global>{`
 				.MenuButton {
@@ -93,14 +91,14 @@ const MenuButton = () => {
 							position: absolute;
 							bottom: 0;
 							right: 0;
-							transform: 0.6s color cubic-bezier(0.66, 0, 0.15, 1);
+							transition: 0.6s color cubic-bezier(0.66, 0, 0.15, 1);
 							color: transparent;
 						}
 					}
 					&:hover {
 						.text {
 							color: ${variable.color.gold};
-							transform: 0.6s color cubic-bezier(0.66, 0, 0.15, 1);
+							transition: 0.6s color cubic-bezier(0.66, 0, 0.15, 1);
 						}
 						.hamburger {
 							span {

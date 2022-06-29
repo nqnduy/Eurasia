@@ -25,7 +25,7 @@ export default function AllInspirations() {
 				</div>
 				<style jsx global>{`
 					.AllInspirations {
-						padding: 11.5rem 0 10rem 0;
+						padding: 11.5rem 0 5rem 0;
 						&__link {
 							text-align: center;
 							cursor: pointer;
