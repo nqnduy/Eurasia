@@ -17,7 +17,7 @@ return (
 							<ArrowLeftBannerIcon style={{ fontSize: 30, cursor: "pointer" }} />
 							<div className="textWrap">
 								<HeadlineText className="headline">{headline}</HeadlineText>
-								<MainTitle className="title">{title}</MainTitle>
+								<MainTitle className="title" colorTitle={variable.color.white}>{title}</MainTitle>
 							</div>
 						</div>
 						<ArrowRightBannerIcon style={{ fontSize: 30, cursor: "pointer" }} />

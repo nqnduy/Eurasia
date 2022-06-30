@@ -4,10 +4,15 @@ import MainTitle from "@/website/common/MainTitle";
 import HeadlineText from "./HeadlineText";
 import { variable } from 'styles/variable';
 
-export default function MainTextWrap({ className, title, typeTitle, children, colorContent, overText, ...titleProps }) {
+export default function MainTextWrap({ className, title, titleSize, typeTitle, children, colorContent, overText, ...titleProps }) {
 	const chooseTitle = (type) => {
 		if (type === "main") {
-			return <MainTitle inTextWrap={true} {...titleProps}>{title}</MainTitle>;
+			if (titleSize === "large") {
+				return <MainTitle.Large inTextWrap={true} {...titleProps}>{title}</MainTitle.Large>
+			}
+			else {
+				return <MainTitle inTextWrap={true} {...titleProps}>{title}</MainTitle>;
+			}
 		} else if (type === "headline") {
 			return <HeadlineText inTextWrap={true} {...titleProps}>{title}</HeadlineText>;
 		} else {
@@ -21,7 +26,7 @@ export default function MainTextWrap({ className, title, typeTitle, children, co
 				<div className="title">{chooseTitle(typeTitle)}</div>
 				{overText ? (
 					<div className="content">
-						<p className="content-over">{children}</p>
+						<div className="content-over">{children}</div>
 					</div>
 				) : (
 					<div className="content">

@@ -4,7 +4,8 @@ import HeadlineText from '@/website/common/HeadlineText';
 import { variable } from 'styles/variable';
 import MainTextWrap from '@/website/common/MainTextWrap';
 
-export default function ProductCard({image, category, type, name, description, skuCode}) {
+export default function ProductCard({data}) {
+  const { category, type, name, description, image, skuCode } = data;
   return (
 		<>
 			<div className="ProductCard">

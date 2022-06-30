@@ -15,13 +15,17 @@ export default function InspirationStyle() {
 							Inspiration style
 						</HeadlineText>
 						<div className="thumbnail">
-							<MainTextWrap className="thumbnail__text" typeTitle="main" title="Contemporary style">
-								<p>
+							<MainTextWrap className="thumbnail__text" typeTitle="main" title="Contemporary style" titleSize="large">
+								<div className="text">
 									Natural materials (leather, wood, marble, metal etc.), without embellishments, used in such a way as to enhance and emphasise their
 									quintessential qualities. Made unique by finishes and technologically advanced processes specifically designed for the brand to make
-									them “proprietary” design materials. <br /><br /> A process that strives to create unique categories of materials which, like Pelle Frau®, might
-									become registered trademarks: Legno Frau®, Marmo Frau® etc.
-								</p>
+									them “proprietary” design materials. <br />
+									<br /> A process that strives to create unique categories of materials which, like Pelle Frau®, might become registered trademarks:
+									Legno Frau®, Marmo Frau® etc.
+									<MainTitle className="thumbnail__cta" colorTitle={variable.color.violet} textTransform="none">
+										ReadMore
+									</MainTitle>
+								</div>
 								<div className="thumbnail__image">
 									<ImageWrap src="/images/inspirationstyle.jpg" gif="/gifs/662x412.gif" />
 								</div>
@@ -33,7 +37,7 @@ export default function InspirationStyle() {
 			<style jsx global>{`
 				.InspirationStyle {
 					position: relative;
-					padding: 5rem 0 5rem 0;
+					padding: 5rem 0;
 					&__content {
 						display: grid;
 						grid-template-columns: repeat(13, 1fr);
@@ -42,7 +46,6 @@ export default function InspirationStyle() {
 						grid-template-areas: 1fr 1fr 1fr;
 					}
 					.headline {
-						width: 50%;
 						transform: rotate(270deg);
 						transform-origin: 0 0;
 						position: absolute;
@@ -55,10 +58,8 @@ export default function InspirationStyle() {
 						grid-column: 2 / 14;
 						&__text {
 							.title {
-								font-size: 4.8rem !important;
 								margin-bottom: 3rem;
 								width: 45%;
-								color: ${variable.color.violet};
 							}
 							.content {
 								font-size: 1.4rem;
@@ -67,17 +68,21 @@ export default function InspirationStyle() {
 								display: grid;
 								grid-template-columns: repeat(12, 1fr);
 								column-gap: 2rem;
-									p {
+								.text {
 									grid-column: 1 / 5;
 									text-align: justify;
-									}
+								}
 							}
 						}
-				&__image {
-				grid-column: 6 / 13;
+						&__cta {
+							margin-top: 6rem;
+							letter-spacing: 0.2em;
+						}
+						&__image {
+							grid-column: 6 / 13;
+						}
+					}
 				}
-			}
-		}
 			`}</style>
 		</>
   );

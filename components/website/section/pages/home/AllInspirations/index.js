@@ -5,8 +5,8 @@ import GridLayout from '@/website/elements/GridLayout';
 import TextInsideCard from '@/components/website/common/TextInsideCard';
 import MainTitle from '@/website/common/MainTitle';
 import AppLink from '@/diginext/link/AppLink';
-import CardList from '@/website/pages/HomePage/AllInspirations/CardList';
-import Inspirations from "@/website/pages/HomePage/AllInspirations/data.json";
+import CardList from "@/website/section/pages/home/AllInspirations/CardList";
+import Inspirations from "@/website/section/pages/home/AllInspirations/data.json";
 
 export default function AllInspirations() {
     return (

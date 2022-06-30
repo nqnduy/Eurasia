@@ -2,7 +2,7 @@ import React from 'react'
 import ImageWrap from '@/website/common/ImageWrap';
 import MainTitle from '@/website/common/MainTitle';
 import { ArrowMoreIcon } from '@/website/elements/Icons';
-
+import { variable } from 'styles/variable';
 export default function TextInsideCard({data}) {
 	const { image, title } = data;
 return (
@@ -10,13 +10,21 @@ return (
 		<div className="TextInsideCard">
 			<ImageWrap src={image} gif="/gifs/336x336.gif" />
 			<div className="TextInsideCard__text">
-				<MainTitle className="title">{title}</MainTitle>
+				<MainTitle
+					className="title"
+					colorTitle={variable.color.white}>
+					{title}
+				</MainTitle>
 				<div className="see-more">
 					<ArrowMoreIcon style={{ fontSize: 11 }} />
-					<MainTitle className="text">See more</MainTitle>
+					<MainTitle
+						className="text"
+						colorTitle={variable.color.white}>
+						See more
+					</MainTitle>
 				</div>
 			</div>
-			<div className="TextInsideCard__layer"/>
+			<div className="TextInsideCard__layer" />
 		</div>
 		<style jsx global>{`
 			.TextInsideCard {

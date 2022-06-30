@@ -8,7 +8,7 @@ const GridLayout = ({ children, container = false }) => {
 			return children;
 		}
 		return <></>;
-	}, [container]);
+	}, [container, children]);
 
 	return (
 		<>
