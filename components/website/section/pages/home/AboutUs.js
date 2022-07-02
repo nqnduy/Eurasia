@@ -80,9 +80,9 @@ return (
 								conceived, with a mission to open myriad of doors for the crème de la crème of European interior design to enter Vietnam’s elite
 								customers’ homes and hearts.
 							</MainTextWrap>
-							<MainTitle className="thumbnail__cta" colorTitle={variable.color.violet} textTransform="none">
+							<MainTitle.CTA className="thumbnail__cta">
 								Find out more
-							</MainTitle>
+							</MainTitle.CTA>
 						</div>
 					</div>
 				</div>

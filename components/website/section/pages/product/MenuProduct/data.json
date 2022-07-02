@@ -1,0 +1,30 @@
+[
+	{
+		"title": "Brands",
+		"data": ["ALF Italia", "B&B Italia", "Bentley Home", "Bugatti Home", "Cappellini", "Cassina", "Etro Home Interios", "Fendi Casa"]
+	},
+	{
+		"title": "Categories",
+		"data": ["Maxalto", "Heritage", "Murano Art Class Italy", "Rolf Benz", "Frette", "Cassina"]
+	},
+	{
+		"title": "Color",
+		"data": ["Cassina", "Etro Home Interios", "Fendi Casa", "Paul Mathieu"]
+	},
+	{
+		"title": "Materials",
+		"data": ["Duccio di Segna Cristalleria", "Cappellini", "Etro Home Interios", "Fendi Casa", "Fendi Casa", "Paul Mathieu"]
+	},
+	{
+		"title": "Availability",
+		"data": ["Cappellini", "Cassina", "Etro Home Interios", "Fendi Casa", "ALF Italia", "B&B Italia", "Bentley Home", "Bugatti Home"]
+	},
+	{
+		"title": "Price",
+		"data": ["Giorgetti", "B&B Italia", "Bentley Home", "Bugatti Home", "Cappellini", "Cassina", "Etro Home Interios", "Fendi Casa"]
+	},
+	{
+		"title": "Most popular",
+		"data": ["ALF Italia", "B&B Italia", "Bentley Home", "Giorgetti", "Cappellini", "Cassina", "Etro Home Interios", "Fendi Casa"]
+	}
+]

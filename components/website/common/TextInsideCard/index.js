@@ -3,26 +3,26 @@ import ImageWrap from '@/website/common/ImageWrap';
 import MainTitle from '@/website/common/MainTitle';
 import { ArrowMoreIcon } from '@/website/elements/Icons';
 import { variable } from 'styles/variable';
-export default function TextInsideCard({data}) {
+export default function TextInsideCard({data, seeMore = true, colorLayer}) {
 	const { image, title } = data;
 return (
 	<>
 		<div className="TextInsideCard">
 			<ImageWrap src={image} gif="/gifs/336x336.gif" />
 			<div className="TextInsideCard__text">
-				<MainTitle
-					className="title"
-					colorTitle={variable.color.white}>
+				<MainTitle className="title" colorTitle={variable.color.white}>
 					{title}
 				</MainTitle>
-				<div className="see-more">
-					<ArrowMoreIcon style={{ fontSize: 11 }} />
-					<MainTitle
-						className="text"
-						colorTitle={variable.color.white}>
-						See more
-					</MainTitle>
-				</div>
+				{seeMore ? (
+					<div className="see-more">
+						<ArrowMoreIcon style={{ fontSize: 11 }} />
+						<MainTitle className="text" colorTitle={variable.color.white}>
+							See more
+						</MainTitle>
+					</div>
+				) : (
+					<></>
+				)}
 			</div>
 			<div className="TextInsideCard__layer" />
 		</div>
@@ -34,14 +34,14 @@ return (
 					z-index: 3;
 
 					bottom: 0;
-					padding: 2rem;
+					padding: 3rem 2.2rem;
 					.title {
 						font-size: 2.2rem;
 					}
 					.see-more {
 						display: flex;
 						align-items: center;
-						margin-top: 3rem;
+						margin-top: 2.5rem;
 						.text {
 							letter-spacing: 0.2em;
 							margin-left: 1rem;
@@ -56,7 +56,7 @@ return (
 					bottom: 0;
 					width: 100%;
 					height: 40%;
-					background: linear-gradient(180deg, rgba(59, 45, 83, 0) 0%, #3b2d53 100%);
+					background: linear-gradient(${`180deg, ${colorLayer}00 0%, ${colorLayer} 100%`});
 					opacity: 0.5;
 				}
 			}

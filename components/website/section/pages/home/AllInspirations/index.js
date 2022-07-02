@@ -2,7 +2,7 @@ import React from 'react'
 import HeadlineText from '@/website/common/HeadlineText';
 import { variable } from 'styles/variable';
 import GridLayout from '@/website/elements/GridLayout';
-import TextInsideCard from '@/components/website/common/TextInsideCard';
+import TextInsideCard from '@/website/common/TextInsideCard';
 import MainTitle from '@/website/common/MainTitle';
 import AppLink from '@/diginext/link/AppLink';
 import CardList from "@/website/section/pages/home/AllInspirations/CardList";
@@ -15,10 +15,8 @@ export default function AllInspirations() {
 					<GridLayout container="true">
 						<CardList data={Inspirations} />
 						<AppLink href="#" display="block">
-							<div className="AllInspirations__link">
-								<MainTitle colorTitle={variable.color.violet} textTransform="none">
-									All Inspirations
-								</MainTitle>
+							<div className="AllInspirations-more">
+								<MainTitle.CTA isCenter={true}>All Inspirations</MainTitle.CTA>
 							</div>
 						</AppLink>
 					</GridLayout>
@@ -26,13 +24,9 @@ export default function AllInspirations() {
 				<style jsx global>{`
 					.AllInspirations {
 						padding: 11.5rem 0 5rem 0;
-						&__link {
-							text-align: center;
-							cursor: pointer;
-							.MainTitle {
-								font-size: 1.8rem;
-								letter-spacing: 0.2em;
-							}
+						&-more {
+							display: flex;
+							justify-content: center;
 						}
 					}
 				`}</style>

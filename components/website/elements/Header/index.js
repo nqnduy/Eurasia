@@ -7,9 +7,11 @@ import { variable } from 'styles/variable';
 import HeadlineText from '@/website/common/HeadlineText';
 import { debounce } from '@/plugins/next-hooks/useDimension';
 
-export default function Header() {
+export default function Header({isDark}) {
 	const [fixed, setFixed] = useState(false);
 	const [onScroll, setOnScroll] = useState(false);
+	const [currentTheme, setCurrentTheme] = useState(isDark); // default: false = "light" | true = "dark"
+
 	var timer = null;
 	useEffect(() => {
 		if (typeof window != "undefined") {
@@ -21,9 +23,11 @@ export default function Header() {
 	const handleScroll = (event) => {
 		if (window.pageYOffset > 350) {
 			setFixed(true);
+			if (isDark) setCurrentTheme(false);
 		}
 		else {
 			setFixed(false);
+			if (isDark) setCurrentTheme(true);
 		}
 
 		if (window, pageYOffset > 400) {
@@ -31,34 +35,40 @@ export default function Header() {
 		}
 		handleEndScroll();
 	};
+
+	const changeMainColor = () => {
+		if (currentTheme) return variable.color.violet;
+		else return variable.color.white;
+	}
+
     return (
 			<>
 				<header className={`Header ${fixed ? `fixed ${onScroll ? "onScroll" : ""}` : ""}`} onScroll={handleScroll}>
 					<GridLayout container="true">
 						<div className="Header__content">
 							<div className="brand">
-								<div className="brand-main">
-									<MainLogoIcon />
+								<div className="brand__main">
+									<MainLogoIcon className="brand__main-icon" />
 								</div>
-								<div className="brand-name">
-									<NameLogoIcon />
+								<div className="brand__name">
+									<NameLogoIcon className="brand__name-icon" />
 								</div>
 							</div>
 							<div className="action">
 								<ul>
 									<li className="action__language">
-										<HeadlineText>EN</HeadlineText>
+										<HeadlineText colorTitle={changeMainColor()}>EN</HeadlineText>
 									</li>
 									<li className="action__theme">
 										<LightModeIcon className="light" style={{ fontSize: 18 }} />
 										<NightModeIcon className="dark" style={{ fontSize: 10 }} />
 									</li>
 									<li className="action__search">
-										<SearchIcon style={{ fontSize: 13 }} />
+										<SearchIcon className="search" style={{ fontSize: 13 }} />
 									</li>
 								</ul>
 								<div className="action__menu">
-									<MenuButton />
+									<MenuButton isDark={currentTheme} />
 								</div>
 							</div>
 						</div>
@@ -94,7 +104,7 @@ export default function Header() {
 						}
 						position: fixed;
 						z-index: 100;
-						color: ${variable.color.white};
+						color: ${changeMainColor()};
 						padding: 2.8rem 0;
 						width: 100%;
 						background-color: transparent;
@@ -118,14 +128,24 @@ export default function Header() {
 								flex-direction: column;
 								align-items: center;
 								transition: 0.5s ease-out;
-								&-main {
+								&__main {
 									font-size: 6.7rem;
 									transition: 0.5s ease-out;
+									&-icon {
+										svg path {
+											fill: ${changeMainColor()};
+										}
+									}
 								}
-								&-name {
+								&__name {
 									margin: -0.6rem 0 -2.6rem 0;
 									font-size: 7.7rem;
 									transition: ease-out 0.5s;
+									&-icon {
+										svg path {
+											fill: ${changeMainColor()};
+										}
+									}
 								}
 							}
 							.action {
@@ -153,9 +173,25 @@ export default function Header() {
 									.dark {
 										position: relative;
 									}
+									.light,
+									.dark {
+										cursor: pointer;
+										svg path {
+											fill: ${changeMainColor()};
+										}
+									}
+								}
+								&__search {
+									.search {
+										cursor: pointer;
+										svg path {
+											fill: ${changeMainColor()};
+										}
+									}
 								}
 								&__language {
-									> h3 {
+									> div {
+										cursor: pointer;
 										font-size: 1rem;
 										line-height: 1.2em;
 										letter-spacing: 0.2em;
@@ -178,11 +214,16 @@ export default function Header() {
 										transition-delay: 0.1s;
 										transition: 0.6s ease-out;
 										margin: 0 0 -4rem 0;
-										&-main {
+										&__main {
 											font-size: 5.5rem;
 											transition: 0.6s all ease-out;
+											&-icon {
+												svg path {
+													fill: ${!changeMainColor()};
+												}
+											}
 										}
-										&-name {
+										&__name {
 											margin: -2.2rem 0 -2rem 0;
 											transform: translate(95%, -50%);
 											animation-name: changeLogo;
@@ -190,6 +231,11 @@ export default function Header() {
 											animation-timing-function: ease-in;
 											animation-duration: 1s;
 											transition: 0.6s ease-out;
+											&-icon {
+												svg path {
+													fill: ${changeMainColor()};
+												}
+											}
 										}
 									}
 									.action {

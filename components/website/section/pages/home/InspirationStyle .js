@@ -22,9 +22,7 @@ export default function InspirationStyle() {
 									them “proprietary” design materials. <br />
 									<br /> A process that strives to create unique categories of materials which, like Pelle Frau®, might become registered trademarks:
 									Legno Frau®, Marmo Frau® etc.
-									<MainTitle className="thumbnail__cta" colorTitle={variable.color.violet} textTransform="none">
-										ReadMore
-									</MainTitle>
+									<MainTitle.CTA className="thumbnail__cta">Read more</MainTitle.CTA>
 								</div>
 								<div className="thumbnail__image">
 									<ImageWrap src="/images/inspirationstyle.jpg" gif="/gifs/662x412.gif" />

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from "prop-types";
-import Banner from '@/website/section/Banner';
+import Banner from '@/website/section/global/Banner';
 import AllInspirations from '@/website/section/pages/home/AllInspirations';
 import InspirationStyle from "@/website/section/pages/home/InspirationStyle ";
 import FeatureProduct from '@/website/section/global/FeatureProduct';

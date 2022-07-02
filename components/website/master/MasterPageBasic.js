@@ -5,6 +5,7 @@ import { NextSeo } from "next-seo";
 import { useNextResponsive } from "plugins/next-reponsive";
 import GtagScript from "../tracking/GtagScript";
 import dynamic from 'next/dynamic';
+import { useMemo } from "react";
 
 const Providers = dynamic(() => import('components/website/contexts/Providers'));
 const GlobalStyle = dynamic(() => import('styles/global'));
@@ -15,9 +16,14 @@ const Header = dynamic(() => import("@/website/elements/Header"));
 const Footer = dynamic(() => import("@/components/website/elements/Footer"));
 const ContactGroup = dynamic(() => import("@/components/website/elements/ContactGroup"));
 
-const MasterPageBasic = ({ pageName, children }) => {
+const MasterPageBasic = ({ pageName, children, themeHeader }) => {
 	const router = useRouter();
 	const { device, breakpoint, orientation } = useNextResponsive();
+
+	const renderHeader = useMemo(() => {
+		if (themeHeader === "dark") return true;
+		else false;
+	}, [themeHeader]);
 
 	return (
 		<>
@@ -55,10 +61,10 @@ const MasterPageBasic = ({ pageName, children }) => {
 			{/* - ADD MORE PROVIDER INSIDE THIS COMPONENT */}
 			<Providers>
 				<Body>
-					<Header/>
+					<Header isDark={renderHeader} />
 					<main className={[device, orientation, breakpoint].join(" ")}>{children}</main>
 					<Footer />
-					<ContactGroup/>
+					<ContactGroup />
 				</Body>
 			</Providers>
 		</>

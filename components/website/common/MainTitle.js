@@ -69,4 +69,77 @@ MainTitle.Large.defaultProps = {
 	inTextWrap: false,
 };
 
+MainTitle.CTA = ({ className, children, isCenter }) => {
+	return (
+		<>
+			<MainTitle className={`cta ${className}`}>
+				<span data-text={children}>{children}</span>
+			</MainTitle>
+			<style jsx global>{`
+				.cta {
+					position: relative;
+					display: flex;
+					justify-content: ${isCenter ? "center" : "start"};
+
+					font-size: 1.8rem !important;
+					letter-spacing: 0.2em !important;
+					color: ${variable.color.violet};
+					text-transform: none !important;
+					overflow: hidden;
+					line-height: 1;
+					cursor: pointer;
+					span {
+						display: block;
+						transition: 0.3s ease-out;
+						color: ${variable.color.violet};
+						&::before {
+							position: absolute;
+							content: attr(data-text);
+							bottom: 100%;
+							font-style: italic;
+							width: 100%;
+							left: 0;
+						}
+						&::after {
+							position: absolute;
+							content: "";
+							bottom: 97%;
+							width: 0;
+							height: 1px;
+							left: 50%;
+							transform: translate(-50%);
+							transition: 300ms ease-out;
+							background-color: ${variable.color.violet};
+						}
+					}
+					&:hover {
+						span {
+							transform: translate3d(0, 100%, 0);
+							color: ${variable.color.gold};
+							font-weight: 700;
+							transition: 300ms ease-out;
+							&::after {
+								width: 75%;
+								transition: 300ms ease-out;
+								transition-delay: 300ms;
+								background-color: ${variable.color.gold};
+							}
+						}
+					}
+				}
+			`}</style>
+		</>
+	);
+}
+
+MainTitle.CTA.propTypes = {
+	className: PropTypes.string,
+	isCenter: PropTypes.bool,
+};
+MainTitle.CTA.defaultProps = {
+	className: "",
+	isCenter: false,
+};
+
+
 export default MainTitle;

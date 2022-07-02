@@ -1,0 +1,22 @@
+[
+	{
+		"title": "chair",
+		"image": "/images/category-1.jpg"
+	},
+	{
+		"title": "armchair",
+		"image": "/images/category-2.jpg"
+	},
+	{
+		"title": "table",
+		"image": "/images/category-3.jpg"
+	},
+	{
+		"title": "Ergonomy",
+		"image": "/images/product-1.jpg"
+	},
+	{
+		"title": "Organic",
+		"image": "/images/product-2.jpg"
+	}
+]

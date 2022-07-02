@@ -4,7 +4,7 @@ import MainTitle from "@/website/common/MainTitle";
 import HeadlineText from "./HeadlineText";
 import { variable } from 'styles/variable';
 
-export default function MainTextWrap({ className, title, titleSize, typeTitle, children, colorContent, overText, ...titleProps }) {
+export default function MainTextWrap({ className, title, titleSize, typeTitle, children, colorContent, overText, textLineOver, ...titleProps }) {
 	const chooseTitle = (type) => {
 		if (type === "main") {
 			if (titleSize === "large") {
@@ -29,9 +29,7 @@ export default function MainTextWrap({ className, title, titleSize, typeTitle, c
 						<div className="content-over">{children}</div>
 					</div>
 				) : (
-					<div className="content">
-						{children}
-					</div>
+					<div className="content">{children}</div>
 				)}
 			</div>
 
@@ -45,15 +43,17 @@ export default function MainTextWrap({ className, title, titleSize, typeTitle, c
 						}
 					}
 					.content {
+						--lineHeight: 1.8em;
 						font-family: "Lexend";
-						line-height: 1.8;
+						line-height: var(--lineHeight);
 						color: ${colorContent};
 						&-over {
 							display: -webkit-inline-box;
-							-webkit-line-clamp: 2;
+							-webkit-line-clamp: ${textLineOver};
 							-webkit-box-orient: vertical;
 							text-overflow: ellipsis;
 							overflow: hidden;
+							min-height: calc(var(--lineHeight) * ${textLineOver});
 						}
 					}
 				}
@@ -66,9 +66,11 @@ MainTextWrap.propTypes = {
 	colorContent: PropTypes.string,
 	className: PropTypes.string,
 	overText: PropTypes.bool,
+	textLineOver: PropTypes.number,
 };
 MainTextWrap.defaultProps = {
 	colorContent: variable.color.violet,
 	className: "",
 	overText: false,
+	textLineOver: 2
 };

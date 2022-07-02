@@ -7,7 +7,7 @@ export default function ContactGroup() {
     return (
 			<>
 				<div className="ContactGroup">
-					<GridLayout container="true">
+					<GridLayout>
 						<div className="ContactGroup__content">
 							<div>
 								<MessengerIcon className="icon" style={{ fontSize: 20, cursor: "pointer" }} />
@@ -25,6 +25,7 @@ export default function ContactGroup() {
 							display: flex;
 							align-items: flex-end;
 							flex-direction: column;
+							grid-column: 14/15;
 							> div {
 								display: flex;
 								flex-flow: column nowrap;

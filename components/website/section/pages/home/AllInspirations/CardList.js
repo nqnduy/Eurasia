@@ -6,6 +6,7 @@ import TextInsideCard from '@/website/common/TextInsideCard';
 import React, { useMemo, useState } from 'react'
 import Slider from 'react-slick';
 import { variable } from 'styles/variable';
+import TextInsideCardList from "@/website/common/TextInsideCard/CardList"
 
 export default function CardList({ data }) {
     const settings = {
@@ -50,15 +51,11 @@ export default function CardList({ data }) {
 							</MainTitle>
 						</div>
 					</div>
-					<div className="InspirationList__slider">
-						<Slider {...settings}>
-							{renderDataFilter.map((item, index) => (
-								<React.Fragment key={index}>
-									<TextInsideCard data={item} />
-								</React.Fragment>
-							))}
-						</Slider>
-					</div>
+				<TextInsideCardList
+					className="InspirationList__slider"
+					data={renderDataFilter}
+					colorLayer={variable.color.violet}
+				/>
 				</div>
 				<style jsx global>{`
 					.InspirationList {
@@ -101,22 +98,6 @@ export default function CardList({ data }) {
 						}
 						&__slider {
 							grid-column: 1 / 14;
-						}
-						.slick-slider {
-							display: grid;
-							grid-template-columns: repeat(13, 1fr);
-							column-gap: 2rem;
-							.slick-list {
-								grid-column: 2 / 13;
-
-								padding: 0 !important;
-								margin: 0 -2rem;
-								.slick-slide > div {
-									padding: 0 2rem;
-								}
-							}
-						}
-						.TextInsideCard {
 						}
 					}
 				`}</style>
