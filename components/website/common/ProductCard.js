@@ -11,7 +11,7 @@ export default function ProductCard({ data, textLineOverTitle, textLineOverConte
 		<>
 			<div className="ProductCard">
 				<div className="ProductCard__img">
-					<ImageWrap src={image} gif="gifs/370x370.gif" />
+					<ImageWrap src={image} gif="/gifs/370x370.gif" />
 				</div>
 				<HeadlineText colorTitle={variable.color.gold}>{`${category} | ${type}`}</HeadlineText>
 				<MainTextWrap

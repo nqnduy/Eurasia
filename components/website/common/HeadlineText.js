@@ -6,7 +6,7 @@ const HeadlineText = (props) => {
 	const { className, children, colorTitle, fontWeight, margin, padding, inTextWrap = false } = props;
 	return (
 		<>
-			<div className={`HeadlineText ${className ? className : ""}`}>{children}</div>
+			<div className={`${className} HeadlineText`}>{children}</div>
 			<style jsx>{`
 				.HeadlineText {
 					font-family: "Lexend";
@@ -32,6 +32,7 @@ HeadlineText.propTypes = {
 };
 HeadlineText.defaultProps = {
 	colorTitle: variable.color.white,
+	className: "",
 	margin: "0",
 	padding: "0",
 	fontWeight: 400,

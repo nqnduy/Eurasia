@@ -1,21 +1,20 @@
 import React from "react";
 import HeadlineText from "@/website/common/HeadlineText";
 import { variable } from "styles/variable";
+import PropTypes from 'prop-types';
 
-export default function FooterInput() {
+export default function FooterInput({children, className, mainColor}) {
 	return (
 		<>
-			<div className="FooterInput">
+			<div className={`${className} FooterInput`}>
 				<div className="FooterInput__input">
 					<input placeholder="Your email address" />
 					<button>
-						<HeadlineText fontWeight={500} className="Footer__btn">
-							Sign up
-						</HeadlineText>
+						<span>{children}</span>
 					</button>
 				</div>
 			</div>
-			<style jsx global>{`
+			<style jsx>{`
 				.FooterInput {
 					&__input {
 						background-color: transparent;
@@ -35,12 +34,12 @@ export default function FooterInput() {
 							text-transform: auto;
 
 							padding: 2.3rem 3rem;
-							border: 0.05rem solid ${variable.color.white};
+							border: 0.05rem solid ${mainColor};
 							height: 100%;
 							flex-grow: 1;
 
 							transition: 0.4s ease;
-							color: ${variable.color.white};
+							color: ${mainColor};
 							&::placeholder {
 								opacity: 1;
 								font-size: 1.4rem;
@@ -66,7 +65,7 @@ export default function FooterInput() {
 										transition: all 0.4s ease-out;
 										transform: translate3d(-0.2rem, 0.2rem, 0);
 									}
-									.Footer__btn {
+									span {
 										transition: color 0.4s ease-out;
 										color: ${variable.color.violet};
 									}
@@ -78,7 +77,7 @@ export default function FooterInput() {
 											height: 97%;
 											transform: translate3d(0.2rem, 0.2rem, 0);
 										}
-										.Footer__btn {
+										span {
 											filter: brightness(0.7);
 											transition: color 0.4s ease-out;
 											color: ${variable.color.violet};
@@ -92,9 +91,16 @@ export default function FooterInput() {
 							background-color: transparent;
 							cursor: pointer;
 							position: relative;
-							border: 0.05rem solid ${variable.color.white};
+							border: 0.05rem solid ${mainColor};
 							border-left-color: transparent;
-							.Footer__btn {
+							span {
+								font-family: "Lexend";
+								font-size: 1.4rem;
+								font-weight: 500;
+								line-height: 1.3;
+								letter-spacing: 0.3em;
+								color: ${mainColor};
+								text-transform: uppercase;
 								position: relative;
 								z-index: 5;
 								transition: color 0.4s ease-out;
@@ -122,7 +128,7 @@ export default function FooterInput() {
 									height: 97%;
 									transform: translate3d(0.2rem, 0.2rem, 0);
 								}
-								.Footer__btn {
+								span {
 									filter: brightness(0.7);
 									transition: color 0.4s ease-out;
 									color: ${variable.color.violet};
@@ -135,3 +141,10 @@ export default function FooterInput() {
 		</>
 	);
 }
+FooterInput.propTypes = {
+	mainColor: PropTypes.string,
+	className: PropTypes.string,
+};
+FooterInput.defaultProps = {
+	className: "",
+};

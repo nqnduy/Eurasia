@@ -6,7 +6,7 @@ const MainTitle = (props) => {
 	const { className, children, colorTitle, fontFamily, margin, padding, textTransform, inTextWrap, ...e } = props;
 	return (
 		<>
-			<div className={`MainTitle ${className}`} {...e}>
+			<div className={`${className} MainTitle`} {...e}>
 				{children}
 			</div>
 			<style jsx>{`
@@ -46,7 +46,7 @@ MainTitle.defaultProps = {
 MainTitle.Large = ({ children, inTextWrap, className }) => {
 	return (
 		<>
-			<MainTitle className={`large ${className}`} inTextWrap={inTextWrap}>
+			<MainTitle className={`${className} large`} inTextWrap={inTextWrap}>
 				{children}
 			</MainTitle>
 			<style jsx global>{`
@@ -72,7 +72,7 @@ MainTitle.Large.defaultProps = {
 MainTitle.CTA = ({ className, children, isCenter }) => {
 	return (
 		<>
-			<MainTitle className={`cta ${className}`}>
+			<MainTitle className={`${className} cta`}>
 				<span data-text={children}>{children}</span>
 			</MainTitle>
 			<style jsx global>{`

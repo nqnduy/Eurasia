@@ -34,7 +34,7 @@ export default function Footer() {
 							<HeadlineText className="subscribe">
 								Subcribe to get <br /> our lastest updates
 							</HeadlineText>
-							<FooterInput />
+							<FooterInput mainColor={variable.color.white}>Sign up</FooterInput>
 						</div>
 						<span className="footer__line"></span>
 						<div className="footer__bottom">

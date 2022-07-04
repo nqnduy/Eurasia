@@ -1,11 +1,11 @@
 import MasterPageBasic from '@/website/master/MasterPageBasic';
-import ProductPage from '@/website/pages/Product';
+import Product from '@/website/pages/Product';
 import React from 'react'
 
-export default function Product() {
-  return (
-		<MasterPageBasic hidePrevButton pageName="Product" themeHeader="dark">
-			<ProductPage />
+export default function ProductPage() {
+	return (
+		<MasterPageBasic pageName="Product" themeHeader="dark">
+			<Product />
 		</MasterPageBasic>
-  );
+	);
 }

@@ -22,7 +22,7 @@ export default function MainTextWrap({ className, title, titleSize, typeTitle, c
 
 	return (
 		<>
-			<div className={`MainTextWrap ${className ? className : ""}`}>
+			<div className={`${className} MainTextWrap`}>
 				<div className="title">{chooseTitle(typeTitle)}</div>
 				{overText ? (
 					<div className="content">
@@ -47,6 +47,7 @@ export default function MainTextWrap({ className, title, titleSize, typeTitle, c
 						font-family: "Lexend";
 						line-height: var(--lineHeight);
 						color: ${colorContent};
+						text-align: justify;
 						&-over {
 							display: -webkit-inline-box;
 							-webkit-line-clamp: ${textLineOver};
