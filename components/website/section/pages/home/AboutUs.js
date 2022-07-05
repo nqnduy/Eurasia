@@ -29,7 +29,6 @@ export default function AboutUs() {
 	let totalPage = Images.length;
 
 	const renderPageSlide = () => {
-
 		return (
 			<>
 				<ul className="aboutUsSlide">
@@ -75,7 +74,7 @@ return (
 							About us
 						</HeadlineText>
 						<div className="thumbnail">
-							<MainTextWrap className="thumbnail__text" typeTitle="main" title="Eurasia concept" titleSize="large">
+							<MainTextWrap className="thumbnail__text" typeTitle="main" title="Eurasia concept" isLarge={true}>
 								It takes fine taste and exceptional passion to bring Western aesthetic into the cradle of Asian culture. That is how Eurasia Concept is
 								conceived, with a mission to open myriad of doors for the crème de la crème of European interior design to enter Vietnam’s elite
 								customers’ homes and hearts.

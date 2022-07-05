@@ -4,14 +4,21 @@ import MainTitle from "@/website/common/MainTitle";
 import HeadlineText from "./HeadlineText";
 import { variable } from 'styles/variable';
 
-export default function MainTextWrap({ className, title, titleSize, typeTitle, children, colorContent, overText, textLineOver, ...titleProps }) {
+export default function MainTextWrap({ className, title, isLarge, typeTitle, children, colorContent, overText, textLineOver, ...titleProps }) {
 	const chooseTitle = (type) => {
 		if (type === "main") {
-			if (titleSize === "large") {
-				return <MainTitle.Large inTextWrap={true} {...titleProps}>{title}</MainTitle.Large>
-			}
-			else {
-				return <MainTitle inTextWrap={true} {...titleProps}>{title}</MainTitle>;
+			if (isLarge) {
+				return (
+					<MainTitle.Large inTextWrap={true} {...titleProps}>
+						{title}
+					</MainTitle.Large>
+				);
+			} else {
+				return (
+					<MainTitle inTextWrap={true} {...titleProps}>
+						{title}
+					</MainTitle>
+				);
 			}
 		} else if (type === "headline") {
 			return <HeadlineText inTextWrap={true} {...titleProps}>{title}</HeadlineText>;
@@ -22,7 +29,7 @@ export default function MainTextWrap({ className, title, titleSize, typeTitle, c
 
 	return (
 		<>
-			<div className={`${className} MainTextWrap`}>
+			<div className={`MainTextWrap ${className}`}>
 				<div className="title">{chooseTitle(typeTitle)}</div>
 				{overText ? (
 					<div className="content">
@@ -33,11 +40,10 @@ export default function MainTextWrap({ className, title, titleSize, typeTitle, c
 				)}
 			</div>
 
-			<style jsx>{`
+			<style jsx global>{`
 				.MainTextWrap {
 					.title {
 						font-family: "CoGa";
-						font-size: 1.4rem;
 						.MainTitle {
 							font-size: inherit;
 						}
@@ -66,6 +72,7 @@ MainTextWrap.propTypes = {
 	children: PropTypes.any.isRequired,
 	colorContent: PropTypes.string,
 	className: PropTypes.string,
+	isLarge: PropTypes.bool,
 	overText: PropTypes.bool,
 	textLineOver: PropTypes.number,
 };
@@ -73,5 +80,6 @@ MainTextWrap.defaultProps = {
 	colorContent: variable.color.violet,
 	className: "",
 	overText: false,
+	isLarge: false,
 	textLineOver: 2
 };

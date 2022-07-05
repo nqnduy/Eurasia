@@ -10,6 +10,7 @@ export default function FooterTextWrap({title, children}) {
 				<style jsx global>{`
 					.FooterTextWrap {
 						.title {
+							font-size: 1.2rem;
 							margin-bottom: 26px;
 							color: ${variable.color.gold};
 						}

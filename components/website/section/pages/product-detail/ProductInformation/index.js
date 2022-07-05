@@ -84,7 +84,13 @@ export default function ProductInformation() {
 							</div>
 							<div className="ProductInformation__content-right">
 								<HeadlineText colorTitle={variable.color.gold}>{product.brand}</HeadlineText>
-								<MainTextWrap className="textWrap" typeTitle="main" title={product.name} titleSize="large" colorContent={variable.color.dark_grey}>
+								<MainTextWrap
+									className="textWrap"
+									typeTitle="main"
+									title={product.name}
+									isLarge={true}
+									size="xLarge"
+									colorContent={variable.color.dark_grey}>
 									{product.description}
 								</MainTextWrap>
 								<HeadlineText className="sku" colorTitle={variable.color.grey}>
@@ -145,11 +151,6 @@ export default function ProductInformation() {
 								grid-column: 9 / 14;
 								.textWrap {
 									margin-bottom: 10rem;
-									.title {
-										.large {
-											font-size: 3.6rem !important;
-										}
-									}
 									.content {
 										font-size: 1.4rem;
 										letter-spacing: 0.1em;

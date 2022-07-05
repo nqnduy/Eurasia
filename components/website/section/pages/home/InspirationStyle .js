@@ -15,7 +15,7 @@ export default function InspirationStyle() {
 							Inspiration style
 						</HeadlineText>
 						<div className="thumbnail">
-							<MainTextWrap className="thumbnail__text" typeTitle="main" title="Contemporary style" titleSize="large">
+							<MainTextWrap className="thumbnail__text" typeTitle="main" title="Contemporary style" isLarge={true}>
 								<div className="text">
 									Natural materials (leather, wood, marble, metal etc.), without embellishments, used in such a way as to enhance and emphasise their
 									quintessential qualities. Made unique by finishes and technologically advanced processes specifically designed for the brand to make

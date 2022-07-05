@@ -15,7 +15,7 @@ export default function ProductList() {
 				<div className="ProductList">
 					<GridLayout>
 						<div className="ProductList__content">
-							<MainTitle.Large className="ProductList__content-title">Products</MainTitle.Large>
+							<MainTitle.Large className="ProductList__content-title" size="xxLarge">Products</MainTitle.Large>
 							<TextInsideCardList className="ProductList__content-category" data={Categories} seeMore={false} colorLayer={variable.color.gold} />
 							<div className="ProductList__content-product">
 								{Products.map((product, index) => (

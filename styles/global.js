@@ -6,11 +6,6 @@ import "slick-carousel/slick/slick-theme.css";
 
 const GlobalStyle = () => (
 	<style jsx global>{`
-		/*
-		font-family: 'Cabin', sans-serif;
-		font-family: 'Lora', serif;
-		font-family: 'Playfair Display', serif;
-		*/
 
 		@font-face {
 			font-family: "ProximaNova";

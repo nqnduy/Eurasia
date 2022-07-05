@@ -10,7 +10,7 @@ return (
 		<div className="OurServices">
 			<GridLayout>
 				<div className="OurServices__headline">
-					<MainTitle.Large>Our service</MainTitle.Large>
+					<MainTitle.Large size="xxLarge">Our service</MainTitle.Large>
 					<MainTitle className="cta" colorTitle={variable.color.violet} textTransform="none">
 						Find out more
 					</MainTitle>

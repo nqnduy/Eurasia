@@ -43,7 +43,21 @@ MainTitle.defaultProps = {
 	inTextWrap: false,
 };
 
-MainTitle.Large = ({ children, inTextWrap, className }) => {
+MainTitle.Large = ({ children, inTextWrap, className, size }) => {
+
+	let sizeConfig = "";
+	switch (size) {
+		case "xLarge":
+			sizeConfig = "font-size: 3.6rem !important;";
+			break;
+		case "xxLarge":
+			sizeConfig = "font-size: 4.8rem !important;";
+			break;
+		default:
+			sizeConfig = "font-size: inherit";
+			break;
+	}
+
 	return (
 		<>
 			<MainTitle className={`${className} large`} inTextWrap={inTextWrap}>
@@ -51,7 +65,7 @@ MainTitle.Large = ({ children, inTextWrap, className }) => {
 			</MainTitle>
 			<style jsx global>{`
 				.large {
-					font-size: 4.8rem !important;
+					${sizeConfig}
 					width: ${inTextWrap ? "inherit" : "30%"};
 					color: ${variable.color.violet} !important;
 				}
