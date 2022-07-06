@@ -6,7 +6,7 @@ import GridLayout from "@/website/elements/GridLayout";
 import { ArrowRightBannerIcon, ArrowLeftBannerIcon, ArrowDownBannerIcon } from "@/website/elements/Icons";
 import { variable } from 'styles/variable';
 
-export default function Banner({headline, title, image}) {
+export default function Banner({ headline, title, image }) {
 return (
 	<>
 		<div className="Banner">

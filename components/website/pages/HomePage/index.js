@@ -13,7 +13,7 @@ HomePage.propTypes = {};
 export default function HomePage() {
 	return (
 		<>
-			<Banner headline="Furniture" title="Fendi Casa" image="/images/home_banner.png" />
+			<Banner headline="Furniture" title="Fendi Casa" image="/images/banner-1.png" />
 			<AllInspirations />
 			<InspirationStyle />
 			<FeatureProduct data={Products} />
