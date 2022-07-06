@@ -6,14 +6,8 @@ import { variable } from 'styles/variable';
 import ImageSlidePaging from '@/website/section/global/ImageSlidePaging';
 import PropTypes from "prop-types";
 
-export default function MainIntroBlock({ className, data, isHaveAuthor = true, type, isReverse }) {
-	const { title, description, author, images } = data;
-	if (type === "horizontal") {
-		return "horizontal"
-	}
-	else if (type === "vertical") {
-
-	}
+export default function MainIntroBlock({ className, data, isHaveAuthor = true, isReverse }) {
+	const { title, description, author, images, type } = data;
 	return (
 		<>
 			<div className={`MainIntroBlock ${className} ${type === "horizontal" ? "horizontal" : "vertical"}`}>
@@ -47,8 +41,11 @@ export default function MainIntroBlock({ className, data, isHaveAuthor = true, t
 					&__text {
 						grid-column: 1 / 5;
 						.title {
-							font-size: 3.6rem;
 							margin-bottom: 3.5rem;
+							.large {
+								font-size: 3.6rem !important;
+								width: 90% !important ;
+							}
 						}
 						.content {
 							color: ${variable.color.violet} !important;

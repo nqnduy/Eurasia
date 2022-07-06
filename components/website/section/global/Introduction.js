@@ -6,34 +6,31 @@ export default function Introduction({title, description}) {
     return (
 			<>
 				<div className="Introduction">
-                <MainTextWrap
-                    className="Introduction-wrap"
-                    title={title} typeTitle="main"
-                    isLarge={true}>
+					<MainTextWrap className="Introduction-wrap" title={title} typeTitle="main" isLarge={true}>
 						{description}
 					</MainTextWrap>
 				</div>
 				<style jsx global>{`
-                    .Introduction{
-                        display: flex;
-                        justify-content: center;
-
-                        text-align: center;
-                        padding: 10rem 0 6rem 0;
-                        &-wrap {
-                            .title {
-                                font-size: 4.8rem;
-                                margin-bottom: 6.8rem;
-                            }
-                            .content {
-                                font-size: 2.4rem;
-                                letter-spacing: 0.1em;
-                                font-weight: 300;
-                                color: ${variable.color.violet} !important;
-                            }
-                        }
-                    }
-            `}</style>
+					.Introduction {
+						padding: 10rem 0 6rem 0;
+						&-wrap {
+							display: flex;
+							align-items: center;
+							flex-direction: column;
+							.title {
+								font-size: 4.8rem;
+								margin-bottom: 6.8rem;
+							}
+							.content {
+								font-size: 2.4rem;
+								letter-spacing: 0.1em;
+								font-weight: 300;
+								color: ${variable.color.violet} !important;
+								text-align: justify;
+							}
+						}
+					}
+				`}</style>
 			</>
 		);
 }

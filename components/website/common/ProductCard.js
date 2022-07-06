@@ -52,6 +52,7 @@ export default function ProductCard({ data, textLineOverTitle, textLineOverConte
 							font-size: 1.4rem !important;
 							font-weight: 300 !important;
 							text-align: justify;
+							color: ${variable.color.dark_grey};
 						}
 					}
 					&__sku {

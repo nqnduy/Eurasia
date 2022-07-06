@@ -63,6 +63,7 @@ return (
 							font-size: 1.4rem;
 							font-weight: 300;
 							letter-spacing: 0.1em;
+							color: ${variable.color.dark_grey};
 						}
 					}
 				}

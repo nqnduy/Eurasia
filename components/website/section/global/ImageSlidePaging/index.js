@@ -20,37 +20,6 @@ export default function ImageSlidePaging({ className, images, gifSize, direction
 			prevArrow: <ArrowPrev fill={variable.color.gold} isProductType={true} />,
 	};
 	let totalPage = images.length;
-
-	let rowPagingConfig = "";
-	let columnSlideConfig = "";
-	let arrowPosition = "";
-	let arrowNextPosition = "";
-	let arrowPrevPosition = "";
-	let gifFrameSize = "";
-
-	switch (type) {
-		case "horizontal":
-			rowPagingConfig = "";
-			columnSlideConfig = "";
-			arrowPosition = "";
-			arrowNextPosition = "";
-			arrowPrevPosition = "";
-
-			gifFrameSize = "/gifs/450x600.gif";
-			break;
-		case "vertical":
-			rowPagingConfig = "";
-			columnSlideConfig = "";
-			arrowPosition = "";
-			arrowNextPosition = "";
-			arrowPrevPosition = "";
-
-			gifFrameSize = "/gifs/583x363.gif";
-			break;
-		default:
-			console.warn("Please choose the type of slide");
-			break;
-	}
 	const renderPageSlide = () => {
 		return (
 			<>
@@ -83,7 +52,7 @@ export default function ImageSlidePaging({ className, images, gifSize, direction
 					<Slider {...settings}>
 						{images.map((image, index) => (
 							<React.Fragment key={index}>
-								<ImageWrap src={image} gif={gifFrameSize} />
+								<ImageWrap src={image} gif={type === "horizontal" ? "/gifs/450x600.gif" : "/gifs/583x363.gif"} />
 							</React.Fragment>
 						))}
 					</Slider>
