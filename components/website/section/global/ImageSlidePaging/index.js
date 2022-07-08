@@ -1,5 +1,5 @@
 import ImageWrap from '@/website/common/ImageWrap';
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import Slider from 'react-slick';
 import PropTypes from "prop-types";
 import HeadlineText from '@/website/common/HeadlineText';
@@ -8,16 +8,16 @@ import ArrowPrev from '@/website/common/ArrowPrev';
 import { variable } from "styles/variable";
 
 
-export default function ImageSlidePaging({ className, images, gifSize, direction, type}) {
-	const [currentPage, setCurrentPage] = useState(1)
+export default function ImageSlidePaging({ className, images, gifSize, direction, type, positionControl }) {
+	const [currentPage, setCurrentPage] = useState(1);
 
 	const settings = {
-			slidesToShow: 1,
-			infinite: true,
-			slidesToScroll: 1,
-			afterChange: (current) => setCurrentPage(current + 1),
-			nextArrow: <ArrowNext fill={variable.color.gold} isProductType={true} />,
-			prevArrow: <ArrowPrev fill={variable.color.gold} isProductType={true} />,
+		slidesToShow: 1,
+		infinite: true,
+		slidesToScroll: 1,
+		afterChange: (current) => setCurrentPage(current + 1),
+		nextArrow: <ArrowNext fill={variable.color.gold} isProductType={true} />,
+		prevArrow: <ArrowPrev fill={variable.color.gold} isProductType={true} />,
 	};
 	let totalPage = images.length;
 	const renderPageSlide = () => {
@@ -45,9 +45,10 @@ export default function ImageSlidePaging({ className, images, gifSize, direction
 			</>
 		);
 	};
+
 	return (
 		<>
-			<div className={`ImageSlidePaging ${type === "horizontal" ? "horizontal" : "vertical"}`}>
+			<div className={`ImageSlidePaging ${type === "horizontal" ? "horizontal" : positionControl === "top" ? "vertical top" : "vertical"}`}>
 				<div className="ImageSlidePaging__slide">
 					<Slider {...settings}>
 						{images.map((image, index) => (
@@ -89,6 +90,18 @@ export default function ImageSlidePaging({ className, images, gifSize, direction
 							align-self: center;
 							right: 15%;
 							bottom: inherit;
+						}
+						&.top {
+							grid-template-rows: 46px 1fr;
+							.ImageSlidePaging__slide {
+								grid-row: 2;
+							}
+							.slick-arrow {
+								top: -6%;
+							}
+							.slide-count {
+								grid-row: 1 / 2;
+							}
 						}
 					}
 					&.horizontal {

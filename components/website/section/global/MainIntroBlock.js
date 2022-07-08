@@ -6,11 +6,11 @@ import { variable } from 'styles/variable';
 import ImageSlidePaging from '@/website/section/global/ImageSlidePaging';
 import PropTypes from "prop-types";
 
-export default function MainIntroBlock({ className, data, isHaveAuthor = true, isReverse }) {
+export default function MainIntroBlock({ className, data, isHaveAuthor = true, positionControl }) {
 	const { title, description, author, images, type } = data;
 	return (
 		<>
-			<div className={`MainIntroBlock ${className} ${type === "horizontal" ? "horizontal" : "vertical"}`}>
+			<div className={`MainIntroBlock ${className} ${type === "horizontal" ? "horizontal" : positionControl === "top" ? "vertical top" : "vertical"}`}>
 				<MainTextWrap className="MainIntroBlock__text" title={title} typeTitle="main" isLarge={true}>
 					<div className="content">{description}</div>
 					{author ? (
@@ -23,7 +23,7 @@ export default function MainIntroBlock({ className, data, isHaveAuthor = true, i
 					<MainTitle.CTA className="cta">ReadMore</MainTitle.CTA>
 				</MainTextWrap>
 				<div className="MainIntroBlock__slide">
-					<ImageSlidePaging images={images} type={type} />
+					<ImageSlidePaging images={images} type={type} positionControl={positionControl} />
 				</div>
 			</div>
 			<style jsx global>{`
@@ -37,6 +37,11 @@ export default function MainIntroBlock({ className, data, isHaveAuthor = true, i
 					}
 					&.vertical {
 						align-items: flex-start;
+						&.top {
+							.MainIntroBlock__text {
+								margin-top: 4.6rem;
+							}
+						}
 					}
 					&__text {
 						grid-column: 1 / 5;

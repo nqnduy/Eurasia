@@ -9,11 +9,14 @@
 	{ "category": "styles", "image": "/images/inspirationslist2.png", "title": "dining table-bassano" },
 	{ "category": "styles", "image": "/images/inspirationslist3.png", "title": "AMB-armchaiR- butterfly" },
 	{ "category": "styles", "image": "/images/inspirationslist1.png", "title": "chair-roka-cognac leather" },
+	{ "category": "home", "image": "/images/inspirationslist1.png", "title": "chair-roka-cognac leather" },
 	{ "category": "styles", "image": "/images/inspirationslist2.png", "title": "dining table-bassano" },
 	{ "category": "styles", "image": "/images/inspirationslist3.png", "title": "AMB-armchaiR- butterfly" },
 	{ "category": "room", "image": "/images/inspirationslist1.png", "title": "chair-roka-cognac leather" },
+	{ "category": "home", "image": "/images/inspirationslist3.png", "title": "AMB-armchaiR- butterfly" },
 	{ "category": "icons", "image": "/images/inspirationslist2.png", "title": "dining table-bassano" },
 	{ "category": "icons", "image": "/images/inspirationslist3.png", "title": "AMB-armchaiR- butterfly" },
+	{ "category": "home", "image": "/images/inspirationslist2.png", "title": "dining table-bassano" },
 	{ "category": "icons", "image": "/images/inspirationslist1.png", "title": "chair-roka-cognac leather" },
 	{ "category": "icons", "image": "/images/inspirationslist2.png", "title": "dining table-bassano" },
 	{ "category": "icons", "image": "/images/inspirationslist3.png", "title": "AMB-armchaiR- butterfly" },
@@ -22,5 +25,8 @@
 	{ "category": "icons", "image": "/images/inspirationslist3.png", "title": "AMB-armchaiR- butterfly" },
 	{ "category": "styles", "image": "/images/inspirationslist1.png", "title": "chair-roka-cognac leather" },
 	{ "category": "room", "image": "/images/inspirationslist2.png", "title": "dining table-bassano" },
-	{ "category": "room", "image": "/images/inspirationslist3.png", "title": "AMB-armchaiR- butterfly" }
+	{ "category": "room", "image": "/images/inspirationslist3.png", "title": "AMB-armchaiR- butterfly" },
+	{ "category": "home", "image": "/images/inspirationslist3.png", "title": "AMB-armchaiR- butterfly" },
+	{ "category": "home", "image": "/images/inspirationslist1.png", "title": "chair-roka-cognac leather" },
+	{ "category": "home", "image": "/images/inspirationslist2.png", "title": "dining table-bassano" }
 ]
