@@ -35,6 +35,16 @@ const CommonStyle = () => {
 							left: initial;
 						}
 					}
+					.border-box {
+						position: absolute;
+						width: 100vw;
+						margin-inline-start: 50%;
+						transform: translateX(-50%);
+						border: 1px solid ${variable.color.gold};
+						height: 100%;
+						background-color: transparent;
+						pointer-events: none;
+					}
 				`}</style>
 			</>
 		);

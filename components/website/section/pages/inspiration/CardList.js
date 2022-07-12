@@ -125,16 +125,6 @@ export default function CardListInspiration({data, ...e}) {
 							align-items: center;
                             position: relative;
                             margin-bottom: 6rem;
-							.border-box {
-                                position: absolute;
-								width: 100vw;
-								margin-inline-start: 50%;
-								transform: translateX(-50%);
-								border: 1px solid ${variable.color.gold};
-                                height: 100%;
-                                background-color: transparent;
-                                pointer-events: none;
-							}
 							.tab {
 								display: flex;
 								align-items: center;
