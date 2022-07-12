@@ -48,14 +48,14 @@ export default function ProjectDetail() {
 							ghế ngoài trời Fat Outdoor của “Nhà thiết kế của thập kỷ” Patricia Urquiola. Sherwood Suites là điểm đến lý tưởng cho những người yêu nội
 							thất, mong muốn tìm kiếm và gặp gỡ những tinh hoa nội thất Ý trong những lần dừng chân tại Sài Gòn.
 						</p>
-						<ul className="imgWrap flex">
+						<ul className="imgWrap">
 							<li>
 								<img src="/images/project-detail-6.jpg" alt="" />
 							</li>
 							<li>
 								<img src="/images/project-detail-7.jpg" alt="" />
 							</li>
-							<li className="flex">
+							<li>
 								<img src="/images/project-detail-8.jpg" alt="" />
 								<img src="/images/project-detail-9.jpg" alt="" />
 							</li>
@@ -65,18 +65,6 @@ export default function ProjectDetail() {
 			</div>
 			<style jsx>{`
 				.ProjectDetail {
-					.col-1 {
-						grid-column: 2 / 15;
-					}
-					.col-2 {
-						grid-column: 3 / 14;
-					}
-					.col-3 {
-						grid-column: 4 / 13;
-					}
-					.col-4 {
-						grid-column: 5 / 12;
-					}
 					.image {
 						&-1 {
 							margin-bottom: 4.2rem;
@@ -84,22 +72,6 @@ export default function ProjectDetail() {
 						&-2 {
 							width: calc(50% - 4.5rem);
 						}
-					}
-					p {
-						font-family: "Lexend";
-						font-size: 1.4rem;
-						font-weight: 300;
-						letter-spacing: 0.1em;
-						line-height: 1.8em;
-						text-align: justify;
-					}
-					h4 {
-						font-family: "CoGa";
-						font-size: 2.4rem;
-						line-height: 2.9rem;
-						letter-spacing: 0.3em;
-						margin-bottom: 3rem;
-						text-transform: uppercase;
 					}
 					.flex {
 						display: flex;
@@ -113,20 +85,21 @@ export default function ProjectDetail() {
 					}
 					.imgWrap {
 						--gap: 2rem;
+						display: flex;
 						justify-content: space-between;
 						margin: 6rem 0;
 						li {
 							width: calc(100% / 3 - (var(--gap) * 2 / 3));
 							img {
-								width: 100%;
 								height: 100%;
 							}
-						}
-						.flex {
-							flex-direction: column;
-							justify-content: space-between;
-							img {
-								height: calc(100% / 2 - (var(--gap) / 2));
+							&:last-child {
+								display: flex;
+								flex-direction: column;
+								justify-content: space-between;
+								img {
+									height: calc(100% / 2 - (var(--gap) / 2));
+								}
 							}
 						}
 					}

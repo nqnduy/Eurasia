@@ -16,6 +16,7 @@ export default function SlideDetailPage({explore}) {
 			slidesToShow: 1,
 			centerMode: true,
 			infinite: true,
+			swipe: false,
 			centerPadding: "300px",
 			lazyLoad: true,
 			nextArrow: <ArrowNext.Line />,

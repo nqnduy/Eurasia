@@ -3,12 +3,12 @@ import ImageWrap from '@/website/common/ImageWrap';
 import MainTitle from '@/website/common/MainTitle';
 import { ArrowMoreIcon } from '@/website/elements/Icons';
 import { variable } from 'styles/variable';
-export default function TextInsideCard({data, seeMore = true, colorLayer}) {
+export default function TextInsideCard({data, seeMore = true, colorLayer, isSquare = true}) {
 	const { image, title } = data;
 return (
 	<>
 		<div className="TextInsideCard">
-			<ImageWrap src={image} gif="/gifs/336x336.gif" />
+			<ImageWrap src={image} gif={isSquare ? "/gifs/336x336.gif" : "/gifs/521x324.gif"} />
 			<div className="TextInsideCard__text">
 				<MainTitle className="title" colorTitle={variable.color.white}>
 					{title}

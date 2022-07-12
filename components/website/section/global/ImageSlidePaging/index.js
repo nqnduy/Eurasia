@@ -14,6 +14,7 @@ export default function ImageSlidePaging({ className, images, gifSize, direction
 	const settings = {
 		slidesToShow: 1,
 		infinite: true,
+		lazyLoad: true,
 		slidesToScroll: 1,
 		afterChange: (current) => setCurrentPage(current + 1),
 		nextArrow: <ArrowNext fill={variable.color.gold} isProductType={true} />,
