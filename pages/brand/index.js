@@ -4,8 +4,8 @@ import Brand from '@/website/pages/Brand';
 
 export default function BrandPage() {
     return (
-        <MasterPageBasic pageName={Brand} themeHeader="light">
-            <Brand />
-        </MasterPageBasic>
-	);
+			<MasterPageBasic pageName="Brands" themeHeader="light">
+				<Brand />
+			</MasterPageBasic>
+		);
 }
