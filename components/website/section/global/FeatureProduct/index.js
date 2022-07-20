@@ -1,28 +1,32 @@
 import CardProduct from "@/website/common/ProductCard";
 import HeadlineText from "@/website/common/HeadlineText";
 import GridLayout from "@/website/elements/GridLayout";
-import React, { useState } from "react";
-import { variable } from 'styles/variable';
+import React, { useState, useContext, useEffect } from "react";
+import { variable } from "styles/variable";
 import ProductCard from "@/website/common/ProductCard";
-import Slider  from 'react-slick';
+import Slider from "react-slick";
 import ArrowNext from "@/website/common/ArrowNext";
 import ArrowPrev from "@/website/common/ArrowPrev";
-import Products from "@/website/section/global/FeatureProduct/data.json"
+import { MainApiContext } from "@/website/contexts/MainApiContext";
 
-export default function FeatureProduct({ data }) {
-	const SLIDE_TO_SHOW = 3
+export default function FeatureProduct({languageCurrent}) {
+	const SLIDE_TO_SHOW = 3;
 	const [pageCount, setPageCount] = useState(SLIDE_TO_SHOW);
 
-    const settings = {
-			slidesToShow: SLIDE_TO_SHOW + 0.5,
-			infinite: true,
-			initialSlide: SLIDE_TO_SHOW,
-			slidesToScroll: SLIDE_TO_SHOW,
-			afterChange: (current) => setPageCount(current),
-			nextArrow: <ArrowNext fill={variable.color.gold} isProductType={true} />,
-			prevArrow: <ArrowPrev fill={variable.color.gold} isProductType={true} />,
-		};
-	let totalPage = Math.ceil(Products.length / SLIDE_TO_SHOW);
+	const { featureProduct, getFeatureProduct } = useContext(MainApiContext);
+	useEffect(() => {
+		getFeatureProduct();
+	}, []);
+	const settings = {
+		slidesToShow: SLIDE_TO_SHOW + 0.5,
+		infinite: true,
+		initialSlide: SLIDE_TO_SHOW,
+		slidesToScroll: SLIDE_TO_SHOW,
+		afterChange: (current) => setPageCount(current),
+		nextArrow: <ArrowNext fill={variable.color.gold} isProductType={true} />,
+		prevArrow: <ArrowPrev fill={variable.color.gold} isProductType={true} />,
+	};
+	let totalPage = Math.ceil(featureProduct?.length / SLIDE_TO_SHOW);
 	const renderPageSlide = () => {
 		if (totalPage <= 1) return;
 		let currentPage = pageCount / SLIDE_TO_SHOW;
@@ -32,8 +36,7 @@ export default function FeatureProduct({ data }) {
 		return (
 			<>
 				<ul className="pageSlide">
-					<li className="current">{currentPage}</li>/
-					<li className="total">{totalPage}</li>
+					<li className="current">{currentPage.toString()}</li>/<li className="total">{totalPage.toString()}</li>
 				</ul>
 				<style jsx>{`
 					.pageSlide {
@@ -52,7 +55,7 @@ export default function FeatureProduct({ data }) {
 				`}</style>
 			</>
 		);
-	}
+	};
 	return (
 		<>
 			<div className="FeatureProduct">
@@ -66,9 +69,16 @@ export default function FeatureProduct({ data }) {
 				</div>
 				<div className="FeatureProduct__content">
 					<Slider {...settings}>
-						{data.map((product, index) => (
+						{featureProduct?.map((product, index) => (
 							<React.Fragment key={index}>
-								<ProductCard data={product} />
+								<ProductCard
+									category={product.categories[0]?.name[`${languageCurrent}`]}
+									image={product.image}
+									brand={product.brand?.name[`${languageCurrent}`]}
+									name={product.name[`${languageCurrent}`]}
+									description={product.description[`${languageCurrent}`]}
+									sku={product.skuProps[0]?.sku}
+								/>
 							</React.Fragment>
 						))}
 					</Slider>

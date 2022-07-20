@@ -4,7 +4,9 @@ import GridLayout from "@/website/elements/GridLayout";
 import MainTitle from "@/website/common/MainTitle";
 import { ArrowDownIcon } from "@/website/elements/Icons";
 import ListNewsCard from "@/website/section/pages/news/ListNewsCard";
+import CardListInspiration from "@/website/section/pages/news/CardListInspiration";
 import { variable } from "styles/variable";
+import Inspirations from "@/website/section/pages/home/AllInspirations/data.json";
 
 export default function News() {
 	const news = [
@@ -60,7 +62,7 @@ export default function News() {
 	return (
 		<>
 			<div className="News">
-				<Banner image="/images/banner-8.jpg" headline="News" title="Chạm đến đỉnh cao thanh nhã cùng BST Black & White Refinement" />
+				<Banner image="/images/banner-8.jpg" category="News" title="Chạm đến đỉnh cao thanh nhã cùng BST Black & White Refinement" />
 				<GridLayout>
 					<div className="News__content">
 						<div className="News__content-header">
@@ -86,6 +88,7 @@ export default function News() {
 						</div>
 					</div>
 				</GridLayout>
+				<CardListInspiration data={Inspirations} />
 			</div>
 			<style jsx global>{`
 				.News {

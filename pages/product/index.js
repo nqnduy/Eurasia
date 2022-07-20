@@ -4,8 +4,8 @@ import React from 'react'
 
 export default function ProductPage() {
 	return (
-		<MasterPageBasic pageName="Product" themeHeader="dark">
-			<Product />
+		<MasterPageBasic pageName="Sản phẩm" themeHeader="dark">
+			<Product languageCurrent="vi" />
 		</MasterPageBasic>
 	);
 }

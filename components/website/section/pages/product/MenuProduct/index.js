@@ -1,21 +1,40 @@
 import MainTitle from '@/website/common/MainTitle';
 import GridLayout from '@/website/elements/GridLayout'
 import { ArrowDownIcon } from '@/website/elements/Icons';
-import React from 'react'
+import React, { useEffect, useContext } from "react";
 import { variable } from 'styles/variable';
 import ListMenu from "@/website/section/pages/product/MenuProduct/data.json";
-
-export default function MenuProduct() {
+import { MainApiContext } from '@/website/contexts/MainApiContext';
+import HeadlineText from "@/website/common/HeadlineText";
+export default function MenuProduct({ languageCurrent }) {
+	const {
+		brandList, getBrandList,
+		roomType, getRoomType,
+		classify, getClassify,
+		statusProduct, getStatusProduct } = useContext(MainApiContext);
+	useEffect(() => {
+		getBrandList();
+		getRoomType();
+		getClassify();
+		getStatusProduct();
+	}, []);
 	return (
 		<>
 			<div className="MenuProduct">
 				<GridLayout container="true">
 					<div className="MenuProduct__content">
-						{ListMenu.map((item, index) => (
-							<React.Fragment key={index}>
-								<MenuProductItem data={item.data}>{item.title}</MenuProductItem>
-							</React.Fragment>
-						))}
+						<MenuProductItem data={brandList} languageCurrent={languageCurrent}>
+							Thương hiệu
+						</MenuProductItem>
+						<MenuProductItem data={roomType} languageCurrent={languageCurrent}>
+							Loại phòng
+						</MenuProductItem>
+						<MenuProductItem data={classify} languageCurrent={languageCurrent}>
+							Phân loại
+						</MenuProductItem>
+						<MenuProductItem data={statusProduct} languageCurrent={languageCurrent}>
+							Trạng thái hàng
+						</MenuProductItem>
 					</div>
 				</GridLayout>
 			</div>
@@ -35,7 +54,7 @@ export default function MenuProduct() {
 	);
 }
 
-const MenuProductItem = ({children, data}) => {
+const MenuProductItem = ({children, data, languageCurrent}) => {
 	return (
 		<>
 			<div className="MenuProduct__item">
@@ -46,13 +65,15 @@ const MenuProductItem = ({children, data}) => {
 					<ArrowDownIcon style={{ fontSize: 10 }} />
 				</div>
 				<ul className="MenuProduct__item-list">
-					{data.map((item, index) => (
+					{data?.map((item, index) => (
 						<React.Fragment key={index}>
-							<MainTitle className="text" textTransform="none">
-								<li>
-									<a href="">{item}</a>
-								</li>
-							</MainTitle>
+							<HeadlineText className="text">
+								<label>
+									<input type="checkbox" />
+									{item.name[`${languageCurrent}`]}
+									<span className="checkmark"></span>
+								</label>
+							</HeadlineText>
 						</React.Fragment>
 					))}
 				</ul>
@@ -101,39 +122,85 @@ const MenuProductItem = ({children, data}) => {
 						margin-right: 3.2rem;
 					}
 					&-list {
-						border-top: 0.5px solid ${variable.color.gold};
 						display: none;
+						border-top: 0.5px solid ${variable.color.gold};
 						animation: dropDown ease 0.3s;
+						background-color: #f7f7f7;
 						transform-origin: top;
 						position: absolute;
+						z-index: 99;
 						margin-top: 2.8rem;
 						margin-left: -1.4rem;
-						background-color: white;
+						min-width: 22rem;
 						width: max-content;
-						li {
-							display: block;
+						max-height: 30rem;
+						overflow: hidden scroll;
+						cursor: pointer;
+						&::-webkit-scrollbar {
+							width: 4px;
+						}
+						&::-webkit-scrollbar-track {
+							background: #f7f7f7;
+						}
+						&::-webkit-scrollbar-thumb {
+							background: ${variable.color.gold};
+						}
+						label {
+							display: flex;
+							align-items: center;
+							position: relative;
 							padding: 1.2rem 3.5rem 1.2rem 1.5rem;
 							width: 100%;
 							transition: ease 0.3s;
+							color: ${variable.color.violet};
+							cursor: pointer;
+							input {
+								margin-right: 1rem;
+								opacity: 0;
+								cursor: pointer;
+								&:checked {
+									~ .checkmark {
+										background-color: ${variable.color.gold};
+										&:after {
+											display: block;
+										}
+									}
+								}
+							}
+							.checkmark {
+								position: absolute;
+								left: 1.5rem;
+								height: 1.2rem;
+								width: 1.2rem;
+								background-color: white;
+								border: 0.05rem solid black;
+								transition: ease 0.3s;
+								&:after {
+									content: "";
+									position: absolute;
+									display: none;
+									left: 0.35rem;
+									top: 0.15rem;
+									width: 0.4rem;
+									height: 0.8rem;
+									border: solid black;
+									border-width: 0 0.2rem 0.2rem 0;
+									-webkit-transform: rotate(45deg);
+									-ms-transform: rotate(45deg);
+									transform: rotate(45deg);
+									transition: ease 0.3s;
+								}
+							}
 							&:hover {
 								transition: ease 0.3s;
 								background-color: ${variable.color.gold};
-								a {
-									color: ${variable.color.violet};
-									transition: ease 0.3s;
-								}
-								.MenuProduct__item-link {
-									.text {
-										transition: ease 0.3s;
-										color: ${variable.color.violet} !important;
-									}
-								}
+								color: ${variable.color.white};
 							}
 						}
 						.text {
 							width: 100%;
-							font-size: 1.6rem !important;
-							letter-spacing: 0.2em !important;
+							font-size: 1.2rem !important;
+							letter-spacing: 0.1em !important;
 							transition: ease 0.3s;
 						}
 					}

@@ -4,7 +4,7 @@ import { variable } from 'styles/variable';
 export default function FooterTextWrap({title, children}) {
     return (
 			<div className="FooterTextWrap">
-				<MainTextWrap typeTitle="main" colorContent={variable.color.white} title={title}>
+				<MainTextWrap typeTitle="main" title={title}>
 					{children}
 				</MainTextWrap>
 				<style jsx global>{`
@@ -19,6 +19,7 @@ export default function FooterTextWrap({title, children}) {
 							line-height: 2 !important;
 							letter-spacing: 0.1em;
 							width: 255px;
+							color: ${variable.color.white} !important;
 						}
 					}
 				`}</style>

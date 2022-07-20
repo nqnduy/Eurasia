@@ -4,16 +4,16 @@ import HeadlineText from '@/website/common/HeadlineText';
 import { variable } from 'styles/variable';
 import MainTextWrap from '@/website/common/MainTextWrap';
 import PropTypes  from 'prop-types';
+import renderHTML from 'react-render-html';
 
-export default function ProductCard({ data, textLineOverTitle, textLineOverContent }) {
-	const { category, type, name, description, image, skuCode } = data;
+export default function ProductCard({ category, brand, name, description, image, sku, textLineOverTitle, textLineOverContent }) {
 	return (
 		<>
 			<div className="ProductCard">
 				<div className="ProductCard__img">
 					<ImageWrap src={image} gif="/gifs/370x370.gif" />
 				</div>
-				<HeadlineText colorTitle={variable.color.gold}>{`${category} | ${type}`}</HeadlineText>
+				<HeadlineText colorTitle={variable.color.gold}>{`${category} | ${brand}`}</HeadlineText>
 				<MainTextWrap
 					className="ProductCard__text"
 					typeTitle="main"
@@ -21,10 +21,10 @@ export default function ProductCard({ data, textLineOverTitle, textLineOverConte
 					overText={true}
 					textLineOver={textLineOverContent}
 					colorContent={variable.color.dark_grey}>
-					{description}
+					{renderHTML(description)}
 				</MainTextWrap>
 				<HeadlineText className="ProductCard__sku" colorTitle={variable.color.grey}>
-					Product sku: <span>{skuCode}</span>
+					Product sku: <span>{sku}</span>
 				</HeadlineText>
 			</div>
 			<style jsx global>{`

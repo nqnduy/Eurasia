@@ -1,24 +1,41 @@
-import React from 'react'
+import React, { useEffect, useState, useContext } from "react";
 import PropTypes from "prop-types";
-import Banner from '@/website/section/global/Banner';
-import AllInspirations from '@/website/section/pages/home/AllInspirations';
+import Banner from "@/website/section/global/Banner";
+import AllInspirations from "@/website/section/pages/home/AllInspirations";
 import InspirationStyle from "@/website/section/pages/home/InspirationStyle ";
-import FeatureProduct from '@/website/section/global/FeatureProduct';
+import FeatureProduct from "@/website/section/global/FeatureProduct";
 import Products from "@/website/section/global/FeatureProduct/data.json";
 import AboutUs from "@/website/section/pages/home/AboutUs";
 import OurServices from "@/website/section/pages/home/OurServices";
+import { MainApiContext } from "@/website/contexts/MainApiContext";
 
-HomePage.propTypes = {};
+export default function HomePage({languageCurrent="vi"}) {
+	const { homeContent, getHomeContent } = useContext(MainApiContext);
+	useEffect(() => {
+		getHomeContent();
+	}, []);
 
-export default function HomePage() {
 	return (
 		<>
-			<Banner headline="Furniture" title="Fendi Casa" image="/images/banner-1.png" />
+			<Banner title="Home of Dolce Vita" category="Sống trọn chất Ý" image="/images/banner-1.png" link="#" />
 			<AllInspirations />
-			<InspirationStyle />
-			<FeatureProduct data={Products} />
-			<AboutUs />
-			<OurServices/>
+			{homeContent?.content[`${languageCurrent}`].map((value, i) => {
+				switch (value.section) {
+					case "2":
+						return (
+							<React.Fragment key={i}>
+								<InspirationStyle data={value} />
+								<FeatureProduct languageCurrent={languageCurrent} />
+							</React.Fragment>
+						);
+					case "4":
+						return <AboutUs key={i} data={value} />;
+					case "5":
+						return <OurServices key={i} data={value} />;
+					default:
+						break;
+				}
+			})}
 		</>
 	);
 }

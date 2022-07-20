@@ -4,7 +4,8 @@ import { variable } from "styles/variable";
 import FooterInput from "./FooterInput";
 import { FacebookIcon, LogoIcon, YoutubeIcon, InstagramIcon } from "@/components/website/elements/Icons";
 import FooterTextWrap from "./FooterTextWrap";
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import { MainApiContext } from "@/website/contexts/MainApiContext";
 
 const Showrooms = [
 	{
@@ -24,7 +25,12 @@ const Showrooms = [
 	},
 ];
 
-export default function Footer() {
+export default function Footer({ languageCurrent = "vi" }) {
+	const { footerContent, getFooterContent } = useContext(MainApiContext);
+
+	useEffect(() => {
+		getFooterContent();
+	}, []);
 	return (
 		<>
 			<footer>
@@ -47,7 +53,7 @@ export default function Footer() {
 								</div>
 							</div>
 							<div className="footer__bottom-showroom">
-								{Showrooms.map((item, index) => (
+								{/* {Showrooms.map((item, index) => (
 									<React.Fragment key={index}>
 										<FooterTextWrap title={`${item.city} showrooms`}>
 											{item.content}
@@ -56,6 +62,20 @@ export default function Footer() {
 													<br />
 													Tel: {x}
 												</React.Fragment>
+											))}
+										</FooterTextWrap>
+									</React.Fragment>
+								))} */}
+								{footerContent?.map((showroom) => (
+									<React.Fragment key={showroom.id}>
+										<FooterTextWrap title={showroom.name[`${languageCurrent}`]}>
+											{showroom.address[`${languageCurrent}`].map((e) => (
+												<div key={e.key} className="address-item">
+													{e.address.slice(0, e.address.indexOf("Hotline:"))}
+													<br />
+													{e.address.slice(e.address.indexOf("Hotline"))}
+													<br />
+												</div>
 											))}
 										</FooterTextWrap>
 									</React.Fragment>
@@ -73,7 +93,7 @@ export default function Footer() {
 					background-color: ${variable.color.violet};
 					.footer {
 						position: relative;
-						padding: 6.5rem 0 5.5rem 0;
+						padding: 6.5rem 0 12rem 0;
 						grid-column: 3 / 14;
 						&__top {
 							display: grid;
@@ -122,6 +142,9 @@ export default function Footer() {
 								display: grid;
 								grid-template-columns: repeat(3, 1fr);
 								column-gap: 2rem;
+								.address-item:not(:last-child) {
+									margin-bottom: 5px;
+								}
 							}
 						}
 						.privacy {

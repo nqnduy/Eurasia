@@ -8,7 +8,7 @@ export default function ProductDetail() {
 		<>
 			<div className="ProductDetail">
 				<ProductInformation />
-				<FeatureProduct data={Products} />
+				{/* <FeatureProduct data={Products} /> */}
 			</div>
 
 			<style jsx global>{`

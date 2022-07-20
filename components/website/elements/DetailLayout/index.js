@@ -1,11 +1,12 @@
-import React from 'react'
-import MasterPageBasic from '@/website/master/MasterPageBasic';
-import Banner from '@/website/section/global/Banner';
-import SlideDetailPage from '@/website/section/global/SlideDetailPage';
-import FeatureProduct from '@/website/section/global/FeatureProduct';
-import ArticleStyle from 'styles/article';
+import React from "react";
+import MasterPageBasic from "@/website/master/MasterPageBasic";
+import Banner from "@/website/section/global/Banner";
+import SlideDetailPage from "@/website/section/global/SlideDetailPage";
+import FeatureProduct from "@/website/section/global/FeatureProduct";
+import ArticleStyle from "styles/article";
+import RelatedNews from "@/website/common/RelatedNews";
 
-export default function DetailLayout({ children, pageName, imageBanner, dataFeatureProduct, explore }) {
+export default function DetailLayout({ children, pageName, imageBanner, dataFeatureProduct, explore, dataRelatedNews }) {
 	return (
 		<MasterPageBasic pageName={pageName} themeHeader="light">
 			<div className="DetailLayout">
@@ -15,7 +16,8 @@ export default function DetailLayout({ children, pageName, imageBanner, dataFeat
 					{children}
 				</div>
 				<SlideDetailPage explore={explore} />
-				<FeatureProduct data={dataFeatureProduct} />
+				{dataFeatureProduct && <FeatureProduct data={dataFeatureProduct} />}
+				{dataRelatedNews && <RelatedNews data={dataRelatedNews} />}
 			</div>
 			<style jsx>{`
 				.DetailLayout {

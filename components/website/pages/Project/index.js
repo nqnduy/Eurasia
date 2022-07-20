@@ -1,9 +1,9 @@
-import GridLayout from '@/website/elements/GridLayout';
-import Banner from '@/website/section/global/Banner'
-import Introduction from '@/website/section/global/Introduction';
-import MainIntroBlock from '@/website/section/global/MainIntroBlock';
-import OurServices from '@/website/section/pages/home/OurServices';
-import React from 'react'
+import GridLayout from "@/website/elements/GridLayout";
+import Banner from "@/website/section/global/Banner";
+import Introduction from "@/website/section/global/Introduction";
+import MainIntroBlock from "@/website/section/global/MainIntroBlock";
+import OurServices from "@/website/section/pages/home/OurServices";
+import React from "react";
 
 export default function Project() {
 	const data = [
@@ -49,48 +49,48 @@ export default function Project() {
 		},
 	];
 
-    return (
-			<>
-				<div className="Project">
-					<Banner headline="bedroom" title="CA' FOSCARI" image="/images/banner-2.jpg" />
-					<GridLayout>
-						<div className="Project__content">
-							<div className="Project__content-intro">
-								<Introduction
-									title="Project"
-									description="Eurasia Concept excels at providing bespoke solution and world-renowned interior for a range of projects: from hotels, restaurants, to private houses & apartments."
-								/>
-							</div>
-							<div className="Project__content-inSide">
-								{data.map((item, index) => (
-									<React.Fragment key={index}>
-										<MainIntroBlock data={item} />
-									</React.Fragment>
-								))}
-							</div>
+	return (
+		<>
+			<div className="Project">
+				<Banner category="bedroom" title="CA' FOSCARI" image="/images/banner-2.jpg" />
+				<GridLayout>
+					<div className="Project__content">
+						<div className="Project__content-intro">
+							<Introduction
+								title="Project"
+								description="Eurasia Concept excels at providing bespoke solution and world-renowned interior for a range of projects: from hotels, restaurants, to private houses & apartments."
+							/>
 						</div>
+						<div className="Project__content-inSide">
+							{data.map((item, index) => (
+								<React.Fragment key={index}>
+									<MainIntroBlock data={item} />
+								</React.Fragment>
+							))}
+						</div>
+					</div>
 				</GridLayout>
-				<OurServices/>
-				</div>
-				<style jsx global>{`
-					.Project {
-						&__content {
-							grid-column: 3 / 14;
-							&-inSide {
-								.MainIntroBlock:nth-child(2n) {
-									.MainIntroBlock {
-										&__slide {
-											grid-area: 1 / 1 / 2 / 7;
-										}
-										&__text {
-											grid-area: 1 / 8 / 2 / 12;
-										}
+				<OurServices />
+			</div>
+			<style jsx global>{`
+				.Project {
+					&__content {
+						grid-column: 3 / 14;
+						&-inSide {
+							.MainIntroBlock:nth-child(2n) {
+								.MainIntroBlock {
+									&__slide {
+										grid-area: 1 / 1 / 2 / 7;
+									}
+									&__text {
+										grid-area: 1 / 8 / 2 / 12;
 									}
 								}
 							}
 						}
 					}
-				`}</style>
-			</>
-		);
+				}
+			`}</style>
+		</>
+	);
 }

@@ -4,11 +4,11 @@ import React from 'react'
 import Products from "@/website/section/global/FeatureProduct/data.json";
 import FeatureProduct from "@/website/section/global/FeatureProduct";
 
-export default function Product() {
-    return (
-			<>
-				<MenuProduct />
-				<ProductList />
-			</>
-		);
+export default function Product({ languageCurrent }) {
+	return (
+		<>
+			<MenuProduct languageCurrent={languageCurrent} />
+			<ProductList />
+		</>
+	);
 }

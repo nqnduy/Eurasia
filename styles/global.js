@@ -216,6 +216,9 @@ const GlobalStyle = () => (
 			border: 0;
 			background: none;
 		}
+		strong {
+			font-weight: bold;
+		}
 
 		main {
 		}

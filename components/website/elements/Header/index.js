@@ -6,6 +6,7 @@ import MenuButton from "@/components/website/elements/Header/MenuButton";
 import { variable } from 'styles/variable';
 import HeadlineText from '@/website/common/HeadlineText';
 import { debounce } from '@/plugins/next-hooks/useDimension';
+import AppLink from '@/components/diginext/link/AppLink';
 
 export default function Header({isDark}) {
 	const [fixed, setFixed] = useState(false);
@@ -46,14 +47,18 @@ export default function Header({isDark}) {
 				<header className={`Header ${fixed ? `fixed ${onScroll ? "onScroll" : ""}` : ""}`} onScroll={handleScroll}>
 					<GridLayout container="true">
 						<div className="Header__content">
-							<div className="brand">
-								<div className="brand__main">
-									<MainLogoIcon className="brand__main-icon" />
+							<AppLink href="/">
+								<div>
+									<div className="brand">
+										<div className="brand__main">
+											<MainLogoIcon className="brand__main-icon" />
+										</div>
+										<div className="brand__name">
+											<NameLogoIcon className="brand__name-icon" />
+										</div>
+									</div>
 								</div>
-								<div className="brand__name">
-									<NameLogoIcon className="brand__name-icon" />
-								</div>
-							</div>
+							</AppLink>
 							<div className="action">
 								<ul>
 									<li className="action__language">
