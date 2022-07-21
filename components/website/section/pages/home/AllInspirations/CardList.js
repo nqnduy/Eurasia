@@ -32,7 +32,6 @@ export default function CardList( { data, onFilterClick }) {
 			onFilterClick(category);
 		}
 	}
-	console.log("data:", data)
 	return (
 		<>
 			<div className="InspirationList">

@@ -10,11 +10,11 @@ import OurServices from "@/website/section/pages/home/OurServices";
 import { MainApiContext } from "@/website/contexts/MainApiContext";
 
 export default function HomePage({languageCurrent="vi"}) {
-	const { homeContent, getHomeContent } = useContext(MainApiContext);
+	const { homeContent, getHomeContent, featureProduct, getFeatureProduct } = useContext(MainApiContext);
 	useEffect(() => {
 		getHomeContent();
+		getFeatureProduct();
 	}, []);
-
 	return (
 		<>
 			<Banner title="Home of Dolce Vita" category="Sống trọn chất Ý" image="/images/banner-1.png" link="#" />
@@ -25,7 +25,7 @@ export default function HomePage({languageCurrent="vi"}) {
 						return (
 							<React.Fragment key={i}>
 								<InspirationStyle data={value} />
-								<FeatureProduct languageCurrent={languageCurrent} />
+								<FeatureProduct languageCurrent={languageCurrent} data={featureProduct} />
 							</React.Fragment>
 						);
 					case "4":

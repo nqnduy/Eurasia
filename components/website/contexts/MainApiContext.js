@@ -15,6 +15,8 @@ export default function MainApiContextProvider({ children }) {
 	const [roomType, setRoomType] = useState();
 	const [classify, setClassify] = useState();
 	const [statusProduct, setStatusProduct] = useState();
+	const [productDetail, setProductDetail] = useState();
+	const [relatedProductList, setRelatedProductList] = useState();
 
 	const getInspirationCategories = async (order) => {
 		const res = await ApiCall({
@@ -53,7 +55,7 @@ export default function MainApiContextProvider({ children }) {
 		});
 
 		if (res.status) {
-			// console.log("Feature Product", res.data.list);
+			console.log("Feature Product", res.data.list);
 			setFeatureProduct(res.data.list);
 		} else {
 			notification.error({
@@ -159,6 +161,35 @@ export default function MainApiContextProvider({ children }) {
 			});
 		}
 	};
+
+	const getProductDetail = async (slug) => {
+		const res = await ApiCall({
+			path: `/api/v1/products/${slug}`
+		});
+		if (res.data) {
+			console.log("product detail", res.data);
+			setProductDetail(res.data);
+		} else {
+			notification.error({
+				message: res.message || "Something went wrong",
+			});
+		}
+	}
+
+	const getRelatedProductList = async (category) => {
+		const res = await ApiCall({
+			path: `/api/v1/products?categories=${category}&order=1&orderBy=sortOrder&idNotIn=628331f22f674a990214c41d`,
+		});
+		if (res.data) {
+			console.log("related product", res.data.list);
+			setRelatedProductList(res.data.list);
+		} else {
+			notification.error({
+				message: res.message || "Something went wrong",
+			});
+		}
+	}
+
 	return (
 		<MainApiContext.Provider
 			value={{
@@ -190,7 +221,13 @@ export default function MainApiContextProvider({ children }) {
 				getClassify,
 
 				statusProduct,
-				getStatusProduct
+				getStatusProduct,
+
+				productDetail,
+				getProductDetail,
+
+				relatedProductList,
+				getRelatedProductList
 			}}>
 			{children}
 		</MainApiContext.Provider>

@@ -9,14 +9,11 @@ import ArrowNext from "@/website/common/ArrowNext";
 import ArrowPrev from "@/website/common/ArrowPrev";
 import { MainApiContext } from "@/website/contexts/MainApiContext";
 
-export default function FeatureProduct({languageCurrent}) {
+export default function FeatureProduct(props) {
+	const { data, languageCurrent } = props;
 	const SLIDE_TO_SHOW = 3;
 	const [pageCount, setPageCount] = useState(SLIDE_TO_SHOW);
 
-	const { featureProduct, getFeatureProduct } = useContext(MainApiContext);
-	useEffect(() => {
-		getFeatureProduct();
-	}, []);
 	const settings = {
 		slidesToShow: SLIDE_TO_SHOW + 0.5,
 		infinite: true,
@@ -26,7 +23,7 @@ export default function FeatureProduct({languageCurrent}) {
 		nextArrow: <ArrowNext fill={variable.color.gold} isProductType={true} />,
 		prevArrow: <ArrowPrev fill={variable.color.gold} isProductType={true} />,
 	};
-	let totalPage = Math.ceil(featureProduct?.length / SLIDE_TO_SHOW);
+	let totalPage = Math.ceil(data?.length / SLIDE_TO_SHOW);
 	const renderPageSlide = () => {
 		if (totalPage <= 1) return;
 		let currentPage = pageCount / SLIDE_TO_SHOW;
@@ -69,9 +66,10 @@ export default function FeatureProduct({languageCurrent}) {
 				</div>
 				<div className="FeatureProduct__content">
 					<Slider {...settings}>
-						{featureProduct?.map((product, index) => (
+						{data?.map((product, index) => (
 							<React.Fragment key={index}>
 								<ProductCard
+									slug={product.slug[`${languageCurrent}`]}
 									category={product.categories[0]?.name[`${languageCurrent}`]}
 									image={product.image}
 									brand={product.brand?.name[`${languageCurrent}`]}

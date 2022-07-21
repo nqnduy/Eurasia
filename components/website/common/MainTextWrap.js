@@ -69,7 +69,6 @@ export default function MainTextWrap({ className, title, isLarge, typeTitle, chi
 	);
 }
 MainTextWrap.propTypes = {
-	children: PropTypes.any.isRequired,
 	colorContent: PropTypes.string,
 	className: PropTypes.string,
 	isLarge: PropTypes.bool,

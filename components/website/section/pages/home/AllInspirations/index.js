@@ -14,7 +14,6 @@ export default function AllInspirations() {
 		setFilterStatus(category);
 	}
 	const renderDataFilter = Inspirations?.filter((item) => filterStatus==="all" || filterStatus === item.category);
-	console.log("renderDataFilter:", renderDataFilter);
 	return (
 		<>
 			<div className="AllInspirations">
