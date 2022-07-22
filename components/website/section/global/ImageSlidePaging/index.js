@@ -46,15 +46,14 @@ export default function ImageSlidePaging({ className, images, gifSize, direction
 			</>
 		);
 	};
-
 	return (
 		<>
 			<div className={`ImageSlidePaging ${type === "horizontal" ? "horizontal" : positionControl === "top" ? "vertical top" : "vertical"}`}>
 				<div className="ImageSlidePaging__slide">
 					<Slider {...settings}>
-						{images.map((image, index) => (
+						{images.map((item, index) => (
 							<React.Fragment key={index}>
-								<ImageWrap src={image} gif={type === "horizontal" ? "/gifs/450x600.gif" : "/gifs/583x363.gif"} />
+								<ImageWrap src={item.image} gif={type === "horizontal" ? "/gifs/450x600.gif" : "/gifs/583x363.gif"} />
 							</React.Fragment>
 						))}
 					</Slider>

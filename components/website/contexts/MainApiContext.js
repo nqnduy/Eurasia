@@ -17,6 +17,9 @@ export default function MainApiContextProvider({ children }) {
 	const [statusProduct, setStatusProduct] = useState();
 	const [productDetail, setProductDetail] = useState();
 	const [relatedProductList, setRelatedProductList] = useState();
+	const [pageContent, setPageContent] = useState();
+	const [projectList, setProjectList] = useState();
+
 
 	const getInspirationCategories = async (order) => {
 		const res = await ApiCall({
@@ -24,8 +27,7 @@ export default function MainApiContextProvider({ children }) {
 		});
 
 		if (res.status) {
-			console.log("Inspiration Categories", res.data.list);
-
+			// console.log("Inspiration Categories", res.data.list);
 			setInspirationCategories(res.data.list);
 		} else {
 			notification.error({
@@ -33,6 +35,20 @@ export default function MainApiContextProvider({ children }) {
 			});
 		}
 	};
+
+	const getPageContent = async (page) => {
+		const res = await ApiCall({
+			path: `/api/v1/pages/find-by-page-code?pageCode=${page}`,
+		});
+			if (res.status) {
+				console.log(`${page} content`, res.data);
+				setPageContent(res.data);
+			} else {
+				notification.error({
+					message: res.message || "Something went wrong",
+				});
+			}
+	}
 
 	const getHomeContent = async () => {
 		const res = await ApiCall({
@@ -167,7 +183,7 @@ export default function MainApiContextProvider({ children }) {
 			path: `/api/v1/products/${slug}`
 		});
 		if (res.data) {
-			console.log("product detail", res.data);
+			// console.log("product detail", res.data);
 			setProductDetail(res.data);
 		} else {
 			notification.error({
@@ -176,13 +192,27 @@ export default function MainApiContextProvider({ children }) {
 		}
 	}
 
-	const getRelatedProductList = async (category) => {
+	const getRelatedProductList = async () => {
 		const res = await ApiCall({
 			path: `/api/v1/products?categories=${category}&order=1&orderBy=sortOrder&idNotIn=628331f22f674a990214c41d`,
 		});
 		if (res.data) {
-			console.log("related product", res.data.list);
+			// console.log("related product", res.data.list);
 			setRelatedProductList(res.data.list);
+		} else {
+			notification.error({
+				message: res.message || "Something went wrong",
+			});
+		}
+	}
+
+	const getProjectList = async () => {
+		const res = await ApiCall({
+			path: `/api/v1/frontend/projects?order=1&orderBy=sortOrder`,
+		});
+		if (res.data) {
+			console.log("project list", res.data.list);
+			setProjectList(res.data.list);
 		} else {
 			notification.error({
 				message: res.message || "Something went wrong",
@@ -193,6 +223,9 @@ export default function MainApiContextProvider({ children }) {
 	return (
 		<MainApiContext.Provider
 			value={{
+				pageContent,
+				getPageContent,
+
 				inspirationCategories,
 				getInspirationCategories,
 
@@ -227,7 +260,10 @@ export default function MainApiContextProvider({ children }) {
 				getProductDetail,
 
 				relatedProductList,
-				getRelatedProductList
+				getRelatedProductList,
+
+				projectList,
+				getProjectList
 			}}>
 			{children}
 		</MainApiContext.Provider>

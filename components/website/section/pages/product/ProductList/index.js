@@ -36,6 +36,7 @@ export default function ProductList({ languageCurrent="vi" }) {
 							{productList?.map((product) => (
 								<React.Fragment key={product.id}>
 									<ProductCard
+										slug={product.slug[`${languageCurrent}`]}
 										category={product.categories[0]?.name[`${languageCurrent}`]}
 										brand={product.brand?.name[`${languageCurrent}`]}
 										name={product.name[`${languageCurrent}`]}

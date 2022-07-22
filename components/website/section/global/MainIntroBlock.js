@@ -6,16 +6,16 @@ import { variable } from 'styles/variable';
 import ImageSlidePaging from '@/website/section/global/ImageSlidePaging';
 import PropTypes from "prop-types";
 
-export default function MainIntroBlock({ className, data, isHaveAuthor = true, positionControl }) {
-	const { title, description, author, images, type } = data;
+export default function MainIntroBlock(props) {
+	const { name, description, author, images, type, className, isHaveAuthor = true, positionControl } = props;
 	return (
 		<>
 			<div className={`MainIntroBlock ${className} ${type === "horizontal" ? "horizontal" : positionControl === "top" ? "vertical top" : "vertical"}`}>
-				<MainTextWrap className="MainIntroBlock__text" title={title} typeTitle="main" isLarge={true}>
+				<MainTextWrap className="MainIntroBlock__text" title={name} typeTitle="main" isLarge={true}>
 					<div className="content">{description}</div>
 					{author ? (
 						<HeadlineText className="author" colorTitle={variable.color.gold}>
-							Designer: <span>Davide Sozzi</span>
+							Eurasia Concept: <span>Davide Sozzi</span>
 						</HeadlineText>
 					) : (
 						<></>
@@ -48,8 +48,11 @@ export default function MainIntroBlock({ className, data, isHaveAuthor = true, p
 						.title {
 							margin-bottom: 3.5rem;
 							.large {
-								font-size: 3.6rem !important;
-								width: 90% !important ;
+								font-weight: 500;
+								letter-spacing: 0.3rem !important;
+								font-size: 3.2rem !important;
+								line-height: 1.4em;
+								width: 100% !important ;
 							}
 						}
 						.content {

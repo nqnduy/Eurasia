@@ -1,11 +1,17 @@
+import { MainApiContext } from "@/website/contexts/MainApiContext";
 import GridLayout from "@/website/elements/GridLayout";
 import Banner from "@/website/section/global/Banner";
 import Introduction from "@/website/section/global/Introduction";
 import MainIntroBlock from "@/website/section/global/MainIntroBlock";
 import OurServices from "@/website/section/pages/home/OurServices";
-import React from "react";
+import React, { useContext, useEffect } from "react";
 
-export default function Project() {
+export default function Project({languageCurrent}) {
+	const { pageContent, getPageContent, projectList, getProjectList } = useContext(MainApiContext);
+	useEffect(() => {
+		getPageContent("PROJECT");
+		getProjectList();
+	}, []);
 	const data = [
 		{
 			title: "The Reverie",
@@ -52,32 +58,42 @@ export default function Project() {
 	return (
 		<>
 			<div className="Project">
-				<Banner category="bedroom" title="CA' FOSCARI" image="/images/banner-2.jpg" />
-				<GridLayout>
-					<div className="Project__content">
-						<div className="Project__content-intro">
-							<Introduction
-								title="Project"
-								description="Eurasia Concept excels at providing bespoke solution and world-renowned interior for a range of projects: from hotels, restaurants, to private houses & apartments."
-							/>
-						</div>
-						<div className="Project__content-inSide">
-							{data.map((item, index) => (
-								<React.Fragment key={index}>
-									<MainIntroBlock data={item} />
+				<Banner category="bedroom" title="CA' FOSCARI" image="/images/banner-2.jpg" link="#" />
+				{pageContent?.content[`${languageCurrent}`]?.map((value, i) => {
+					switch (value.section) {
+						case "1":
+							return (
+								<React.Fragment key={i}>
+									<GridLayout>
+										<div className="Project__content">
+											<div className="Project__content-intro">
+												<Introduction data={value} />
+											</div>
+											<div className="Project__content-inSide">
+												{projectList?.map((item, index) => (
+													<React.Fragment key={index}>
+														<MainIntroBlock name={item.name[`${languageCurrent}`]}
+															images={item.images} />
+													</React.Fragment>
+												))}
+											</div>
+										</div>
+									</GridLayout>
 								</React.Fragment>
-							))}
-						</div>
-					</div>
-				</GridLayout>
-				<OurServices />
+							);
+						case "3":
+							return <OurServices key={i} data={value} />;
+						default:
+							break;
+					}
+				})}
 			</div>
 			<style jsx global>{`
 				.Project {
 					&__content {
 						grid-column: 3 / 14;
 						&-inSide {
-							.MainIntroBlock:nth-child(2n) {
+							.MainIntroBlock:nth-child(2n + 1) {
 								.MainIntroBlock {
 									&__slide {
 										grid-area: 1 / 1 / 2 / 7;
