@@ -11,6 +11,14 @@ export default function CardList({ className, data, languageCurrent = "vi", ...e
 		infinite: true,
 		nextArrow: <ArrowNext fill={variable.color.gold} />,
 		prevArrow: <ArrowPrev fill={variable.color.gold} />,
+		responsive: [
+			{
+				breakpoint: 1024,
+				settings: {
+					slidesToShow: 2,
+				},
+			},
+		],
 	};
 	return (
 		<>

@@ -13,7 +13,6 @@ const Hamburger = ({ isDark }) => {
 					<i></i>
 				</span>
 			</div>
-
 			<style jsx global>{`
 				.hamburger {
 					color: ${changeColorMain()};
@@ -71,7 +70,7 @@ const Hamburger = ({ isDark }) => {
 	);
 };
 
-const MenuButton = ({ isDark }) => {
+const MenuButton = ({ isDark, isOpen }) => {
 
 	const changeColorMain = () => {
 		if (isDark) return variable.color.violet;
@@ -81,7 +80,7 @@ const MenuButton = ({ isDark }) => {
 
 	return (
 		<>
-			<button className="MenuButton unbutton">
+			<button className={`MenuButton unbutton ${isOpen ? "menu-on" : ""}`}>
 				<Hamburger isDark={isDark} />
 				<HeadlineText className="text">Menu</HeadlineText>
 			</button>
@@ -116,9 +115,11 @@ const MenuButton = ({ isDark }) => {
 							span {
 								i {
 									width: 3.5rem;
+									background-color: ${variable.color.gold};
 								}
 								&::before,
 								&::after {
+									background-color: ${variable.color.gold};
 									width: 100%;
 								}
 								&::before {
@@ -130,9 +131,7 @@ const MenuButton = ({ isDark }) => {
 							}
 						}
 					}
-				}
-				.menu-on {
-					.MenuButton {
+					&.menu-on {
 						.text {
 							color: transparent;
 							transform: 0.6s color cubic-bezier(0.66, 0, 0.15, 1);
@@ -158,6 +157,14 @@ const MenuButton = ({ isDark }) => {
 								}
 								&::after {
 									transform: translateY(0.1rem) rotate(-45deg);
+								}
+							}
+						}
+						&:hover {
+							.text {
+								&::after {
+									color: ${variable.color.gold};
+									transition: 0.6s color cubic-bezier(0.66, 0, 0.15, 1);
 								}
 							}
 						}

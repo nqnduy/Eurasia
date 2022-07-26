@@ -71,7 +71,7 @@ export default function MainApiContextProvider({ children }) {
 		});
 
 		if (res.status) {
-			console.log("Feature Product", res.data.list);
+			// console.log("Feature Product", res.data.list);
 			setFeatureProduct(res.data.list);
 		} else {
 			notification.error({

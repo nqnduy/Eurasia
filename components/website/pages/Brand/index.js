@@ -11,7 +11,7 @@ export default function Brand() {
 	return (
 		<>
 			<div className="Brand">
-				<Banner image="/images/banner-4.jpg" headline="Furniture" title="Fendi Casa" />
+				<Banner image="/images/banner-4.jpg" headline="Furniture" title="Fendi Casa" link="#"/>
 				<GridLayout>
 					<div className="Brand__intro">
 						<Introduction

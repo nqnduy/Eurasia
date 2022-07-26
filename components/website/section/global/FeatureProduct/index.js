@@ -8,11 +8,15 @@ import Slider from "react-slick";
 import ArrowNext from "@/website/common/ArrowNext";
 import ArrowPrev from "@/website/common/ArrowPrev";
 import { MainApiContext } from "@/website/contexts/MainApiContext";
+import { useMediaQuery } from "react-responsive";
+import { useNextResponsive } from "@/plugins/next-reponsive";
 
 export default function FeatureProduct(props) {
 	const { data, languageCurrent } = props;
-	const SLIDE_TO_SHOW = 3;
+	const { size, device } = useNextResponsive();
+	const SLIDE_TO_SHOW = device === "desktop" ? 3 : 2;
 	const [pageCount, setPageCount] = useState(SLIDE_TO_SHOW);
+	console.log("size:", size);
 
 	const settings = {
 		slidesToShow: SLIDE_TO_SHOW + 0.5,
@@ -22,6 +26,25 @@ export default function FeatureProduct(props) {
 		afterChange: (current) => setPageCount(current),
 		nextArrow: <ArrowNext fill={variable.color.gold} isProductType={true} />,
 		prevArrow: <ArrowPrev fill={variable.color.gold} isProductType={true} />,
+		// responsive: [
+		// 	// {
+		// 	// 	breakpoint: 1024,
+		// 	// 	settings: {
+		// 	// 		slidesToShow: 2,
+		// 	// 		initialSlide: 2,
+		// 	// 		slidesToScroll: 3,
+		// 	// 	},
+		// 	// },
+		// ],
+		// responsive: [
+		// 	{
+		// 		breakpoint: 1024,
+		// 		settings: {
+		// 			slidesToShow: 2.5,
+		// 			initialSlide: 2,
+		// 		},
+		// 	},
+		// ],
 	};
 	let totalPage = Math.ceil(data?.length / SLIDE_TO_SHOW);
 	const renderPageSlide = () => {
@@ -125,6 +148,13 @@ export default function FeatureProduct(props) {
 							}
 							.slick-slide > div {
 								padding: 0 1rem;
+							}
+						}
+						@media (max-width: 1280px) {
+							.slick-list {
+								.slick-track {
+									left: initial;
+								}
 							}
 						}
 					}

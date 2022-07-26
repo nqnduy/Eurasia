@@ -43,7 +43,7 @@ export default function ProductInformation(props) {
 	return (
 		<>
 			<div className="ProductInformation">
-				<GridLayout container={true}>
+				<GridLayout container>
 					<div className="ProductInformation__content">
 						<div className="ProductInformation__content-img">
 							<div className="slider-thumbnail">

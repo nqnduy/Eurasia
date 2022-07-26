@@ -12,7 +12,7 @@ export default function InspirationStyle({ data }) {
 	return (
 		<>
 			<div className="InspirationStyle">
-				<GridLayout container="true">
+				<GridLayout container>
 					<div className="InspirationStyle__content">
 						<HeadlineText className="headline" colorTitle={variable.color.gold}>
 							KHÔNG GIAN & CẢM HỨNG SỐNG

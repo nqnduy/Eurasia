@@ -6,28 +6,11 @@ import { FacebookIcon, LogoIcon, YoutubeIcon, InstagramIcon } from "@/components
 import FooterTextWrap from "./FooterTextWrap";
 import React, { useContext, useEffect } from 'react';
 import { MainApiContext } from "@/website/contexts/MainApiContext";
+import { MainContext } from "@/website/contexts/MainContext";
 
-const Showrooms = [
-	{
-		city: "Ha Noi",
-		content: "30A Ly Thuong Kiet, Hang Bai Ward, Hoan Kiem District, Ha Noi, Vietnam",
-		tel: ["842 422 654 848", "842 422 654 949"],
-	},
-	{
-		city: "Ho Chi Minh",
-		content: "22-36 Nguyen Hue Boulevard. & 57-69F Dong Khoi St., District 1, HCMC, Vietnam",
-		tel: ["842 866 502 233"],
-	},
-	{
-		city: "Ho Chi Minh",
-		content: "16-18 Nguyen Hue Boulevard, District 1, HCMC, Vietnam",
-		tel: ["842 866 580 333"],
-	},
-];
-
-export default function Footer({ languageCurrent = "vi" }) {
+export default function Footer() {
 	const { footerContent, getFooterContent } = useContext(MainApiContext);
-
+	const { languageCurrent } = useContext(MainContext);
 	useEffect(() => {
 		getFooterContent();
 	}, []);
@@ -53,19 +36,6 @@ export default function Footer({ languageCurrent = "vi" }) {
 								</div>
 							</div>
 							<div className="footer__bottom-showroom">
-								{/* {Showrooms.map((item, index) => (
-									<React.Fragment key={index}>
-										<FooterTextWrap title={`${item.city} showrooms`}>
-											{item.content}
-											{item.tel?.map((x, i) => (
-												<React.Fragment key={i}>
-													<br />
-													Tel: {x}
-												</React.Fragment>
-											))}
-										</FooterTextWrap>
-									</React.Fragment>
-								))} */}
 								{footerContent?.map((showroom) => (
 									<React.Fragment key={showroom.id}>
 										<FooterTextWrap title={showroom.name[`${languageCurrent}`]}>

@@ -50,7 +50,7 @@ export default function AboutUs({ data }) {
 	return (
 		<>
 			<div className="AboutUs">
-				<GridLayout container="true">
+				<GridLayout container>
 					<div className="AboutUs__content">
 						<div className="AboutUs__content-img">
 							<Slider {...settings}>

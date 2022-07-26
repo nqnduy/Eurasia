@@ -17,9 +17,8 @@ export default function AllInspirations() {
 	return (
 		<>
 			<div className="AllInspirations">
-				<GridLayout container="true">
+				<GridLayout container>
 					{/* Todo: Chưa có API nên bị trống name */}
-
 					<CardList data={renderDataFilter} onFilterClick={handleFilterShow} />
 					<AppLink href="#" display="block">
 						<div className="AllInspirations-more">

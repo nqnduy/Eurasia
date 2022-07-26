@@ -8,13 +8,15 @@ import Products from "@/website/section/global/FeatureProduct/data.json";
 import AboutUs from "@/website/section/pages/home/AboutUs";
 import OurServices from "@/website/section/pages/home/OurServices";
 import { MainApiContext } from "@/website/contexts/MainApiContext";
+import { MainContext } from "@/website/contexts/MainContext";
 
-export default function HomePage({languageCurrent="vi"}) {
+export default function HomePage() {
 	const { homeContent, getHomeContent, featureProduct, getFeatureProduct } = useContext(MainApiContext);
 	useEffect(() => {
 		getHomeContent();
 		getFeatureProduct();
 	}, []);
+	const { languageCurrent } = useContext(MainContext);
 	return (
 		<>
 			<Banner title="Home of Dolce Vita" category="Sống trọn chất Ý" image="/images/banner-1.png" link="#" />

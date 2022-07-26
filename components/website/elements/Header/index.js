@@ -1,18 +1,20 @@
 import React from 'react'
 import GridLayout from '@/website/elements/GridLayout';
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useContext } from "react";
 import { LogoIcon, NightModeIcon, SearchIcon, LightModeIcon, MainLogoIcon, NameLogoIcon } from "@/website/elements/Icons";
 import MenuButton from "@/components/website/elements/Header/MenuButton";
 import { variable } from 'styles/variable';
 import HeadlineText from '@/website/common/HeadlineText';
 import { debounce } from '@/plugins/next-hooks/useDimension';
 import AppLink from '@/components/diginext/link/AppLink';
+import Navigation from "@/components/website/elements/Navigation";
+import { MainContext } from '@/website/contexts/MainContext';
 
 export default function Header({isDark}) {
 	const [fixed, setFixed] = useState(false);
 	const [onScroll, setOnScroll] = useState(false);
-	const [currentTheme, setCurrentTheme] = useState(isDark); // default: false = "light" | true = "dark"
-
+	const [currentTheme, setCurrentTheme] = useState(isDark); // important: false = "light" & true = "dark"
+	const { navStatus, changeNavStatus, languageCurrent, changeLanguage } = useContext(MainContext);
 	var timer = null;
 	useEffect(() => {
 		if (typeof window != "undefined") {
@@ -41,11 +43,18 @@ export default function Header({isDark}) {
 		if (currentTheme) return variable.color.violet;
 		else return variable.color.white;
 	}
-
+	const handleHeaderTheme = () => {
+		if (navStatus) {
+			if (isDark) setCurrentTheme(true);
+		}
+		else {
+			if (isDark) setCurrentTheme(false);
+		}
+	}
     return (
 			<>
 				<header className={`Header ${fixed ? `fixed ${onScroll ? "onScroll" : ""}` : ""}`} onScroll={handleScroll}>
-					<GridLayout container="true">
+					<GridLayout container>
 						<div className="Header__content">
 							<AppLink href="/">
 								<div>
@@ -61,8 +70,8 @@ export default function Header({isDark}) {
 							</AppLink>
 							<div className="action">
 								<ul>
-									<li className="action__language">
-										<HeadlineText colorTitle={changeMainColor()}>EN</HeadlineText>
+									<li className="action__language" onClick={changeLanguage}>
+										<HeadlineText colorTitle={changeMainColor()}>{languageCurrent}</HeadlineText>
 									</li>
 									<li className="action__theme">
 										<LightModeIcon className="light" style={{ fontSize: 18 }} />
@@ -72,8 +81,13 @@ export default function Header({isDark}) {
 										<SearchIcon className="search" style={{ fontSize: 13 }} />
 									</li>
 								</ul>
-								<div className="action__menu">
-									<MenuButton isDark={currentTheme} />
+								<div
+									className="action__menu"
+									onClick={() => {
+										changeNavStatus();
+										handleHeaderTheme();
+									}}>
+									<MenuButton isDark={currentTheme} isOpen={navStatus} />
 								</div>
 							</div>
 						</div>
@@ -108,7 +122,7 @@ export default function Header({isDark}) {
 							}
 						}
 						position: fixed;
-						z-index: 100;
+						z-index: 101;
 						color: ${changeMainColor()};
 						padding: 2.8rem 0;
 						width: 100%;
@@ -129,12 +143,13 @@ export default function Header({isDark}) {
 							justify-content: space-between;
 							transition: 0.5s ease-out;
 							.brand {
+								--iconSize: 6.7rem;
 								display: flex;
 								flex-direction: column;
 								align-items: center;
 								transition: 0.5s ease-out;
 								&__main {
-									font-size: 6.7rem;
+									font-size: var(--iconSize);
 									transition: 0.5s ease-out;
 									&-icon {
 										svg path {
@@ -143,14 +158,23 @@ export default function Header({isDark}) {
 									}
 								}
 								&__name {
+									font-size: calc(var(--iconSize) + 1rem);
 									margin: -0.6rem 0 -2.6rem 0;
-									font-size: 7.7rem;
 									transition: ease-out 0.5s;
 									&-icon {
 										svg path {
 											fill: ${changeMainColor()};
 										}
 									}
+								}
+								@media (max-width: 1024px) {
+									--iconSize: 5.5rem;
+								}
+								@media (max-width: 920px) {
+									--iconSize: 5rem;
+								}
+								@media (max-width: 820px) {
+									--iconSize: 4.5rem;
 								}
 							}
 							.action {
@@ -260,6 +284,9 @@ export default function Header({isDark}) {
 								animation-timing-function: ease-in;
 								animation-duration: 0.7s;
 							}
+						}
+						@media (max-width: 820px) {
+							padding: 1.6rem 0;
 						}
 					}
 				`}</style>

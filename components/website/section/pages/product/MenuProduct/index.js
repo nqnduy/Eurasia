@@ -21,7 +21,7 @@ export default function MenuProduct({ languageCurrent }) {
 	return (
 		<>
 			<div className="MenuProduct">
-				<GridLayout container="true">
+				<GridLayout container>
 					<div className="MenuProduct__content">
 						<MenuProductItem data={brandList} languageCurrent={languageCurrent}>
 							Thương hiệu

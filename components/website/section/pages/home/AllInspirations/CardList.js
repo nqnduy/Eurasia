@@ -1,16 +1,12 @@
-import ArrowNext from "@/website/common/ArrowNext";
-import ArrowPrev from "@/website/common/ArrowPrev";
 import HeadlineText from "@/website/common/HeadlineText";
 import MainTitle from "@/website/common/MainTitle";
 import TextInsideCard from "@/website/common/TextInsideCard";
 import React, { useMemo, useState } from "react";
-import Slider from "react-slick";
 import { variable } from "styles/variable";
 import TextInsideCardList from "@/website/common/TextInsideCard/CardList";
 import AppLink from "@/components/diginext/link/AppLink";
 import PropTypes  from 'prop-types';
 import Inspirations from "@/website/section/pages/home/AllInspirations/data.json";
-
 
 CardList.propTypes = {
 	onFilterClick: PropTypes.func,
@@ -21,12 +17,6 @@ CardList.defaultProps = {
 
 export default function CardList( { data, onFilterClick }) {
 	const [isActive, setIsActive] = useState(false);
-	const settings = {
-		slidesToShow: 3,
-		infinite: true,
-		nextArrow: <ArrowNext fill={variable.color.gold} />,
-		prevArrow: <ArrowPrev fill={variable.color.gold} />,
-	};
 	const filter = (category) => {
 		if (onFilterClick) {
 			onFilterClick(category);
@@ -88,12 +78,6 @@ export default function CardList( { data, onFilterClick }) {
 
 CardList.Header = ({ onFilterClick }) => {
 	const [isActive, setIsActive] = useState(false);
-	const settings = {
-		slidesToShow: 3,
-		infinite: true,
-		nextArrow: <ArrowNext fill={variable.color.gold} />,
-		prevArrow: <ArrowPrev fill={variable.color.gold} />,
-	};
 	const filter = (category) => {
 		if (onFilterClick) {
 			onFilterClick(category);

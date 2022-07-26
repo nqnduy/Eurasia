@@ -28,6 +28,10 @@ const GridLayout = ({ children, container = false }) => {
 						grid-template-rows: 100vh;
 						width: 100%;
 						height: auto;
+						@media (max-width: 1366px) {
+							padding: 0 3rem;
+							grid-column: 1 / 16;
+						}
 					}
 				}
 			`}</style>

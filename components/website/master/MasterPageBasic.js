@@ -9,12 +9,14 @@ import { useMemo } from "react";
 
 const Providers = dynamic(() => import("components/website/contexts/Providers"));
 const MainApiContextProvider = dynamic(() => import("@/website/contexts/MainApiContext"));
+const MainContextProvider = dynamic(() => import("@/website/contexts/MainContext"));
 const Compose = dynamic(() => import("@/website/contexts/Compose"));
 const GlobalStyle = dynamic(() => import("styles/global"));
 const CommonStyle = dynamic(() => import("styles/common"));
 const Variable = dynamic(() => import("styles/variable"));
 const Body = dynamic(() => import("@/website/elements/Body"));
 const Header = dynamic(() => import("@/website/elements/Header"));
+const Navigation = dynamic(() => import("@/website/elements/Navigation"));
 const Footer = dynamic(() => import("@/components/website/elements/Footer"));
 const ContactGroup = dynamic(() => import("@/components/website/elements/ContactGroup"));
 
@@ -61,9 +63,10 @@ const MasterPageBasic = ({ pageName, children, themeHeader }) => {
 			<CommonStyle />
 			<Variable />
 			{/* - ADD MORE PROVIDER INSIDE THIS COMPONENT */}
-			<Compose components={[MainApiContextProvider]}>
+			<Compose components={[MainApiContextProvider, MainContextProvider]}>
 				<Body>
 					<Header isDark={renderHeader} />
+					<Navigation/>
 					<main className={[device, orientation, breakpoint].join(" ")}>{children}</main>
 					<Footer />
 					<ContactGroup />

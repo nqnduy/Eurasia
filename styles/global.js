@@ -6,7 +6,6 @@ import "slick-carousel/slick/slick-theme.css";
 
 const GlobalStyle = () => (
 	<style jsx global>{`
-
 		@font-face {
 			font-family: "ProximaNova";
 			src: url("../public/fonts/ProximaNovaRegular.eot");
@@ -54,7 +53,16 @@ const GlobalStyle = () => (
 		}
 		html {
 			font-size: 62.5% !important;
-        }
+			@media (max-width: 1366px) {
+				font-size: 60.5% !important;
+			}
+			@media (max-width: 1024px) {
+				font-size: 58.5% !important;
+			}
+			@media (max-width: 920px) {
+				font-size: 55.5% !important;
+			}
+		}
 		#__next {
 			overflow-x: hidden;
 		}
@@ -248,6 +256,12 @@ const GlobalStyle = () => (
 			border-radius: 50%;
 			width: 80px;
 			height: 80px;
+		}
+		body {
+			&.nav-on {
+				height: 100%;
+				overflow: hidden;
+			}
 		}
 	`}</style>
 );
