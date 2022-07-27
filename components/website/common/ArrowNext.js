@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { variable } from 'styles/variable';
 import { useMemo } from "react";
 import HeadlineText from '@/website/common/HeadlineText';
-const ArrowNext = ({ currentSlide, slideCount, fill, isProductType, ...props }) => {
+import React from "react";
+const ArrowNext = ({ currentSlide, slideCount, fill, isProductType, onClickCus,...props }) => {
 	const arrowRender = useMemo(() => {
 		if (isProductType) {
 			return <ProductArrowNextIcon style={{ fontSize: 11, cursor: "pointer" }} />;
@@ -13,6 +14,11 @@ const ArrowNext = ({ currentSlide, slideCount, fill, isProductType, ...props }) 
 		return <></>;
 	}, [isProductType]);
 
+	const handleOnClickCus = () => {
+		if (onClickCus) {
+			onClickCus();
+		}
+	}
 	return (
 		<>
 			<button
@@ -20,7 +26,8 @@ const ArrowNext = ({ currentSlide, slideCount, fill, isProductType, ...props }) 
 				className={"slick-next slick-arrow" + (currentSlide === 0 ? " slick-disabled" : "")}
 				aria-hidden="true"
 				aria-disabled={currentSlide === 0 ? true : false}
-				type="button">
+				type="button"
+				onClick={() => { props.onClick(); handleOnClickCus();}}>
 				{arrowRender}
 			</button>
 			<style jsx global>{`

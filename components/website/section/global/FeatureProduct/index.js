@@ -10,53 +10,79 @@ import ArrowPrev from "@/website/common/ArrowPrev";
 import { MainApiContext } from "@/website/contexts/MainApiContext";
 import { useMediaQuery } from "react-responsive";
 import { useNextResponsive } from "@/plugins/next-reponsive";
+import { debounce } from '@/plugins/next-hooks/useDimension';
+
 
 export default function FeatureProduct(props) {
 	const { data, languageCurrent } = props;
 	const { size, device } = useNextResponsive();
-	const SLIDE_TO_SHOW = device === "desktop" ? 3 : 2;
-	const [pageCount, setPageCount] = useState(SLIDE_TO_SHOW);
-	console.log("size:", size);
+	const [currentPage, setCurrentPage] = useState(1);
+
+	console.log("device:", device);
+
+	let totalPage = data?.length;
+
+	const checkSlide = (slide) => {
+		if (slide === 0) {
+			setCurrentPage(totalPage);
+		} else {
+			setCurrentPage(slide);
+		}
+	}
 
 	const settings = {
-		slidesToShow: SLIDE_TO_SHOW + 0.5,
+		slidesToShow: 3,
 		infinite: true,
-		initialSlide: SLIDE_TO_SHOW,
-		slidesToScroll: SLIDE_TO_SHOW,
-		afterChange: (current) => setPageCount(current),
+		initialSlide: 0,
+		slidesToScroll: 1,
+		centerMode: true,
+		centerPadding: "120px",
+		afterChange: (current, next) => checkSlide(current),
 		nextArrow: <ArrowNext fill={variable.color.gold} isProductType={true} />,
 		prevArrow: <ArrowPrev fill={variable.color.gold} isProductType={true} />,
-		// responsive: [
-		// 	// {
-		// 	// 	breakpoint: 1024,
-		// 	// 	settings: {
-		// 	// 		slidesToShow: 2,
-		// 	// 		initialSlide: 2,
-		// 	// 		slidesToScroll: 3,
-		// 	// 	},
-		// 	// },
-		// ],
-		// responsive: [
-		// 	{
-		// 		breakpoint: 1024,
-		// 		settings: {
-		// 			slidesToShow: 2.5,
-		// 			initialSlide: 2,
-		// 		},
-		// 	},
-		// ],
+		responsive: [
+			{
+				breakpoint: 1280,
+				settings: {
+					slidesToShow: 2,
+				},
+			},
+			{
+				breakpoint: 1024,
+				settings: {
+					slidesToShow: 2,
+					centerPadding: "100",
+				},
+			},
+			{
+				breakpoint: 820,
+				settings: {
+					slidesToShow: 2,
+					centerPadding: "50",
+				},
+			},
+			{
+				breakpoint: 720,
+				settings: {
+					slidesToShow: 1,
+					centerPadding: "100",
+				},
+			},
+			{
+				breakpoint: 620,
+				settings: {
+					slidesToShow: 1,
+					centerPadding: "30",
+				},
+			},
+		],
 	};
-	let totalPage = Math.ceil(data?.length / SLIDE_TO_SHOW);
 	const renderPageSlide = () => {
 		if (totalPage <= 1) return;
-		let currentPage = pageCount / SLIDE_TO_SHOW;
-		if (currentPage < 1) {
-			currentPage = totalPage;
-		}
 		return (
 			<>
 				<ul className="pageSlide">
-					<li className="current">{currentPage.toString()}</li>/<li className="total">{totalPage.toString()}</li>
+					<li className="current">{currentPage}</li>/<li className="total">{totalPage}</li>
 				</ul>
 				<style jsx>{`
 					.pageSlide {
@@ -119,6 +145,9 @@ export default function FeatureProduct(props) {
 						justify-content: space-between;
 						.product-page {
 							padding-right: 4.8rem;
+							@media (max-width: 1280px) {
+								display: none;
+							}
 						}
 					}
 					&__content {
@@ -137,24 +166,23 @@ export default function FeatureProduct(props) {
 							}
 							&.slick-prev {
 								left: 5.5rem;
+								@media (max-width: 820px) {
+									left: 4rem;
+								}
+								@media (max-width: 720px) {
+									left: 2rem;
+								}
+								@media (max-width: 620px) {
+									left: -2rem;
+								}
 							}
 						}
 						.slick-list {
 							grid-column: 1 / 15;
 							padding: 0 !important;
 							margin: 0 -1rem;
-							.slick-track {
-								left: 100%;
-							}
 							.slick-slide > div {
 								padding: 0 1rem;
-							}
-						}
-						@media (max-width: 1280px) {
-							.slick-list {
-								.slick-track {
-									left: initial;
-								}
 							}
 						}
 					}

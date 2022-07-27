@@ -108,12 +108,14 @@ CardList.Header = ({ onFilterClick }) => {
 					margin-bottom: 6rem;
 					&__header {
 						grid-column: 2 / 13;
-
 						display: flex;
 						justify-content: space-between;
 						align-items: center;
-
 						margin-bottom: 7.5rem;
+						@media (max-width: 720px) {
+							flex-direction: column;
+							margin-bottom: 5rem;
+						}
 						.tab {
 							display: flex;
 							&-item {

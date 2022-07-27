@@ -135,6 +135,43 @@ export default function FooterInput({children, className, mainColor}) {
 								}
 							}
 						}
+						@media (max-width: 1090px) {
+							input {
+								padding: 2rem 2.5rem;
+								&::placeholder {
+									font-size: 1.2rem;
+								}
+							}
+							button {
+								padding: 2rem 3.5rem;
+								span {
+									font-size: 1.2rem;
+								}
+							}
+						}
+						@media (max-width: 800px) {
+							input {
+								padding: 2rem 2rem;
+							}
+							button {
+								padding: 2rem;
+							}
+						}
+						@media (max-width: 500px) {
+							input {
+								padding: 1.8rem 2rem;
+								font-size: 1.2rem;
+								&::placeholder {
+									font-size: 1.1rem;
+								}
+							}
+							button {
+								padding: 1.8rem;
+								span {
+									font-size: 1.1rem;
+								}
+							}
+						}
 					}
 				}
 			`}</style>

@@ -85,6 +85,10 @@ export default function AboutUs({ data }) {
 						display: grid;
 						grid-template-columns: repeat(13, 1fr);
 						column-gap: 2rem;
+						@media (max-width: 720px) {
+							display: flex;
+							flex-direction: column-reverse;
+						}
 						&-img {
 							grid-column: 2 / 7;
 							.slick-slider {
@@ -97,18 +101,37 @@ export default function AboutUs({ data }) {
 									&.slick-prev {
 										left: -1rem;
 									}
+									@media (max-width: 720px) {
+										&.slick-next {
+											left: 60%;
+											transform: translate(-60%, -45%);
+										}
+										&.slick-prev {
+											left: 40%;
+											transform: translate(-40%, -45%);
+										}
+									}
 								}
 							}
 							.slide-count {
-								position: absolute;
-								bottom: 0.5rem;
-								left: 15rem;
+								position: relative;
+								margin-top: 3rem;
+								margin-left: 4rem;
+								@media (max-width: 720px) {
+									display: flex;
+									justify-content: center;
+									position: relative;
+									margin-left: 0;
+								}
 							}
 						}
 						&-text {
 							position: relative;
 							grid-column: 9 / 13;
 							padding: 15.7rem 0 12rem 0;
+							@media (max-width: 1280px) {
+								padding: 12rem 0 5rem 0;
+							}
 							.headline {
 								position: absolute;
 								transform: rotate(270deg);
@@ -136,6 +159,35 @@ export default function AboutUs({ data }) {
 								&__cta {
 									font-size: 1.8rem;
 									letter-spacing: 0.2em;
+								}
+							}
+							@media (max-width: 720px) {
+								padding: 6rem 0 10rem 0;
+								.headline {
+									position: relative;
+									display: inline-block;
+									left: 0;
+									transform: rotate(0);
+									margin-bottom: 5rem;
+									text-align: center;
+								}
+								.thumbnail {
+									display: flex;
+									align-items: center;
+									flex-direction: column;
+									&__text {
+										margin-bottom: 5rem;
+										.title {
+											width: 100%;
+											text-align: center;
+											.large {
+												width: 100%;
+											}
+										}
+										.content {
+											text-align: center;
+										}
+									}
 								}
 							}
 						}

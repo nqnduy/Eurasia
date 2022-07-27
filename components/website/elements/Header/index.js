@@ -266,6 +266,24 @@ export default function Header({isDark}) {
 												}
 											}
 										}
+										@media (max-width: 1024px) {
+											&__name {
+												margin: -2.2rem 0 -0.6rem 0;
+											}
+										}
+										@media (max-width: 920px) {
+											&__main {
+												font-size: 5rem;
+											}
+										}
+										@media (max-width: 820px) {
+											&__main {
+												font-size: 4.8rem;
+											}
+											&__name {
+												margin: -2.2rem 0 0.5rem 0;
+											}
+										}
 									}
 									.action {
 										align-items: center;

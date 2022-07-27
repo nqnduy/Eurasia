@@ -53,14 +53,23 @@ const GlobalStyle = () => (
 		}
 		html {
 			font-size: 62.5% !important;
+			@media (min-width: 2560px) {
+				font-size: 100% !important;
+			}
+			@media (min-width: 1920px) {
+				font-size: 80.5% !important;
+			}
 			@media (max-width: 1366px) {
 				font-size: 60.5% !important;
 			}
 			@media (max-width: 1024px) {
-				font-size: 58.5% !important;
+				font-size: 51.5% !important;
 			}
 			@media (max-width: 920px) {
-				font-size: 55.5% !important;
+				font-size: 48.5% !important;
+			}
+			@media (max-width: 720px) {
+				font-size: 60.5% !important;
 			}
 		}
 		#__next {

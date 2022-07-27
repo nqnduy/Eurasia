@@ -43,6 +43,13 @@ export default function InspirationStyle({ data }) {
 						column-gap: 2rem;
 						position: relative;
 						grid-template-areas: 1fr 1fr 1fr;
+						@media (max-width: 920px) {
+							column-gap: 0;
+						}
+						@media (max-width: 720px){
+							display: flex;
+							flex-direction: column;
+						}
 					}
 					.headline {
 						transform: rotate(270deg);
@@ -52,6 +59,13 @@ export default function InspirationStyle({ data }) {
 						left: 0;
 						width: 100%;
 						height: 0;
+						@media (max-width: 720px) {
+							position: relative;
+							transform: rotate(0);
+							display: inline-block;
+							text-align: center;
+							margin-bottom: 5rem;
+						}
 					}
 					.thumbnail {
 						grid-column: 2 / 14;
@@ -70,6 +84,9 @@ export default function InspirationStyle({ data }) {
 								display: grid;
 								grid-template-columns: repeat(12, 1fr);
 								column-gap: 2rem;
+								@media (max-width: 920px) {
+									column-gap: 0;
+								}
 								.text {
 									grid-column: 1 / 5;
 									text-align: justify;
@@ -82,6 +99,31 @@ export default function InspirationStyle({ data }) {
 						}
 						&__image {
 							grid-column: 6 / 13;
+						}
+					}
+					@media (max-width: 720px) {
+						.thumbnail {
+							&__text {
+								.title {
+									text-align: center;
+									width: 100%;
+									.large {
+										font-size: 4rem !important;
+									}
+								}
+								.content {
+									display: flex;
+									flex-direction: column;
+									.text {
+										display: flex;
+										align-items: center;
+										flex-direction: column;
+										margin-bottom: 3rem;
+									}
+								}
+							}
+							&__cta {
+							}
 						}
 					}
 				}

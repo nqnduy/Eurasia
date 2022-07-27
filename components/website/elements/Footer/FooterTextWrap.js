@@ -18,7 +18,7 @@ export default function FooterTextWrap({title, children}) {
 							font-size: 1.2rem;
 							line-height: 2 !important;
 							letter-spacing: 0.1em;
-							width: 255px;
+							width: 90%;
 							color: ${variable.color.white} !important;
 						}
 					}

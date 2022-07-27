@@ -18,6 +18,12 @@ export default function CardList({ className, data, languageCurrent = "vi", ...e
 					slidesToShow: 2,
 				},
 			},
+			{
+				breakpoint: 720,
+				settings: {
+					slidesToShow: 1,
+				},
+			},
 		],
 	};
 	return (

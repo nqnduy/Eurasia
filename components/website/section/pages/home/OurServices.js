@@ -71,6 +71,30 @@ export default function OurServices({ data }) {
 							}
 						}
 					}
+					@media (max-width: 720px) {
+						.GridLayout {
+							display: flex;
+							flex-direction: column;
+							padding: 0 3rem;
+						}
+						&__headline {
+							margin-bottom: 5rem;
+							.large {
+								width: 100%;
+							}
+							.cta {
+								display: none;
+							}
+						}
+						&__content {
+							.wrapText {
+								padding: 2.5rem 0;
+								.HeadlineText {
+									letter-spacing: 0.1em;
+								}
+							}
+						}
+					}
 				}
 			`}</style>
 		</>

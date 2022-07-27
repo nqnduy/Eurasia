@@ -4,7 +4,7 @@ import { variable } from "styles/variable";
 import { useMemo } from "react";
 import HeadlineText from '@/website/common/HeadlineText';
 
-const ArrowPrev = ({ currentSlide, slideCount, fill, isProductType, ...props }) => {
+const ArrowPrev = ({ currentSlide, slideCount, fill, isProductType, onClickCus, ...props }) => {
 	const arrowRender = useMemo(() => {
 		if (isProductType) {
 			return <ProductArrowPrevIcon style={{ fontSize: 11, cursor: "pointer" }} />;
@@ -14,6 +14,12 @@ const ArrowPrev = ({ currentSlide, slideCount, fill, isProductType, ...props }) 
 		return <></>;
 	}, [isProductType]);
 
+	const handleOnClickCus = () => {
+		if (onClickCus) {
+			onClickCus();
+		}
+	};
+
 	return (
 		<>
 			<button
@@ -21,7 +27,9 @@ const ArrowPrev = ({ currentSlide, slideCount, fill, isProductType, ...props }) 
 				className={"slick-prev slick-arrow" + (currentSlide === 0 ? " slick-disabled" : "")}
 				aria-hidden="true"
 				aria-disabled={currentSlide === 0 ? true : false}
-				type="button">
+				type="button"
+				onClick={() => { props.onClick(); handleOnClickCus();}}
+			>
 				{arrowRender}
 			</button>
 			<style jsx global>{`

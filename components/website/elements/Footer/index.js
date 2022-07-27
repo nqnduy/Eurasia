@@ -76,6 +76,17 @@ export default function Footer() {
 							.FooterInput {
 								grid-column: 6 / 12;
 							}
+							@media (max-width: 720px) {
+								display: flex;
+								flex-direction: column;
+								align-items: flex-start;
+								.subscribe {
+									margin-bottom: 3rem;
+								}
+								.FooterInput {
+									width: 100%;
+								}
+							}
 						}
 						&__line {
 							display: inline-block;
@@ -95,7 +106,7 @@ export default function Footer() {
 								align-items: center;
 								justify-self: flex-start;
 								.iconSocial {
-									margin-top: 35px;
+									margin-top: 3.5rem;
 									&__item {
 										border-radius: 50%;
 										border: 0.1rem solid ${variable.color.gold};
@@ -112,8 +123,29 @@ export default function Footer() {
 								display: grid;
 								grid-template-columns: repeat(3, 1fr);
 								column-gap: 2rem;
+								.FooterTextWrap:last-child {
+									grid-column: 2 / 4;
+								}
 								.address-item:not(:last-child) {
 									margin-bottom: 5px;
+								}
+							}
+							@media (max-width: 850px) {
+								display: flex;
+								flex-direction: column;
+								&-logoGroup {
+									.iconSocial {
+										margin: 3rem 0 5rem;
+									}
+								}
+							}
+							@media (max-width: 720px) {
+								&-showroom {
+									display: flex;
+									flex-direction: column;
+									.FooterTextWrap:not(:last-child) {
+										margin-bottom: 5rem;
+									}
 								}
 							}
 						}
@@ -123,6 +155,9 @@ export default function Footer() {
 							right: 2rem;
 							font-size: 0.8rem;
 							letter-spacing: 0.3em;
+						}
+						@media (max-width: 500px) {
+							grid-column: 2 / 15;
 						}
 					}
 				}
