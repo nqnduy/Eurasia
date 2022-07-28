@@ -11,9 +11,11 @@ import { useRouter } from 'next/router';
 import React, { useState, useEffect, useContext } from "react";
 import Slider from 'react-slick';
 import { variable } from 'styles/variable';
+import { MainContext } from "@/website/contexts/MainContext";
 
 export default function ProductInformation(props) {
-	const { data, languageCurrent } = props;
+	const { data } = props;
+  	const { languageCurrent } = useContext(MainContext);
 
 	const [sliderMain, setSliderMain] = useState(null);
 	const [sliderThumb, setSliderThumb] = useState(null);
@@ -38,6 +40,17 @@ export default function ProductInformation(props) {
 		centerPadding: "10px",
 		vertical: true,
 		verticalSwiping: true,
+		responsive: [
+			{
+				breakpoint: 820,
+				settings: {
+					vertical: false,
+					verticalSwiping: false,
+					centerPadding: "0",
+					centerMode: false,
+				},
+			},
+		],
 	};
 
 	return (
@@ -133,12 +146,11 @@ export default function ProductInformation(props) {
 									padding: 1.5rem 0;
 								}
 							}
-
 							.slider-thumbnail-item {
 								cursor: pointer;
 								display: block;
 								width: 7.8rem;
-								height: 7.8rem;
+								aspect-ratio: 1;
 								border: 0.5px solid ${variable.color.grey};
 							}
 						}
@@ -150,6 +162,9 @@ export default function ProductInformation(props) {
 									font-size: 1.4rem;
 									letter-spacing: 0.1em;
 									font-weight: 300;
+								}
+								@media (max-width: 820px) {
+									margin: 2rem 0 6rem;
 								}
 							}
 							.sku {
@@ -183,6 +198,36 @@ export default function ProductInformation(props) {
 							input::placeholder,
 							span {
 								font-size: 1.2rem !important;
+							}
+							@media (max-width: 920px) {
+								.FooterInput__input {
+									flex-direction: column;
+								}
+							}
+							@media (max-width: 820px) {
+								.FooterInput__input {
+									flex-direction: row;
+								}
+							}
+						}
+						@media (max-width: 820px) {
+							display: flex;
+							flex-direction: column;
+							&-img {
+								flex-direction: column-reverse;
+								.slider-thumbnail {
+									width: 50%;
+									margin: 2.5rem 0 5rem;
+									.slick-list {
+										margin: 0 -1rem;
+										.slick-slide > div {
+											padding: 0 1rem;
+										}
+									}
+									&-item {
+										width: 100%;
+									}
+								}
 							}
 						}
 					}

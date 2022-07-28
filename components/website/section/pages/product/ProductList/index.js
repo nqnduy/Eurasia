@@ -1,21 +1,18 @@
-import MainTitle from '@/website/common/MainTitle';
-import TextInsideCard from '@/website/common/TextInsideCard';
-import React, { useContext, useEffect } from "react";
+import MainTitle from "@/website/common/MainTitle";
+import TextInsideCard from "@/website/common/TextInsideCard";
+import React, { useContext  } from "react";
 import Categories from "@/website/section/pages/product/ProductList/data.json";
-import Slider from 'react-slick';
-import TextInsideCardList from "@/website/common/TextInsideCard/CardList"
+import Slider from "react-slick";
+import TextInsideCardList from "@/website/common/TextInsideCard/CardList";
 import GridLayout from "@/website/elements/GridLayout";
-import { variable } from 'styles/variable';
-import Products from "@/website/section/global/FeatureProduct/data.json";
-import ProductCard from '@/website/common/ProductCard';
-import { MainApiContext } from '@/website/contexts/MainApiContext';
+import { variable } from "styles/variable";
+import ProductCard from "@/website/common/ProductCard";
+import { MainContext } from "@/website/contexts/MainContext";
+import Paginate from "@/website/common/Paginate";
 
-export default function ProductList({ languageCurrent="vi" }) {
-	const { categoriesList, getCategoriesList, productList, getProductList } = useContext(MainApiContext);
-	useEffect(() => {
-		getCategoriesList();
-		getProductList();
-	}, []);
+export default function ProductList(props) {
+	const { categoriesList, productList, paginatorProduct } = props;
+	const { languageCurrent } = useContext(MainContext);
 
 	return (
 		<>
@@ -25,13 +22,7 @@ export default function ProductList({ languageCurrent="vi" }) {
 						<MainTitle.Large className="ProductList__content-title" size="xxLarge">
 							Products
 						</MainTitle.Large>
-						<TextInsideCardList
-							className="ProductList__content-category"
-							languageCurrent={languageCurrent}
-							data={categoriesList}
-							seeMore={false}
-							colorLayer={variable.color.gold}
-						/>
+						<TextInsideCardList className="ProductList__content-category" data={categoriesList} seeMore={false} colorLayer={variable.color.gold} />
 						<div className="ProductList__content-product">
 							{productList?.map((product) => (
 								<React.Fragment key={product.id}>
@@ -44,11 +35,12 @@ export default function ProductList({ languageCurrent="vi" }) {
 										image={product.image}
 										sku={product.skuProps[0]?.sku}
 										textLineOverTitle={2}
-										textLineOverContent={3}/>
+										textLineOverContent={3}
+									/>
 								</React.Fragment>
 							))}
 						</div>
-						<MainTitle.CTA isCenter={true}>Load more</MainTitle.CTA>
+						<Paginate totalPage={paginatorProduct?.pageCount} />
 					</div>
 				</GridLayout>
 			</div>
@@ -66,7 +58,6 @@ export default function ProductList({ languageCurrent="vi" }) {
 							text-align: center;
 							margin: 6rem 0 !important;
 						}
-
 						&-category {
 							margin-bottom: 14rem;
 						}
@@ -76,6 +67,15 @@ export default function ProductList({ languageCurrent="vi" }) {
 							gap: 6rem 3rem;
 
 							margin-bottom: 6rem;
+							@media (max-width: 1024px) {
+								grid-template-columns: repeat(3, 1fr);
+							}
+							@media (max-width: 820px) {
+								grid-template-columns: repeat(2, 1fr);
+							}
+							@media (max-width: 720px) {
+								grid-template-columns: repeat(1, 1fr);
+							}
 						}
 					}
 				}

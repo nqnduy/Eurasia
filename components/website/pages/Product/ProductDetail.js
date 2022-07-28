@@ -4,12 +4,13 @@ import FeatureProduct from '@/website/section/global/FeatureProduct';
 import Products from "@/website/section/global/FeatureProduct/data.json";
 import { MainApiContext } from '@/website/contexts/MainApiContext';
 import { useRouter } from "next/router";
+import { MainContext } from '@/website/contexts/MainContext';
 
-export default function ProductDetail({ languageCurrent }) {
+export default function ProductDetail() {
   const { productDetail, getProductDetail, relatedProductList, getRelatedProductList } = useContext(MainApiContext);
+  const [filterList, setFilterList] = useState([]);
   const router = useRouter();
   const slug = router.query.slug;
-  const [filterList, setFilterList] = useState([]);
 
   useEffect(() => {
     if (slug) {
@@ -36,8 +37,8 @@ export default function ProductDetail({ languageCurrent }) {
   return (
 		<>
 			<div className="ProductDetail">
-				<ProductInformation languageCurrent={languageCurrent} data={productDetail} />
-				<FeatureProduct languageCurrent={languageCurrent} data={filterList} />
+				<ProductInformation data={productDetail} />
+				<FeatureProduct data={filterList} />
 			</div>
 
 			<style jsx global>{`

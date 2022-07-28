@@ -112,6 +112,36 @@ ArrowNext.Line = ({ currentSlide, slideCount, ...props }) => {
 	);
 };
 
+ArrowNext.Paging = () => {
+	return (
+		<>
+			<button className="btnNext">
+				<ProductArrowNextIcon style={{ fontSize: 11, cursor: "pointer" }} />
+			</button>
+			<style jsx global>{`
+				.btnNext {
+					height: 4rem;
+					aspect-ratio: 1;
+					cursor: pointer;
+					background-color: transparent;
+					border: 0.1rem solid ${variable.color.grey};
+					margin: 0 0.5rem;
+					color: ${variable.color.violet};
+					svg path {
+						fill: ${variable.color.violet};
+					}
+					&:hover {
+						background-color: ${variable.color.violet};
+						svg path {
+							fill: ${variable.color.gold};
+						}
+					}
+				}
+			`}</style>
+		</>
+	);
+}
+
 export default ArrowNext;
 
 

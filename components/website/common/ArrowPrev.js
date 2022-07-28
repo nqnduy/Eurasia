@@ -115,4 +115,41 @@ ArrowPrev.Line = ({ currentSlide, slideCount, ...props }) => {
 	);
 };
 
+
+ArrowPrev.Paging = () => {
+	return (
+		<>
+			<button className="btnPrev">
+				<ProductArrowPrevIcon style={{ fontSize: 11, cursor: "pointer" }} />
+			</button>
+			<style jsx global>{`
+				.btnPrev {
+					height: 4rem;
+					aspect-ratio: 1;
+					cursor: pointer;
+					background-color: transparent;
+					border: 0.1rem solid ${variable.color.grey};
+					margin: 0 0.5rem;
+					transition: 0.3s ease;
+					color: ${variable.color.violet};
+					svg path {
+						transition: 0.3s ease;
+						fill: ${variable.color.violet};
+					}
+					&:hover {
+						transition: 0.3s ease;
+						background-color: ${variable.color.violet};
+						svg path {
+							transition: 0.3s ease;
+							fill: ${variable.color.gold};
+						}
+					}
+				}
+			`}</style>
+		</>
+	);
+};
+
+
+
 export default ArrowPrev;

@@ -7,7 +7,7 @@ export default function ProductDetailPage() {
     const router = useRouter();
     return (
 			<MasterPageBasic pageName={router.query.slug} themeHeader="dark">
-				<ProductDetail languageCurrent="vi" />
+				<ProductDetail  />
 			</MasterPageBasic>
 		);
 }

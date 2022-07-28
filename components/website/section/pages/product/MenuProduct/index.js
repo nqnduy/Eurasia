@@ -1,38 +1,42 @@
 import MainTitle from '@/website/common/MainTitle';
 import GridLayout from '@/website/elements/GridLayout'
 import { ArrowDownIcon } from '@/website/elements/Icons';
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { variable } from 'styles/variable';
 import ListMenu from "@/website/section/pages/product/MenuProduct/data.json";
 import { MainApiContext } from '@/website/contexts/MainApiContext';
 import HeadlineText from "@/website/common/HeadlineText";
-export default function MenuProduct({ languageCurrent }) {
+import { MainContext } from '@/website/contexts/MainContext';
+export default function MenuProduct() {
 	const {
 		brandList, getBrandList,
 		roomType, getRoomType,
 		classify, getClassify,
 		statusProduct, getStatusProduct } = useContext(MainApiContext);
+	const { languageCurrent } = useContext(MainContext);
 	useEffect(() => {
 		getBrandList();
 		getRoomType();
 		getClassify();
 		getStatusProduct();
 	}, []);
+
+
 	return (
 		<>
 			<div className="MenuProduct">
 				<GridLayout container>
-					<div className="MenuProduct__content">
-						<MenuProductItem data={brandList} languageCurrent={languageCurrent}>
+					<div className="MenuProduct__content" >
+						<MenuProductItem data={brandList}>
 							Thương hiệu
 						</MenuProductItem>
-						<MenuProductItem data={roomType} languageCurrent={languageCurrent}>
+						<MenuProductItem data={roomType}>
 							Loại phòng
 						</MenuProductItem>
-						<MenuProductItem data={classify} languageCurrent={languageCurrent}>
+						<MenuProductItem data={classify}>
 							Phân loại
 						</MenuProductItem>
-						<MenuProductItem data={statusProduct} languageCurrent={languageCurrent}>
+						<MenuProductItem data={statusProduct}>
 							Trạng thái hàng
 						</MenuProductItem>
 					</div>
@@ -54,11 +58,15 @@ export default function MenuProduct({ languageCurrent }) {
 	);
 }
 
-const MenuProductItem = ({children, data, languageCurrent}) => {
+const MenuProductItem = (props) => {
+	const { children, data } = props;
+	const { languageCurrent } = useContext(MainContext);
+	const [isOpen, setIsOpen] = useState(false);
+
 	return (
 		<>
 			<div className="MenuProduct__item">
-				<div className="MenuProduct__item-link">
+				<div className="MenuProduct__item-link" >
 					<MainTitle className="text" textTransform="none">
 						{children}
 					</MainTitle>

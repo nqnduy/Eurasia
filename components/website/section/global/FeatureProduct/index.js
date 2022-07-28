@@ -11,12 +11,14 @@ import { MainApiContext } from "@/website/contexts/MainApiContext";
 import { useMediaQuery } from "react-responsive";
 import { useNextResponsive } from "@/plugins/next-reponsive";
 import { debounce } from '@/plugins/next-hooks/useDimension';
+import { MainContext } from "@/website/contexts/MainContext";
 
 
 export default function FeatureProduct(props) {
-	const { data, languageCurrent } = props;
+	const { data } = props;
 	const { size, device } = useNextResponsive();
 	const [currentPage, setCurrentPage] = useState(1);
+  	const { languageCurrent } = useContext(MainContext);
 
 	console.log("device:", device);
 

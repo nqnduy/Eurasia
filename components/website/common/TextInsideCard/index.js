@@ -3,28 +3,31 @@ import ImageWrap from '@/website/common/ImageWrap';
 import MainTitle from '@/website/common/MainTitle';
 import { ArrowMoreIcon } from '@/website/elements/Icons';
 import { variable } from 'styles/variable';
-export default function TextInsideCard({image, name, seeMore = true, colorLayer, isSquare = true}) {
+import AppLink from '@/components/diginext/link/AppLink';
+export default function TextInsideCard({image, name, seeMore = true, page, category, colorLayer, isSquare = true}) {
 return (
 	<>
-		<div className="TextInsideCard">
-			<ImageWrap src={image} gif={isSquare ? "/gifs/336x336.gif" : "/gifs/521x324.gif"} />
-			<div className="TextInsideCard__text">
-				<MainTitle className="title" colorTitle={variable.color.white}>
-					{name}
-				</MainTitle>
-				{seeMore ? (
-					<div className="see-more">
-						<ArrowMoreIcon style={{ fontSize: 11 }} />
-						<MainTitle className="text" colorTitle={variable.color.white}>
-							See more
-						</MainTitle>
-					</div>
-				) : (
-					<></>
-				)}
+ 		<AppLink href={category ? `product?&page=${page ? page : ""}&orderBy=sortOrder&order=1&rooms=${category}` : "#"}>
+			<div className="TextInsideCard">
+				<ImageWrap src={image} gif={isSquare ? "/gifs/336x336.gif" : "/gifs/521x324.gif"} />
+				<div className="TextInsideCard__text">
+					<MainTitle className="title" colorTitle={variable.color.white}>
+						{name}
+					</MainTitle>
+					{seeMore ? (
+						<div className="see-more">
+							<ArrowMoreIcon style={{ fontSize: 11 }} />
+							<MainTitle className="text" colorTitle={variable.color.white}>
+								See more
+							</MainTitle>
+						</div>
+					) : (
+						<></>
+					)}
+				</div>
+				<div className="TextInsideCard__layer" />
 			</div>
-			<div className="TextInsideCard__layer" />
-		</div>
+		</AppLink>
 		<style jsx global>{`
 			.TextInsideCard {
 				position: relative;

@@ -68,6 +68,9 @@ const GlobalStyle = () => (
 			@media (max-width: 920px) {
 				font-size: 48.5% !important;
 			}
+			@media (max-width: 820px) {
+				font-size: 62.5% !important;
+			}
 			@media (max-width: 720px) {
 				font-size: 60.5% !important;
 			}

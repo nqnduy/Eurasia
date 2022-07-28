@@ -4,3 +4,6 @@ export const capitalizeFirstLetter = (text) => {
 export const currency = (num) => {
 	return new Intl.NumberFormat("vn").format(num);
 };
+export const changeQueryURL = (data) => {
+	return "?" + new URLSearchParams(data).toString();
+};
