@@ -77,19 +77,42 @@ export default function ImageSlidePaging({ className, images, gifSize, direction
 							grid-column: 1 / 7;
 						}
 						.slick-arrow {
-							bottom: -13%;
+							bottom: -4.8rem;
 							&.slick-next {
 								left: 17%;
 							}
 							&.slick-prev {
 								left: 0%;
 							}
+							@media (min-width: 1920px) {
+								bottom: -5rem !important;
+							}
+							@media (min-width: 1024px) {
+								bottom: -5.5rem !important;
+							}
+							@media (min-width: 821px) {
+								bottom: -6rem;
+							}
+							@media (max-width: 820px) {
+								bottom: -5.3rem;
+							}
+							@media (max-width: 500px) {
+								bottom: -5.4rem;
+								&.slick-next {
+									left: 20%;
+								}
+							}
 						}
+
 						.slide-count {
 							grid-area: 2 / 1 / 3 / 3;
 							align-self: center;
 							right: 15%;
 							bottom: inherit;
+							@media (max-width: 500px) {
+								right: initial;
+								left: 0;
+							}
 						}
 						&.top {
 							grid-template-rows: 46px 1fr;

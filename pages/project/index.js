@@ -7,7 +7,7 @@ import React from "react";
 export default function ProjectPage() {
     return (
 			<MasterPageBasic pageName="Dự án">
-				<Project languageCurrent="vi"/>
+				<Project />
 			</MasterPageBasic>
 		);
 }

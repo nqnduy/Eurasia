@@ -56,11 +56,20 @@ export default function MainIntroBlock(props) {
 							}
 						}
 						.content {
+							--textLineOver: 6;
+							--lineHeight: 1.5em;
 							color: ${variable.color.violet} !important;
 							margin-bottom: 3rem;
 							font-size: 1.4rem;
 							letter-spacing: 0.1em;
 							font-weight: 300;
+
+							display: -webkit-inline-box;
+							-webkit-line-clamp: var(--textLineOver);
+							-webkit-box-orient: vertical;
+							text-overflow: ellipsis;
+							overflow: hidden;
+							min-height: calc(var(--lineHeight) * var(--textLineOver));
 						}
 						.author {
 							font-size: 1.2rem;
@@ -75,6 +84,98 @@ export default function MainIntroBlock(props) {
 					}
 					&__slide {
 						grid-column: 6 / 12;
+					}
+					@media (min-width: 2560px) {
+						&__text {
+							.title {
+								.large {
+									font-size: 4.5rem !important;
+								}
+							}
+							.content {
+								--lineHeight: 1.8em;
+								font-size: 1.6rem;
+							}
+						}
+					}
+					@media (min-width: 2150px) {
+						&__text {
+							.title {
+								.large {
+									font-size: 3.8rem !important;
+								}
+							}
+						}
+					}
+					@media (max-width: 1919px) {
+						&__text {
+							.title {
+								.large {
+									font-size: 3.8rem !important;
+								}
+							}
+							.content {
+								--lineHeight: 1.6em;
+								font-size: 1.5rem;
+							}
+						}
+					}
+					@media (min-width: 1440px) {
+						&__text {
+							.title {
+								.large {
+									font-size: 3rem !important;
+								}
+							}
+							.content {
+								--lineHeight: 1.6em;
+								font-size: 1.4rem;
+							}
+						}
+					}
+					@media (min-width: 1025px) {
+						&__text {
+							.title {
+								.large {
+									font-size: 2.8rem !important;
+								}
+							}
+						}
+					}
+					@media (max-width: 1024px) {
+						&__text {
+							.title {
+								.large {
+									font-size: 2.8rem !important;
+								}
+							}
+							.content {
+								--textLineOver: 4;
+							}
+						}
+					}
+					@media (max-width: 500px) {
+						&__text {
+							.title {
+								margin-bottom: 2.5rem;
+								.large {
+									font-size: 2rem !important;
+								}
+							}
+							.content {
+								font-size: 1.2rem !important;
+							}
+						}
+					}
+					@media (max-width: 820px) {
+						display: flex;
+						flex-direction: column-reverse;
+						padding: 3rem 0;
+					}
+					@media (max-width: 500px) {
+						display: flex;
+						flex-direction: column-reverse;
+						padding: 2rem 0;
 					}
 				}
 			`}</style>

@@ -1,4 +1,5 @@
 import { MainApiContext } from "@/website/contexts/MainApiContext";
+import { MainContext } from "@/website/contexts/MainContext";
 import GridLayout from "@/website/elements/GridLayout";
 import Banner from "@/website/section/global/Banner";
 import Introduction from "@/website/section/global/Introduction";
@@ -6,54 +7,13 @@ import MainIntroBlock from "@/website/section/global/MainIntroBlock";
 import OurServices from "@/website/section/pages/home/OurServices";
 import React, { useContext, useEffect } from "react";
 
-export default function Project({languageCurrent}) {
+export default function Project() {
 	const { pageContent, getPageContent, projectList, getProjectList } = useContext(MainApiContext);
+	const { languageCurrent } = useContext(MainContext);
 	useEffect(() => {
 		getPageContent("PROJECT");
 		getProjectList();
 	}, []);
-	const data = [
-		{
-			title: "The Reverie",
-			description:
-				"Driven by a pioneering vision, the company has always been ahead of its time, successfully attracting the most talented designers and architects in the making of new shapes, spurred on by the many inspirations and influences of contemporary design.",
-			author: "Davide Sozzie",
-			images: ["/images/aboutus1.jpg", "/images/aboutus2.jpg", "/images/aboutus3.jpg", "/images/aboutus4.jpg"],
-			type: "horizontal",
-		},
-		{
-			title: "Cafe cardinal",
-			description:
-				"Natural materials (leather, wood, marble, metal etc.), without embellishments, used in such a way as to enhance and emphasise their quintessential qualities.",
-			author: "Davide Sozzie",
-			images: ["/images/showcase1.jpg", "/images/showcase2.jpg", "/images/showcase3.jpg", "/images/showcase4.jpg"],
-			type: "vertical",
-		},
-		{
-			title: "CA' FOSCARI LIVING",
-			description:
-				"Natural materials (leather, wood, marble, metal etc.), without embellishments, used in such a way as to enhance and emphasise their quintessential qualities.",
-			author: "Davide Sozzie",
-			images: ["/images/showcase2.jpg", "/images/showcase3.jpg", "/images/showcase4.jpg", "/images/showcase1.jpg"],
-			type: "vertical",
-		},
-		{
-			title: "Vietnam house",
-			description:
-				"Natural materials (leather, wood, marble, metal etc.), without embellishments, used in such a way as to enhance and emphasise their quintessential qualities.",
-			author: "Davide Sozzie",
-			images: ["/images/showcase3.jpg", "/images/showcase4.jpg", "/images/showcase1.jpg", "/images/showcase2.jpg"],
-			type: "vertical",
-		},
-		{
-			title: "The Reverie",
-			description:
-				"Natural materials (leather, wood, marble, metal etc.), without embellishments, used in such a way as to enhance and emphasise their quintessential qualities.",
-			author: "Davide Sozzie",
-			images: ["/images/showcase4.jpg", "/images/showcase1.jpg", "/images/showcase2.jpg", "/images/showcase3.jpg"],
-			type: "vertical",
-		},
-	];
 
 	return (
 		<>
@@ -72,8 +32,11 @@ export default function Project({languageCurrent}) {
 											<div className="Project__content-inSide">
 												{projectList?.map((item, index) => (
 													<React.Fragment key={index}>
-														<MainIntroBlock name={item.name[`${languageCurrent}`]}
-															images={item.images} />
+														<MainIntroBlock
+															name={item.name[`${languageCurrent}`]}
+															images={item.images}
+															description={item.description[`${languageCurrent}`]}
+														/>
 													</React.Fragment>
 												))}
 											</div>
@@ -103,6 +66,20 @@ export default function Project({languageCurrent}) {
 									}
 								}
 							}
+						}
+						@media (max-width: 1366px) {
+							grid-column: 2 / 15;
+						}
+						@media (max-width: 1230px) {
+							padding: 0 50px;
+							grid-column: 1 / 16;
+						}
+						@media (max-width: 820px) {
+							padding: 0;
+							grid-column: 3 / 14;
+						}
+						@media (max-width: 500px) {
+							grid-column: 2 / 15;
 						}
 					}
 				}
