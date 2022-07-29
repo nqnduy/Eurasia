@@ -5,23 +5,29 @@ import HeadlineText from '@/website/common/HeadlineText';
 import { variable } from 'styles/variable';
 import ImageSlidePaging from '@/website/section/global/ImageSlidePaging';
 import PropTypes from "prop-types";
+import AppLink from '@/components/diginext/link/AppLink';
 
 export default function MainIntroBlock(props) {
-	const { name, description, author, images, type, className, isHaveAuthor = true, positionControl } = props;
+	const { slug, name, description, author, images, type, className, isHaveAuthor = true, positionControl } = props;
 	return (
 		<>
 			<div className={`MainIntroBlock ${className} ${type === "horizontal" ? "horizontal" : positionControl === "top" ? "vertical top" : "vertical"}`}>
-				<MainTextWrap className="MainIntroBlock__text" title={name} typeTitle="main" isLarge={true}>
-					<div className="content">{description}</div>
-					{author ? (
-						<HeadlineText className="author" colorTitle={variable.color.gold}>
-							Eurasia Concept: <span>Davide Sozzi</span>
-						</HeadlineText>
-					) : (
-						<></>
-					)}
-					<MainTitle.CTA className="cta">ReadMore</MainTitle.CTA>
-				</MainTextWrap>
+				<div className="MainIntroBlock__text">
+					<AppLink href={`/project/${slug}`}>
+						<MainTextWrap title={name} typeTitle="main" isLarge={true}>
+								<div className="content">{description}</div>
+								{author ? (
+									<HeadlineText className="author" colorTitle={variable.color.gold}>
+										Eurasia Concept: <span>Davide Sozzi</span>
+									</HeadlineText>
+								) : (
+									<></>
+								)}
+								<MainTitle.CTA className="cta">ReadMore</MainTitle.CTA>
+						</MainTextWrap>
+					</AppLink>
+				</div>
+
 				<div className="MainIntroBlock__slide">
 					<ImageSlidePaging images={images} type={type} positionControl={positionControl} />
 				</div>

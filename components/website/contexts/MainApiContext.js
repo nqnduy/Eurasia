@@ -19,16 +19,18 @@ export default function MainApiContextProvider({ children }) {
 	const [relatedProductList, setRelatedProductList] = useState();
 	const [pageContent, setPageContent] = useState();
 	const [projectList, setProjectList] = useState();
-	const [productByCategory, setProductByCategory] = useState();
+	const [projectDetail, setProjectDetail] = useState();
 	const [paginatorProduct, setPaginatorProduct] = useState();
+	const [inspirationHighlight, setInspirationHighlight] = useState();
+
 
 	const getInspirationCategories = async (order) => {
 		const res = await ApiCall({
-			path: `/api/v1/frontend/inspiration-categories`,
+			path: `/api/v1/frontend/inspiration-categories?order=1`,
 		});
 
 		if (res.status) {
-			// console.log("Inspiration Categories", res.data.list);
+			console.log("Inspiration Categories", res.data.list);
 			setInspirationCategories(res.data.list);
 		} else {
 			notification.error({
@@ -223,19 +225,32 @@ export default function MainApiContextProvider({ children }) {
 		}
 	}
 
-	const getProductByCategory = async (room, page) => {
+	const getProjectDetail = async (slug) => {
 		const res = await ApiCall({
-			path: `api/v1/products?limit=12&page=${page}&orderBy=sortOrder&order=1&rooms=${room}`,
+			path: `/api/v1/frontend/projects/${slug}`,
 		});
 		if (res.data) {
-			console.log("filter product", res.data.list);
-			setProductByCategory(res.data.list);
+			console.log("project detail:", res.data);
+			setProjectDetail(res.data);
 		} else {
 			notification.error({
 				message: res.message || "Something went wrong",
 			});
 		}
-	}
+	};
+	const getInspirationHighlight = async (slug) => {
+		const res = await ApiCall({
+			path: `/api/v1/frontend/inspirations?limit=99999&order=1&orderBy=sortOrder&isHighlight=true&category=`,
+		});
+		if (res.data) {
+			console.log("inspiration highlight:", res.data);
+			setInspirationHighlight(res.data.list);
+		} else {
+			notification.error({
+				message: res.message || "Something went wrong",
+			});
+		}
+	};
 
 	return (
 		<MainApiContext.Provider
@@ -283,8 +298,11 @@ export default function MainApiContextProvider({ children }) {
 				projectList,
 				getProjectList,
 
-				productByCategory,
-				getProductByCategory,
+				projectDetail,
+				getProjectDetail,
+
+				inspirationHighlight,
+				getInspirationHighlight
 			}}>
 			{children}
 		</MainApiContext.Provider>

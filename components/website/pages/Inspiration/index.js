@@ -2,63 +2,43 @@ import GridLayout from "@/website/elements/GridLayout";
 import Banner from "@/website/section/global/Banner";
 import Introduction from "@/website/section/global/Introduction";
 import CardListInspiration from "@/website/section/pages/inspiration/CardList";
-import React from "react";
+import React, { useEffect,useContext } from "react";
 import Inspirations from "@/website/section/pages/home/AllInspirations/data.json";
 import { data } from "autoprefixer";
 import MainIntroBlock from "@/website/section/global/MainIntroBlock";
+import { MainApiContext } from "@/website/contexts/MainApiContext";
+import { MainContext } from "@/website/contexts/MainContext";
 
 export default function Inspiration() {
-	const data = [
-		{
-			title: "Salone del",
-			description:
-				"Natural materials (leather, wood, marble, metal etc.), without embellishments, used in such a way as to enhance and emphasise their quintessential qualities.",
-			author: "Davide Sozzie",
-			images: ["/images/showcase1.jpg", "/images/showcase2.jpg", "/images/showcase3.jpg", "/images/showcase4.jpg"],
-			type: "vertical",
-		},
-		{
-			title: "CA' FOSCARI LIVING",
-			description:
-				"Natural materials (leather, wood, marble, metal etc.), without embellishments, used in such a way as to enhance and emphasise their quintessential qualities.",
-			author: "Davide Sozzie",
-			images: ["/images/showcase2.jpg", "/images/showcase3.jpg", "/images/showcase4.jpg", "/images/showcase1.jpg"],
-			type: "vertical",
-		},
-		{
-			title: "CA' FOSCARI BEDROOM",
-			description:
-				"Natural materials (leather, wood, marble, metal etc.), without embellishments, used in such a way as to enhance and emphasise their quintessential qualities.",
-			author: "Davide Sozzie",
-			images: ["/images/showcase3.jpg", "/images/showcase4.jpg", "/images/showcase1.jpg", "/images/showcase2.jpg"],
-			type: "vertical",
-		},
-		{
-			title: "Poltrona Frau",
-			description:
-				"Natural materials (leather, wood, marble, metal etc.), without embellishments, used in such a way as to enhance and emphasise their quintessential qualities.",
-			author: "Davide Sozzie",
-			images: ["/images/showcase4.jpg", "/images/showcase1.jpg", "/images/showcase2.jpg", "/images/showcase3.jpg"],
-			type: "vertical",
-		},
-	];
+	const { pageContent, getPageContent} = useContext(MainApiContext);
+	const { languageCurrent } = useContext(MainContext);
+
+	useEffect(() => {
+		getPageContent("INSPIRATION");
+	}, []);
 
 	return (
 		<>
 			<div className="Inspiration">
-				<Banner image="/images/banner-3.jpg" category="home story" title="CA' FOSCARI" />
-				<GridLayout>
-					<div className="Inspiration__content">
-						<div className="Inspiration__content-intro">
-							<Introduction
-								title="Inspirations"
-								description="Eurasia Concept excels at providing bespoke solution and world-renowned interior for a range of projects: from hotels, restaurants, to private houses & apartments."
-							/>
-						</div>
-					</div>
-				</GridLayout>
-				<CardListInspiration data={Inspirations} />
-				<GridLayout>
+				<Banner image="/images/banner-3.jpg" category="home story" title="CA' FOSCARI" link="#" />
+				{pageContent?.content[`${languageCurrent}`]?.map((value, i) => {
+					switch (value.section) {
+						case "1":
+							return (
+								<React.Fragment key={i}>
+									<GridLayout>
+										<div className="Inspiration__content">
+											<div className="Inspiration__content-intro">
+												<Introduction data={value} />
+											</div>
+										</div>
+									</GridLayout>
+								</React.Fragment>
+							);
+					}
+				})}
+				<CardListInspiration/>
+				{/*	<GridLayout>
 					<div className="Inspiration__content-inSide">
 						{data.map((item, index) => (
 							<React.Fragment key={index}>
@@ -66,7 +46,7 @@ export default function Inspiration() {
 							</React.Fragment>
 						))}
 					</div>
-				</GridLayout>
+				</GridLayout> */}
 			</div>
 			<style jsx global>{`
 				.Inspiration {

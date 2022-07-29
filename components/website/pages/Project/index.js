@@ -35,6 +35,7 @@ export default function Project() {
 														<MainIntroBlock
 															name={item.name[`${languageCurrent}`]}
 															images={item.images}
+															slug={item.slug[`${languageCurrent}`]}
 															description={item.description[`${languageCurrent}`]}
 														/>
 													</React.Fragment>

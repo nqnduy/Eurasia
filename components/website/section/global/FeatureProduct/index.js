@@ -20,8 +20,6 @@ export default function FeatureProduct(props) {
 	const [currentPage, setCurrentPage] = useState(1);
   	const { languageCurrent } = useContext(MainContext);
 
-	console.log("device:", device);
-
 	let totalPage = data?.length;
 
 	const checkSlide = (slide) => {

@@ -18,6 +18,7 @@ const ArticleStyle = () => {
 				}
 				img {
 					width: 100%;
+					margin: 5rem 0;
 				}
 				p {
 					font-family: "Lexend";
@@ -26,6 +27,7 @@ const ArticleStyle = () => {
 					letter-spacing: 0.1em;
 					line-height: 1.8em;
 					text-align: justify;
+					margin: 5rem 0;
 				}
 				h4 {
 					font-family: "CoGa";

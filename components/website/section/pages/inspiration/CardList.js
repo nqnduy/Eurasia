@@ -3,56 +3,62 @@ import ArrowPrev from "@/website/common/ArrowPrev";
 import HeadlineText from "@/website/common/HeadlineText";
 import MainTitle from "@/website/common/MainTitle";
 import TextInsideCard from "@/website/common/TextInsideCard";
+import { MainApiContext } from "@/website/contexts/MainApiContext";
+import { MainContext } from "@/website/contexts/MainContext";
 import GridLayout from "@/website/elements/GridLayout";
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Slider from "react-slick";
 import { variable } from "styles/variable";
 
 export default function CardListInspiration({ data, ...e }) {
 	const [filterStatus, setFilterStatus] = useState("all");
 	const [pageCount, setPageCount] = useState(3);
-	const settings = {
-		slidesToShow: 3.5,
-		infinite: true,
-		initialSlide: 3,
-		slidesToScroll: 3,
-		afterChange: (current) => {
-			console.log("current", current);
-			setPageCount(current);
-		},
-		nextArrow: <ArrowNext fill={variable.color.gold} isProductType={true} />,
-		prevArrow: <ArrowPrev fill={variable.color.gold} isProductType={true} />,
+	const { inspirationHighlight, getInspirationHighlight, inspirationCategories, getInspirationCategories } = useContext(MainApiContext);
+	const { languageCurrent } = useContext(MainContext);
+	const [currentPage, setCurrentPage] = useState(1);
+
+	useEffect(() => {
+		getInspirationHighlight();
+		getInspirationCategories();
+	}, []);
+
+	const checkSlide = (slide) => {
+		if (slide === 0) {
+			setCurrentPage(totalPage);
+		} else {
+			setCurrentPage(slide);
+		}
 	};
+
+
 
 	const showAll = () => {
 		setFilterStatus("all");
-		setPageCount(3);
+		setCurrentPage(1);
 	};
-	const showHomeStory = () => {
-		setFilterStatus("home");
-		setPageCount(3);
-	};
-	const showRoom = () => {
-		setFilterStatus("room");
-		setPageCount(3);
-	};
-	const showStyles = () => {
-		setFilterStatus("styles");
-		setPageCount(3);
-	};
-	const showIcons = () => {
-		setFilterStatus("icons");
-		setPageCount(3);
-	};
+	const handleShowFilter = (value) => {
+		setFilterStatus(value);
+		setCurrentPage(1);
+	}
+	console.log("filterStatus:", filterStatus)
+	const renderDataFilter = inspirationHighlight && inspirationHighlight?.filter((item) => filterStatus === "all" || filterStatus === item.categories[0]?.name[`${languageCurrent}`]);
+	console.log("renderDataFilter:", renderDataFilter);
+	let totalPage = Math.ceil(renderDataFilter?.length);
+	console.log("totalPage:", totalPage)
+	// console.log("inspirationHighlight:", inspirationHighlight)
 
-	const renderDataFilter = data && data.filter((item) => filterStatus === "all" || filterStatus === item.category);
-	let totalPage = Math.ceil(renderDataFilter.length / 3);
+const settings = {
+	slidesToShow: 3,
+	infinite: renderDataFilter?.length < 3 ? false : true,
+	initialSlide: 0,
+	slidesToScroll: 1,
+	afterChange: (current, next) => checkSlide(current),
+	nextArrow: <ArrowNext fill={variable.color.gold} isProductType={true} />,
+	prevArrow: <ArrowPrev fill={variable.color.gold} isProductType={true} />,
+};
+
 	const renderPageSlide = () => {
 		if (totalPage <= 1) return;
-		let currentPage = Math.floor(pageCount / 3);
-		if (currentPage < 1) {
-			currentPage = totalPage;
-		}
 		return (
 			<>
 				<ul className="pageSlide">
@@ -83,20 +89,17 @@ export default function CardListInspiration({ data, ...e }) {
 					<div className="CardListInspiration__header">
 						<div className="tab">
 							<MainTitle className={`tab-item ${filterStatus === "all" && "active"}`} onClick={showAll}>
-								All
+								Tất cả
 							</MainTitle>
-							<MainTitle className={`tab-item ${filterStatus === "home" && "active"}`} onClick={showHomeStory}>
-								Home Story
-							</MainTitle>
-							<MainTitle className={`tab-item ${filterStatus === "room" && "active"}`} onClick={showRoom}>
-								Room
-							</MainTitle>
-							<MainTitle className={`tab-item ${filterStatus === "styles" && "active"}`} onClick={showStyles}>
-								Styles
-							</MainTitle>
-							<MainTitle className={`tab-item ${filterStatus === "icons" && "active"}`} onClick={showIcons}>
-								Icons
-							</MainTitle>
+							{inspirationCategories?.map((item, i) => (
+								<React.Fragment key={i}>
+									<MainTitle
+										className={`tab-item ${filterStatus === item.name[languageCurrent] && "active"}`}
+										onClick={() => handleShowFilter(item.name[`${languageCurrent}`])}>
+										{item.name[`${languageCurrent}`]}
+									</MainTitle>
+								</React.Fragment>
+							))}
 						</div>
 						<div className="border-box"></div>
 						<HeadlineText className="countPage" colorTitle={variable.color.gold}>
@@ -105,9 +108,9 @@ export default function CardListInspiration({ data, ...e }) {
 					</div>
 					<div className="CardListInspiration__list">
 						<Slider {...settings}>
-							{renderDataFilter.map((item, index) => (
+							{renderDataFilter?.map((item, index) => (
 								<React.Fragment key={index}>
-									<TextInsideCard data={item} {...e} />
+									<TextInsideCard colorLayer={variable.color.gold} name={item.name[`${languageCurrent}`]} image={item.images[0]?.image} category={item.id} page={1} {...e} />
 								</React.Fragment>
 							))}
 						</Slider>
@@ -153,7 +156,7 @@ export default function CardListInspiration({ data, ...e }) {
 						}
 					}
 					&__list {
-						grid-column: 3 / 16;
+						grid-column: 3 / 14;
 						.slick-slider {
 							display: grid;
 							grid-template-columns: repeat(13, 1fr);
@@ -162,9 +165,6 @@ export default function CardListInspiration({ data, ...e }) {
 								grid-column: 1 / 14;
 								padding: 0 !important;
 								margin: 0 -1rem;
-								.slick-track {
-									left: 100%;
-								}
 							}
 							.slick-arrow {
 								top: -10rem;

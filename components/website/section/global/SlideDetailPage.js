@@ -10,8 +10,7 @@ import React from "react";
 import Slider from "react-slick";
 import { variable } from "styles/variable";
 
-export default function SlideDetailPage({ explore }) {
-	const images = ["/images/slide-detail-1.jpg", "/images/slide-detail-3.jpg", "/images/slide-detail-2.jpg"];
+export default function SlideDetailPage({ data, explore }) {
 	const settings = {
 		slidesToShow: 1,
 		centerMode: true,
@@ -26,7 +25,7 @@ export default function SlideDetailPage({ explore }) {
 		<>
 			<div className="SlideDetailPage">
 				<Slider {...settings}>
-					{images.map((image, index) => (
+					{data.map((image, index) => (
 						<React.Fragment key={index}>
 							<ImageWrap src={image} gif="/gifs/856x570.gif" />
 						</React.Fragment>
