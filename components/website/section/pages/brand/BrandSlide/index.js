@@ -1,12 +1,14 @@
 import TextInsideCard from '@/website/common/TextInsideCard';
-import React from 'react'
+import React, { useContext } from 'react'
 import { variable } from 'styles/variable';
 import Categories from  "@/website/section/pages/brand/BrandSlide/data.json"
 import ArrowNext from '@/website/common/ArrowNext';
 import ArrowPrev from '@/website/common/ArrowPrev';
 import Slider from 'react-slick';
+import { MainContext } from '@/website/contexts/MainContext';
 
-export default function BrandSlide() {
+export default function BrandSlide({ data }) {
+	const { languageCurrent } = useContext(MainContext)
 	const settings = {
 		initialSlide: 1,
 		slidesToShow: 2,
@@ -20,9 +22,14 @@ export default function BrandSlide() {
 			<>
 				<div className="BrandSlide">
 					<Slider {...settings}>
-						{Categories.map((category, index) => (
+						{data?.map((category, index) => (
 							<React.Fragment key={index}>
-								<TextInsideCard data={category} seeMore={false} colorLayer={variable.color.gold} isSquare={false} />
+								<TextInsideCard
+									image={category.banner}
+									name={category.categories[0]?.name[`${languageCurrent}`]}
+									seeMore={false}
+									colorLayer={variable.color.violet}
+									isSquare={false} />
 							</React.Fragment>
 						))}
 					</Slider>

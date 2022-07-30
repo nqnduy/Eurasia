@@ -10,6 +10,7 @@ import React, { useContext, useEffect } from "react";
 export default function Project() {
 	const { pageContent, getPageContent, projectList, getProjectList } = useContext(MainApiContext);
 	const { languageCurrent } = useContext(MainContext);
+
 	useEffect(() => {
 		getPageContent("PROJECT");
 		getProjectList();

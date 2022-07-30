@@ -31,6 +31,7 @@ export default function MainApiContextProvider({ children }) {
 
 	//brand
 	const [brandList, setBrandList] = useState();
+	const [brandListByCategory, setBrandListByCategory] = useState();
 
 	const getInspirationCategories = async (order) => {
 		const res = await ApiCall({
@@ -126,8 +127,22 @@ export default function MainApiContextProvider({ children }) {
 			path: `/api/v1/brands?limit=99999`,
 		});
 		if (res.status) {
-			// console.log("brand list:", res.data.list);
+			console.log("brand list:", res.data.list);
 			setBrandList(res.data.list);
+		} else {
+			notification.error({
+				message: res.message || "Something went wrong",
+			});
+		}
+	};
+
+	const getBrandListByCategory = async () => {
+		const res = await ApiCall({
+			path: `/api/v1/brands?limit=12&order=1&orderBy=name.viNon&category=&keyword=&page=1`,
+		});
+		if (res.status) {
+			// console.log("brand list:", res.data.list);
+			setBrandListByCategory(res.data.list);
 		} else {
 			notification.error({
 				message: res.message || "Something went wrong",
@@ -314,7 +329,10 @@ export default function MainApiContextProvider({ children }) {
 				paginatorInspiration,
 
 				inspirationDetail,
-				getInspirationDetail
+				getInspirationDetail,
+
+				brandListByCategory,
+				getBrandListByCategory,
 			}}>
 			{children}
 		</MainApiContext.Provider>

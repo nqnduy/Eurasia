@@ -1,102 +1,87 @@
+/* eslint-disable @next/next/no-img-element */
 import MainTitle from "@/website/common/MainTitle";
 import GridLayout from "@/website/elements/GridLayout";
 import { ArrowDownIcon, SearchIcon } from "@/website/elements/Icons";
 import Banner from "@/website/section/global/Banner";
 import Introduction from "@/website/section/global/Introduction";
 import BrandSlide from "@/website/section/pages/brand/BrandSlide";
-import React from "react";
-import { variable } from '../../../../styles/variable';
+import React, { useContext, useEffect } from "react";
+import { variable } from 'styles/variable';
+import { MainApiContext } from '@/website/contexts/MainApiContext';
+import { MainContext } from "@/website/contexts/MainContext";
 
 export default function Brand() {
+	const {
+		pageContent, getPageContent,
+		brandList, getBrandList,
+		brandListByCategory, getBrandListByCategory,
+	} = useContext(MainApiContext);
+	const { languageCurrent } = useContext(MainContext);
+
+	useEffect(() => {
+		getPageContent("BRAND");
+		getBrandList();
+		getBrandListByCategory();
+	}, []);
+
 	return (
 		<>
 			<div className="Brand">
 				<Banner image="/images/banner-4.jpg" headline="Furniture" title="Fendi Casa" link="#"/>
-				<GridLayout>
-					<div className="Brand__intro">
-						<Introduction
-							title="Brands"
-							description="Eurasia Concept excels at providing bespoke solution and world-renowned interior for a range of projects: from hotels, restaurants, to private houses & apartments."
-						/>
-					</div>
-					<div className="Brand__slide">
-						<BrandSlide />
-					</div>
-					<div className="Brand__menu">
-						<div className="border-box"></div>
-						<div className="Brand__menu-list">
-							<div className="menu-item">
-								<MainTitle className="text" textTransform="none">
-									Sort by name
-								</MainTitle>
-								<ArrowDownIcon style={{ fontSize: 10 }} />
-							</div>
-							<div className="menu-item">
-								<MainTitle className="text" textTransform="none">
-									Sort by style
-								</MainTitle>
-								<ArrowDownIcon style={{ fontSize: 10 }} />
-							</div>
-						</div>
-						<div className="Brand__menu-search">
-							<input placeholder="Search" />
-							<SearchIcon className="icon" style={{ fontSize: 12 }} />
-						</div>
-					</div>
-					<div className="Brand__logoList">
-						<div className="Brand__logoList-item">
-							<img src="/images/brand-1.png" alt="" />
-						</div>
-						<div className="Brand__logoList-item">
-							<img src="/images/brand-2.png" alt="" />
-						</div>
-						<div className="Brand__logoList-item">
-							<img src="/images/brand-3.png" alt="" />
-						</div>
-						<div className="Brand__logoList-item">
-							<img src="/images/brand-4.png" alt="" />
-						</div>
-						<div className="Brand__logoList-item">
-							<img src="/images/brand-5.png" alt="" />
-						</div>
-						<div className="Brand__logoList-item">
-							<img src="/images/brand-6.png" alt="" />
-						</div>
-						<div className="Brand__logoList-item">
-							<img src="/images/brand-7.png" alt="" />
-						</div>
-						<div className="Brand__logoList-item">
-							<img src="/images/brand-8.png" alt="" />
-						</div>
-						<div className="Brand__logoList-item">
-							<img src="/images/brand-9.png" alt="" />
-						</div>
-						<div className="Brand__logoList-item">
-							<img src="/images/brand-10.png" alt="" />
-						</div>
-						<div className="Brand__logoList-item">
-							<img src="/images/brand-11.png" alt="" />
-						</div>
-						<div className="Brand__logoList-item">
-							<img src="/images/brand-12.png" alt="" />
-						</div>
-						<div className="Brand__logoList-item">
-							<img src="/images/brand-13.png" alt="" />
-						</div>
-						<div className="Brand__logoList-item">
-							<img src="/images/brand-14.png" alt="" />
-						</div>
-						<div className="Brand__logoList-item">
-							<img src="/images/brand-15.png" alt="" />
-						</div>
-						<div className="Brand__logoList-item">
-							<img src="/images/brand-16.png" alt="" />
-						</div>
-					</div>
-					<MainTitle.CTA className="load-more" isCenter={true}>
-						Load more
-					</MainTitle.CTA>
-				</GridLayout>
+				{pageContent?.content[`${languageCurrent}`]?.map((value, i) => {
+					switch (value.section) {
+						case "1":
+							return (
+								<React.Fragment key={i}>
+									<GridLayout>
+										<div className="Brand__intro">
+											<Introduction data={value} />
+										</div>
+
+										<div className="Brand__slide">
+											<BrandSlide data={brandListByCategory} />
+										</div>
+
+										<div className="Brand__menu">
+											<div className="border-box"></div>
+											<div className="Brand__menu-list">
+												<div className="menu-item">
+													<MainTitle className="text" textTransform="none">
+														Sort by name
+													</MainTitle>
+													<ArrowDownIcon style={{ fontSize: 10 }} />
+												</div>
+												<div className="menu-item">
+													<MainTitle className="text" textTransform="none">
+														Sort by style
+													</MainTitle>
+													<ArrowDownIcon style={{ fontSize: 10 }} />
+												</div>
+											</div>
+											<div className="Brand__menu-search">
+												<input placeholder="Search" />
+												<SearchIcon className="icon" style={{ fontSize: 12 }} />
+											</div>
+										</div>
+
+										<div className="Brand__logoList">
+											{brandList?.map((item) => (
+												<React.Fragment key={item.id}>
+													<div className="Brand__logoList-item">
+														<img src={item.logo} alt="" />
+													</div>
+												</React.Fragment>
+											))}
+										</div>
+
+										<MainTitle.CTA className="load-more" isCenter={true}>
+											Load more
+										</MainTitle.CTA>
+									</GridLayout>
+								</React.Fragment>
+							);
+					}
+				})}
 			</div>
 			<style jsx global>{`
 				.Brand {
