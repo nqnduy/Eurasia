@@ -35,7 +35,7 @@ export default function Project() {
 														<MainIntroBlock
 															name={item.name[`${languageCurrent}`]}
 															images={item.images}
-															slug={item.slug[`${languageCurrent}`]}
+															slug={`/project/${item.slug[languageCurrent]}`}
 															description={item.description[`${languageCurrent}`]}
 														/>
 													</React.Fragment>
@@ -72,15 +72,16 @@ export default function Project() {
 							grid-column: 2 / 15;
 						}
 						@media (max-width: 1230px) {
-							padding: 0 50px;
+							padding: 0 5rem;
 							grid-column: 1 / 16;
 						}
 						@media (max-width: 820px) {
 							padding: 0;
-							grid-column: 3 / 14;
+							grid-column: 2 / 15;
 						}
 						@media (max-width: 500px) {
-							grid-column: 2 / 15;
+							padding: 0 1.5rem;
+							grid-column: 1 / 16;
 						}
 					}
 				}

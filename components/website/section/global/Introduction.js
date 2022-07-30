@@ -41,7 +41,7 @@ export default function Introduction({data}) {
 									font-size: 2rem;
 								}
 							}
-							@media (max-width: 820px) {
+							@media (max-width: 720px) {
 								.title {
 									font-size: 3.5rem;
 									margin-bottom: 5.5rem;

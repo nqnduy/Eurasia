@@ -86,10 +86,7 @@ export default function CardListInspiration({ data, ...e }) {
 							))}
 						</div>
 						<div className="drop-down none-select">
-							<FilterDropdown
-								options={categoryList}
-								onClickFilter={handleShowFilter}
-								onClickShowAll={showAll}>
+							<FilterDropdown options={categoryList} onClickFilter={handleShowFilter} onClickShowAll={showAll}>
 								Tất cả
 							</FilterDropdown>
 						</div>
@@ -155,6 +152,9 @@ export default function CardListInspiration({ data, ...e }) {
 						}
 						.countPage {
 							padding-right: 4rem;
+							@media (max-width: 720px) {
+								display: none;
+							}
 						}
 						.drop-down {
 							padding: 3rem 0;

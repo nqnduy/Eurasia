@@ -5,24 +5,32 @@ import { notification, message } from "antd";
 export const MainApiContext = createContext({});
 
 export default function MainApiContextProvider({ children }) {
-	const [homeContent, setHomeContent] = useState();
-	const [inspirationCategories, setInspirationCategories] = useState();
-	const [featureProduct, setFeatureProduct] = useState();
+	const [pageContent, setPageContent] = useState();
 	const [footerContent, setFooterContent] = useState();
 	const [categoriesList, setCategoriesList] = useState();
-	const [productList, setProductList] = useState();
-	const [brandList, setBrandList] = useState();
 	const [roomType, setRoomType] = useState();
 	const [classify, setClassify] = useState();
+
+	//product
+	const [featureProduct, setFeatureProduct] = useState();
+	const [productList, setProductList] = useState();
 	const [statusProduct, setStatusProduct] = useState();
 	const [productDetail, setProductDetail] = useState();
+	const [paginatorProduct, setPaginatorProduct] = useState();
 	const [relatedProductList, setRelatedProductList] = useState();
-	const [pageContent, setPageContent] = useState();
+
+	//project
 	const [projectList, setProjectList] = useState();
 	const [projectDetail, setProjectDetail] = useState();
-	const [paginatorProduct, setPaginatorProduct] = useState();
+
+	//inspiration
+	const [inspirationCategories, setInspirationCategories] = useState();
 	const [inspirationHighlight, setInspirationHighlight] = useState();
 	const [paginatorInspiration, setPaginatorInspiration] = useState();
+	const [inspirationDetail, setInspirationDetail] = useState();
+
+	//brand
+	const [brandList, setBrandList] = useState();
 
 	const getInspirationCategories = async (order) => {
 		const res = await ApiCall({
@@ -52,21 +60,6 @@ export default function MainApiContextProvider({ children }) {
 				});
 			}
 	}
-
-	const getHomeContent = async () => {
-		const res = await ApiCall({
-			path: `/api/v1/pages/find-by-page-code?pageCode=HOME`,
-		});
-
-		if (res.status) {
-			//console.log("Home content", res.data);
-			setHomeContent(res.data);
-		} else {
-			notification.error({
-				message: res.message || "Something went wrong",
-			});
-		}
-	};
 
 	const getFeatureProduct = async () => {
 		const res = await ApiCall({
@@ -238,6 +231,7 @@ export default function MainApiContextProvider({ children }) {
 			});
 		}
 	};
+
 	const getInspirationHighlight = async (page, limit, isHighlight=false) => {
 		const res = await ApiCall({
 			path: `/api/v1/frontend/inspirations?${limit ? `&limit=${limit}` : ""}&order=1&orderBy=sortOrder${
@@ -245,7 +239,7 @@ export default function MainApiContextProvider({ children }) {
 			}&category=${page ? `&page=${page}` : ""}`,
 		});
 		if (res.data) {
-			console.log("inspiration highlight:", res.data);
+			// console.log("inspiration highlight:", res.data);
 			setInspirationHighlight(res.data.list);
 			setPaginatorInspiration(res.data.paginator);
 		} else {
@@ -255,6 +249,19 @@ export default function MainApiContextProvider({ children }) {
 		}
 	};
 
+	const getInspirationDetail = async (slug) => {
+		const res = await ApiCall({
+			path: `/api/v1/frontend/inspirations/${slug}`,
+		});
+		if (res.data) {
+			console.log("inspiration detail:", res.data);
+			setInspirationDetail(res.data);
+		} else {
+			notification.error({
+				message: res.message || "Something went wrong",
+			});
+		}
+	};
 
 	return (
 		<MainApiContext.Provider
@@ -264,9 +271,6 @@ export default function MainApiContextProvider({ children }) {
 
 				inspirationCategories,
 				getInspirationCategories,
-
-				homeContent,
-				getHomeContent,
 
 				featureProduct,
 				getFeatureProduct,
@@ -308,6 +312,9 @@ export default function MainApiContextProvider({ children }) {
 				inspirationHighlight,
 				getInspirationHighlight,
 				paginatorInspiration,
+
+				inspirationDetail,
+				getInspirationDetail
 			}}>
 			{children}
 		</MainApiContext.Provider>

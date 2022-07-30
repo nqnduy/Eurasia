@@ -35,6 +35,38 @@ export default function ArticleIntroduction({ name, authorName, description }) {
 						letter-spacing: 0.1em;
 						text-align: justify;
 					}
+					@media (max-width: 1366px) {
+						grid-column: 2 / 15;
+					}
+					@media (max-width: 1230px) {
+						padding: 0 5rem;
+						grid-column: 1 / 16;
+					}
+					@media (max-width: 820px) {
+						.large {
+							font-size: 3.5rem !important;
+						}
+						.description {
+							font-size: 2rem;
+						}
+						padding: 0;
+						grid-column: 2 / 15;
+					}
+					@media (max-width: 720px) {
+						margin: 10rem 0 4rem 0;
+
+						.large {
+							font-size: 3rem !important;
+						}
+						.description {
+							font-size: 1.6rem;
+							line-height: 1.8em;
+						}
+					}
+					@media (max-width: 500px) {
+						padding: 0 1.5rem;
+						grid-column: 1 / 16;
+					}
 				}
 			`}</style>
 		</>

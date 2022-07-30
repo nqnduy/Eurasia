@@ -4,30 +4,8 @@ const ArticleStyle = () => {
 	return (
 		<>
 			<style jsx global>{`
-				.col-1 {
-					grid-column: 2 / 15;
-				}
-				.col-2 {
-					grid-column: 3 / 14;
-				}
-				.col-3 {
-					grid-column: 4 / 13;
-				}
-				.col-4 {
-					grid-column: 5 / 12;
-				}
 				img {
 					width: 100%;
-					margin: 5rem 0;
-				}
-				p {
-					font-family: "Lexend";
-					font-size: 1.4rem;
-					font-weight: 300;
-					letter-spacing: 0.1em;
-					line-height: 1.8em;
-					text-align: justify;
-					margin: 5rem 0;
 				}
 				h4 {
 					font-family: "CoGa";

@@ -34,7 +34,6 @@ export async function getServerSideProps(context) {
 
 export default function ProjectDetailPage(props) {
 	const { banner, name, galleries } = props.data;
-	console.log("props.productHighlightData:", props.productHighlightData);
 	return (
 		<DetailLayout pageName={name.vi} dataFeatureProduct={props.productHighlightData} dataGallery={galleries} imageBanner={banner} explore="projects">
 			<ProjectDetail />

@@ -8,12 +8,22 @@ import PropTypes from "prop-types";
 import AppLink from '@/components/diginext/link/AppLink';
 
 export default function MainIntroBlock(props) {
-	const { slug, name, description, author, images, type, className, isHaveAuthor = true, positionControl, arrowSlide=true} = props;
+	const
+		{ slug,
+		name,
+		description,
+		author,
+		images,
+		type,
+		className,
+		isHaveAuthor = true,
+		positionControl,
+		arrowSlide = true } = props;
 	return (
 		<>
 			<div className={`MainIntroBlock ${className} ${type === "horizontal" ? "horizontal" : positionControl === "top" ? "vertical top" : "vertical"}`}>
 				<div className="MainIntroBlock__text">
-					<AppLink href={`/project/${slug}`}>
+					<AppLink href={slug}>
 						<MainTextWrap title={name} typeTitle="main" isLarge={true}>
 							<div className="content">{description}</div>
 							{author ? (
