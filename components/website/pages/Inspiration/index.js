@@ -10,11 +10,13 @@ import { MainApiContext } from "@/website/contexts/MainApiContext";
 import { MainContext } from "@/website/contexts/MainContext";
 
 export default function Inspiration() {
-	const { pageContent, getPageContent} = useContext(MainApiContext);
+	const { pageContent, getPageContent, inspirationHighlight, getInspirationHighlight } = useContext(MainApiContext);
 	const { languageCurrent } = useContext(MainContext);
 
 	useEffect(() => {
 		getPageContent("INSPIRATION");
+		getInspirationHighlight("", 999999, true);
+		getInspirationHighlight(1, 4);
 	}, []);
 
 	return (
@@ -37,16 +39,23 @@ export default function Inspiration() {
 							);
 					}
 				})}
-				<CardListInspiration/>
-				{/*	<GridLayout>
+				<CardListInspiration data={inspirationHighlight} />
+				<GridLayout>
 					<div className="Inspiration__content-inSide">
-						{data.map((item, index) => (
+						{inspirationHighlight?.map((item, index) => (
 							<React.Fragment key={index}>
-								<MainIntroBlock data={item} positionControl="top" />
+								<MainIntroBlock
+									name={item.name[`${languageCurrent}`]}
+									images={item.images}
+									slug={item.slug[`${languageCurrent}`]}
+									description={item.description[`${languageCurrent}`]}
+									positionControl="top"
+									arrowSlide={false}
+								/>
 							</React.Fragment>
 						))}
 					</div>
-				</GridLayout> */}
+				</GridLayout>
 			</div>
 			<style jsx global>{`
 				.Inspiration {
@@ -54,8 +63,15 @@ export default function Inspiration() {
 					&__content {
 						grid-column: 3 / 14;
 						&-inSide {
-							margin-top: 10rem;
+							margin-top: 5rem;
 							grid-column: 3 / 14;
+							.MainIntroBlock {
+								.ImageSlidePaging {
+									.slide-count {
+										display: none;
+									}
+								}
+							}
 							.MainIntroBlock:nth-child(2n + 1) {
 								.MainIntroBlock {
 									&__slide {
@@ -65,6 +81,20 @@ export default function Inspiration() {
 										grid-area: 1 / 8 / 2 / 12;
 									}
 								}
+							}
+							@media (max-width: 1366px) {
+								grid-column: 2 / 15;
+							}
+							@media (max-width: 1230px) {
+								padding: 0 50px;
+								grid-column: 1 / 16;
+							}
+							@media (max-width: 820px) {
+								padding: 0;
+								grid-column: 3 / 14;
+							}
+							@media (max-width: 500px) {
+								grid-column: 2 / 15;
 							}
 						}
 					}

@@ -8,7 +8,7 @@ import ArrowPrev from '@/website/common/ArrowPrev';
 import { variable } from "styles/variable";
 
 
-export default function ImageSlidePaging({ className, images, gifSize, direction, type, positionControl }) {
+export default function ImageSlidePaging({ className, images, gifSize, direction, type, positionControl, arrows }) {
 	const [currentPage, setCurrentPage] = useState(1);
 
 	const settings = {
@@ -19,6 +19,8 @@ export default function ImageSlidePaging({ className, images, gifSize, direction
 		afterChange: (current) => setCurrentPage(current + 1),
 		nextArrow: <ArrowNext fill={variable.color.gold} isProductType={true} />,
 		prevArrow: <ArrowPrev fill={variable.color.gold} isProductType={true} />,
+		arrows: arrows,
+		fade: true,
 	};
 	let totalPage = images.length;
 	const renderPageSlide = () => {

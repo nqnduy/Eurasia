@@ -8,28 +8,28 @@ import PropTypes from "prop-types";
 import AppLink from '@/components/diginext/link/AppLink';
 
 export default function MainIntroBlock(props) {
-	const { slug, name, description, author, images, type, className, isHaveAuthor = true, positionControl } = props;
+	const { slug, name, description, author, images, type, className, isHaveAuthor = true, positionControl, arrowSlide=true} = props;
 	return (
 		<>
 			<div className={`MainIntroBlock ${className} ${type === "horizontal" ? "horizontal" : positionControl === "top" ? "vertical top" : "vertical"}`}>
 				<div className="MainIntroBlock__text">
 					<AppLink href={`/project/${slug}`}>
 						<MainTextWrap title={name} typeTitle="main" isLarge={true}>
-								<div className="content">{description}</div>
-								{author ? (
-									<HeadlineText className="author" colorTitle={variable.color.gold}>
-										Eurasia Concept: <span>Davide Sozzi</span>
-									</HeadlineText>
-								) : (
-									<></>
-								)}
-								<MainTitle.CTA className="cta">ReadMore</MainTitle.CTA>
+							<div className="content">{description}</div>
+							{author ? (
+								<HeadlineText className="author" colorTitle={variable.color.gold}>
+									Eurasia Concept: <span>Davide Sozzi</span>
+								</HeadlineText>
+							) : (
+								<></>
+							)}
+							<MainTitle.CTA className="cta">ReadMore</MainTitle.CTA>
 						</MainTextWrap>
 					</AppLink>
 				</div>
 
 				<div className="MainIntroBlock__slide">
-					<ImageSlidePaging images={images} type={type} positionControl={positionControl} />
+					<ImageSlidePaging images={images} type={type} positionControl={positionControl} arrows={arrowSlide} />
 				</div>
 			</div>
 			<style jsx global>{`

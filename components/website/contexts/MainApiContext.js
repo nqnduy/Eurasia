@@ -22,7 +22,7 @@ export default function MainApiContextProvider({ children }) {
 	const [projectDetail, setProjectDetail] = useState();
 	const [paginatorProduct, setPaginatorProduct] = useState();
 	const [inspirationHighlight, setInspirationHighlight] = useState();
-
+	const [paginatorInspiration, setPaginatorInspiration] = useState();
 
 	const getInspirationCategories = async (order) => {
 		const res = await ApiCall({
@@ -238,19 +238,23 @@ export default function MainApiContextProvider({ children }) {
 			});
 		}
 	};
-	const getInspirationHighlight = async (slug) => {
+	const getInspirationHighlight = async (page, limit, isHighlight=false) => {
 		const res = await ApiCall({
-			path: `/api/v1/frontend/inspirations?limit=99999&order=1&orderBy=sortOrder&isHighlight=true&category=`,
+			path: `/api/v1/frontend/inspirations?${limit ? `&limit=${limit}` : ""}&order=1&orderBy=sortOrder${
+				isHighlight ? `&isHighlight=${isHighlight}` : ""
+			}&category=${page ? `&page=${page}` : ""}`,
 		});
 		if (res.data) {
 			console.log("inspiration highlight:", res.data);
 			setInspirationHighlight(res.data.list);
+			setPaginatorInspiration(res.data.paginator);
 		} else {
 			notification.error({
 				message: res.message || "Something went wrong",
 			});
 		}
 	};
+
 
 	return (
 		<MainApiContext.Provider
@@ -302,7 +306,8 @@ export default function MainApiContextProvider({ children }) {
 				getProjectDetail,
 
 				inspirationHighlight,
-				getInspirationHighlight
+				getInspirationHighlight,
+				paginatorInspiration,
 			}}>
 			{children}
 		</MainApiContext.Provider>

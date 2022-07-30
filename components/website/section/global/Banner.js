@@ -16,10 +16,10 @@ export default function Banner({ title, category, image, link }) {
 					<div className="Banner__content-banner">
 						<img src={asset(image)} alt="" />
 						<GridLayout container>
-							<AppLink href={link}>
+							<AppLink href={link} display="inline">
 								<div className="Banner__content-text">
 									<div>
-										<ArrowLeftBannerIcon style={{ fontSize: 30, cursor: "pointer" }} />
+										<ArrowLeftBannerIcon className="arrow-left" style={{ fontSize: 30, cursor: "pointer" }} />
 										<div className="textWrap">
 											<HeadlineText className="headline">{category}</HeadlineText>
 											<MainTitle className="title" colorTitle={variable.color.white}>
@@ -46,6 +46,9 @@ export default function Banner({ title, category, image, link }) {
 						position: relative;
 						width: 100%;
 						min-height: fit-content;
+						@media (max-width: 550px) {
+							min-height: 50vh;
+						}
 						&-banner {
 							position: relative;
 							overflow: hidden;
@@ -60,6 +63,11 @@ export default function Banner({ title, category, image, link }) {
 								transform: translate(-50%, -50%);
 								object-fit: cover;
 							}
+							@media (max-width: 550px) {
+								width: 100%;
+								height: 100vh;
+								padding-bottom: 0;
+							}
 						}
 						.GridLayout {
 							top: 0;
@@ -73,6 +81,16 @@ export default function Banner({ title, category, image, link }) {
 							&.discover {
 								margin-top: 1rem;
 							}
+							@media (max-width: 820px) {
+								font-size: 1.2rem;
+								letter-spacing: 0.15em;
+							}
+							@media (max-width: 620px) {
+								font-size: 1.1rem;
+							}
+							@media (max-width: 550px) {
+								text-align: center;
+							}
 						}
 						&-text {
 							display: flex;
@@ -82,6 +100,12 @@ export default function Banner({ title, category, image, link }) {
 							position: absolute;
 							top: 50%;
 							transform: translateY(-50%);
+							@media (max-width: 550px) {
+								position: relative;
+								justify-content: center;
+								margin: 0 auto;
+								text-align: center;
+							}
 							> div {
 								display: flex;
 								align-items: center;
@@ -92,10 +116,27 @@ export default function Banner({ title, category, image, link }) {
 								flex-direction: column;
 
 								margin-left: 10rem;
+								@media (max-width: 720px) {
+									margin-left: 3rem;
+								}
+								@media (max-width: 550px) {
+									margin-left: 0;
+								}
+								@media (max-width: 550px) {
+									align-items: center;
+								}
 							}
 							.title {
 								font-size: 6.4rem;
 								line-height: 7.8rem;
+								@media (max-width: 820px) {
+									font-size: 5rem;
+									letter-spacing: 0.15em;
+								}
+								@media (max-width: 620px) {
+									font-size: 4rem;
+									letter-spacing: 0.1em;
+								}
 							}
 							@media (max-width: 1366px) {
 								.arrow-right {
@@ -113,6 +154,18 @@ export default function Banner({ title, category, image, link }) {
 								flex-flow: column nowrap;
 								justify-content: center;
 								cursor: pointer;
+							}
+							@media (max-width: 550px){
+								justify-content: center;
+								margin-left: -1.5rem;;
+							}
+						}
+					}
+					@media (max-width: 550px) {
+						.arrow {
+							&-right,
+							&-left {
+								display: none;
 							}
 						}
 					}

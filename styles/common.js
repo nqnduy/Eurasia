@@ -46,7 +46,7 @@ const CommonStyle = () => {
 					}
 					.border-box {
 						position: absolute;
-						width: 100vw;
+						width: 110vw;
 						margin-inline-start: 50%;
 						transform: translateX(-50%);
 						border: 1px solid ${variable.color.gold};

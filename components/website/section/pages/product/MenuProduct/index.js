@@ -3,7 +3,6 @@ import GridLayout from '@/website/elements/GridLayout'
 import { ArrowDownIcon } from '@/website/elements/Icons';
 import React, { useEffect, useContext, useState } from "react";
 import { variable } from 'styles/variable';
-import ListMenu from "@/website/section/pages/product/MenuProduct/data.json";
 import { MainApiContext } from '@/website/contexts/MainApiContext';
 import HeadlineText from "@/website/common/HeadlineText";
 import { MainContext } from '@/website/contexts/MainContext';
