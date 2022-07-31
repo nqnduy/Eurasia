@@ -34,6 +34,10 @@ export default function MainApiContextProvider({ children }) {
 	const [brandListByCategory, setBrandListByCategory] = useState();
 	const [brandDetail, setBrandDetail] = useState();
 
+	//news
+	const [newsList, setNewsList] = useState();
+	const [newsDetail, setNewsDetail] = useState();
+
 	const getInspirationCategories = async (order) => {
 		const res = await ApiCall({
 			path: `/api/v1/frontend/inspiration-categories?order=1`,
@@ -284,8 +288,37 @@ export default function MainApiContextProvider({ children }) {
 			path: `/api/v1/brands/${slug}`,
 		});
 		if (res.data) {
-			console.log("brand detail", res.data);
+			// console.log("brand detail", res.data);
 			setBrandDetail(res.data);
+		} else {
+			notification.error({
+				message: res.message || "Something went wrong",
+			});
+		}
+	};
+
+	const getNewsList = async () => {
+		const res = await ApiCall({
+			path: `/api/v1/news?category=&order=-1&orderBy=publishedAt&limit=6&page=1`,
+		});
+		if (res.data) {
+			// console.log("news list", res.data.list);
+			setNewsList(res.data.list);
+		} else {
+			notification.error({
+				message: res.message || "Something went wrong",
+			});
+		}
+	};
+
+
+	const getNewsDetail = async (slug) => {
+		const res = await ApiCall({
+			path: `/api/v1/news/${slug}`,
+		});
+		if (res.data) {
+			console.log("news detail", res.data);
+			setNewsDetail(res.data);
 		} else {
 			notification.error({
 				message: res.message || "Something went wrong",
@@ -351,6 +384,12 @@ export default function MainApiContextProvider({ children }) {
 
 				brandDetail,
 				getBrandDetail,
+
+				newsList,
+				getNewsList,
+
+				newsDetail,
+				getNewsDetail,
 			}}>
 			{children}
 		</MainApiContext.Provider>

@@ -1,55 +1,52 @@
 import HeadlineText from "@/website/common/HeadlineText";
 import GridLayout from "@/website/elements/GridLayout";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { variable } from "styles/variable";
 import ArrowNext from "@/website/common/ArrowNext";
 import ArrowPrev from "@/website/common/ArrowPrev";
 import Slider from "react-slick";
 import TextInsideCard from "@/website/common/TextInsideCard";
 import MainTitle from "@/website/common/MainTitle";
+import { MainContext } from "@/website/contexts/MainContext";
 
-export default function CardListInspiration({ data }) {
-	const [pageCount, setPageCount] = useState(3);
+export default function CardListInspiration({ data, ...e }) {
+	const { languageCurrent } = useContext(MainContext);
+	const [currentPage, setCurrentPage] = useState(1);
+
+	const checkSlide = (slide) => {
+		if (slide === 0) {
+			setCurrentPage(totalPage);
+		} else {
+			setCurrentPage(slide);
+		}
+	};
+
 	const settings = {
-		slidesToShow: 3.5,
+		slidesToShow: 3,
 		infinite: true,
-		initialSlide: 3,
-		slidesToScroll: 3,
-		afterChange: (current) => setPageCount(current),
+		initialSlide: 1,
+		slidesToScroll: 1,
+		centerMode: true,
+		afterChange: (current, next) => checkSlide(current),
 		nextArrow: <ArrowNext fill={variable.color.gold} isProductType={true} />,
 		prevArrow: <ArrowPrev fill={variable.color.gold} isProductType={true} />,
+		responsive: [
+			{
+				breakpoint: 1024,
+				settings: {
+					slidesToShow: 2,
+				},
+			},
+			{
+				breakpoint: 720,
+				settings: {
+					slidesToShow: 1,
+				},
+			},
+		],
 	};
 
-	let totalPage = Math.ceil(data.length / 3);
-	const renderPageSlide = () => {
-		if (totalPage <= 1) return;
-		let currentPage = pageCount / 3;
-		if (currentPage < 1) {
-			currentPage = totalPage;
-		}
-		return (
-			<>
-				<ul className="pageSlide">
-					<li className="current">{currentPage}</li>/<li className="total">{totalPage}</li>
-				</ul>
-				<style jsx>{`
-					.pageSlide {
-						display: flex;
-					}
-					li {
-						padding: 0.35rem;
-						line-height: 1;
-					}
-					.current {
-						color: ${variable.color.dark_grey};
-					}
-					.total {
-						color: ${variable.color.grey};
-					}
-				`}</style>
-			</>
-		);
-	};
+	let totalPage = Math.ceil(data?.length);
 
 	return (
 		<>
@@ -60,14 +57,21 @@ export default function CardListInspiration({ data }) {
 							Inspiration
 						</HeadlineText>
 						<HeadlineText className="paginate" colorTitle={variable.color.gold}>
-							{renderPageSlide()}
+							{renderPageSlide(currentPage, totalPage)}
 						</HeadlineText>
 					</div>
 					<div className="CardListInspiration__content">
 						<Slider {...settings}>
-							{data.map((item, index) => (
+							{data?.map((item, index) => (
 								<React.Fragment key={index}>
-									<TextInsideCard data={item} />
+									<TextInsideCard
+										colorLayer={variable.color.violet}
+										name={item.name[`${languageCurrent}`]}
+										image={item.images[3]?.image}
+										category={item.id}
+										page={1}
+										{...e}
+									/>
 								</React.Fragment>
 							))}
 						</Slider>
@@ -88,6 +92,9 @@ export default function CardListInspiration({ data }) {
 						justify-content: space-between;
 						.paginate {
 							padding-right: 4.5rem;
+							@media (max-width: 1024px){
+								display: none;
+							}
 						}
 					}
 					&__content {
@@ -100,9 +107,6 @@ export default function CardListInspiration({ data }) {
 								grid-column: 1 / 15;
 								padding: 0 !important;
 								margin: 0 -1rem;
-								.slick-track {
-									left: 100%;
-								}
 							}
 							.slick-arrow {
 								top: -8.5rem;
@@ -112,12 +116,18 @@ export default function CardListInspiration({ data }) {
 									right: initial;
 								}
 								&.slick-prev {
-									left: 5.5rem;
+									right: 12rem;
 								}
 							}
 							.slick-slide > div {
 								padding: 0 1rem;
 							}
+							.slick-slide {
+								width: calc((100% / 3) - (1rem * 2 / 3));
+							}
+						}
+						.app-link {
+							width: 100%;
 						}
 						.seeMore {
 							margin: 6rem 0 10rem;
@@ -128,3 +138,28 @@ export default function CardListInspiration({ data }) {
 		</>
 	);
 }
+const renderPageSlide = (currentPage, totalPage) => {
+	if (totalPage <= 1) return;
+	return (
+		<>
+			<ul className="pageSlide">
+				<li className="current">{currentPage.toString()}</li>/<li className="total">{totalPage.toString()}</li>
+			</ul>
+			<style jsx>{`
+				.pageSlide {
+					display: flex;
+					li {
+						padding: 0.35rem;
+						line-height: 1;
+					}
+					.current {
+						color: ${variable.color.dark_grey};
+					}
+					.total {
+						color: ${variable.color.grey};
+					}
+				}
+			`}</style>
+		</>
+	);
+};

@@ -1,30 +1,38 @@
-import React from "react";
 import DetailLayout from "@/website/elements/DetailLayout";
 import NewsDetail from "@/website/pages/News/NewsDetail";
-import { useRouter } from "next/router";
+import ApiCall from "modules/ApiCall";
 
-export default function NewsDetailPage() {
-	const router = useRouter();
-	const news = [
-		{
-			title: "Sự kiện The Italian Flair – Đêm hội tụ tinh hoa phong cách Ý",
-			time: "21.11.2021",
-			category: "Events",
-			description:
-				"Natural materials (leather, wood, marble, metal etc.), without embellishments, used in such a way as to enhance and emphasise their quintessential qualities.",
-			image: "/images/news-7.jpg",
+export async function getServerSideProps(context) {
+	const slug = context.query.slug || [];
+	const res = await ApiCall({
+		path: `/api/v1/news/${slug}`,
+	});
+	let data = null;
+	if (res.status) {
+		data = res.data;
+	}
+
+	const res2 = await ApiCall({
+		path: `/api/v1/products?isHighlight=true&brands=&order=1&orderBy=sortOrder`,
+	});
+	let productHighlightData = [];
+	if (res2.status) {
+		productHighlightData = res2.data.list;
+	}
+	return {
+		props: {
+			data,
+			productHighlightData,
 		},
-		{
-			title: "Mang hơi thở thiên nhiên vào không gian sống với BST “Breath”",
-			time: "21.11.2021",
-			category: "Events",
-			description:
-				"Natural materials (leather, wood, marble, metal etc.), without embellishments, used in such a way as to enhance and emphasise their quintessential qualities.",
-			image: "/images/news-8.jpg",
-		},
-	];
+	};
+};
+
+
+export default function NewsDetailPage(props) {
+	const { banner, name, galleries } = props.data;
+
 	return (
-		<DetailLayout pageName={router.query.slug} imageBanner="/images/banner-3.jpg" dataRelatedNews={news}>
+		<DetailLayout pageName={name.vi} dataFeatureProduct={props.productHighlightData} dataGallery={galleries} imageBanner={banner}>
 			<NewsDetail />
 		</DetailLayout>
 	);

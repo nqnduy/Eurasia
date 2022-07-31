@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import Banner from "@/website/section/global/Banner";
 import GridLayout from "@/website/elements/GridLayout";
 import MainTitle from "@/website/common/MainTitle";
@@ -7,62 +7,23 @@ import ListNewsCard from "@/website/section/pages/news/ListNewsCard";
 import CardListInspiration from "@/website/section/pages/news/CardListInspiration";
 import { variable } from "styles/variable";
 import Inspirations from "@/website/section/pages/home/AllInspirations/data.json";
+import { MainApiContext } from "@/website/contexts/MainApiContext";
+import { MainContext } from "@/website/contexts/MainContext";
 
 export default function News() {
-	const news = [
-		{
-			title: "Eurasia Concept ưu đãi lớn với chương trình “Hello Santa, Happy Tết”",
-			time: "21.11.2021",
-			category: "news",
-			description:
-				"Natural materials (leather, wood, marble, metal etc.), without embellishments, used in such a way as to enhance and emphasise their quintessential qualities.",
-			image: "/images/news-1.jpg",
-		},
-		{
-			title: "Trải nghiệm thay đổi không gian sống mùa hè với Ưu đãi lên đến 50%",
-			time: "21.11.2021",
-			category: "events",
-			description:
-				"Natural materials (leather, wood, marble, metal etc.), without embellishments, used in such a way as to enhance and emphasise their quintessential qualities.",
-			image: "/images/news-2.jpg",
-		},
-		{
-			title: "Đón năm mới vào không gian sống với ưu đãi từ Eurasia Concept",
-			time: "21.11.2021",
-			category: "news",
-			description:
-				"Natural materials (leather, wood, marble, metal etc.), without embellishments, used in such a way as to enhance and emphasise their quintessential qualities.",
-			image: "/images/news-3.jpg",
-		},
-		{
-			title: "Đã tìm ra chủ nhân của chuyến đi Ý tham quan hãng nội thất Moroso",
-			time: "21.11.2021",
-			category: "events",
-			description:
-				"Natural materials (leather, wood, marble, metal etc.), without embellishments, used in such a way as to enhance and emphasise their quintessential qualities.",
-			image: "/images/news-4.jpg",
-		},
-		{
-			title: "Sự kiện The Italian Flair – Đêm hội tụ tinh hoa với phong cách Ý",
-			time: "21.11.2021",
-			category: "events",
-			description:
-				"Natural materials (leather, wood, marble, metal etc.), without embellishments, used in such a way as to enhance and emphasise their quintessential qualities.",
-			image: "/images/news-5.jpg",
-		},
-		{
-			title: "Mang hơi thở thiên nhiên vào không gian sống với BST “Breath”",
-			time: "21.11.2021",
-			category: "events",
-			description:
-				"Natural materials (leather, wood, marble, metal etc.), without embellishments, used in such a way as to enhance and emphasise their quintessential qualities.",
-			image: "/images/news-6.jpg",
-		},
-	];
+	const { pageContent, getPageContent, newsList, getNewsList, inspirationHighlight, getInspirationHighlight } = useContext(MainApiContext);
+	const { currentLanguage } = useContext(MainContext);
+
+	useEffect(() => {
+		getPageContent("NEWS");
+		getNewsList();
+		getInspirationHighlight("", 999999, true);
+	}, []);
+
 	return (
 		<>
 			<div className="News">
-				<Banner image="/images/banner-8.jpg" category="News" title="Chạm đến đỉnh cao thanh nhã cùng BST Black & White Refinement" link="#"/>
+				<Banner image="/images/banner-8.jpg" category="News" title="Chạm đến đỉnh cao thanh nhã cùng BST Black & White Refinement" link="#" />
 				<GridLayout>
 					<div className="News__content">
 						<div className="News__content-header">
@@ -84,11 +45,11 @@ export default function News() {
 							<div className="border-box"></div>
 						</div>
 						<div className="News__content-list">
-							<ListNewsCard data={news} />
+							<ListNewsCard data={newsList} />
 						</div>
 					</div>
 				</GridLayout>
-				<CardListInspiration data={Inspirations} />
+				<CardListInspiration data={inspirationHighlight} />
 			</div>
 			<style jsx global>{`
 				.News {
@@ -145,6 +106,21 @@ export default function News() {
 									margin-right: 0.5rem;
 								}
 							}
+						}
+						@media (max-width: 1366px) {
+							grid-column: 2 / 15;
+						}
+						@media (max-width: 1230px) {
+							padding: 0 5rem;
+							grid-column: 1 / 16;
+						}
+						@media (max-width: 820px) {
+							padding: 0;
+							grid-column: 2 / 15;
+						}
+						@media (max-width: 500px) {
+							padding: 0 1.5rem;
+							grid-column: 1 / 16;
 						}
 					}
 				}

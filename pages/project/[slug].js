@@ -1,10 +1,5 @@
 import DetailLayout from "@/website/elements/DetailLayout";
-import MasterPageBasic from "@/website/master/MasterPageBasic";
 import ProjectDetail from "@/website/pages/Project/ProjectDetail";
-import { useRouter } from "next/router";
-import Products from "@/website/section/global/FeatureProduct/data.json";
-import React, { useContext, useEffect } from "react";
-import { MainApiContext } from '@/website/contexts/MainApiContext';
 import ApiCall from "modules/ApiCall";
 
 export async function getServerSideProps(context) {
