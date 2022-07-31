@@ -106,6 +106,15 @@ ArrowNext.Line = ({ currentSlide, slideCount, ...props }) => {
 							transition: 0.3s ease-out;
 						}
 					}
+					@media (max-width: 820px) {
+						right: 5rem;
+					}
+					@media (max-width: 620px) {
+						right: 10rem;
+					}
+					@media (max-width: 500px) {
+						right: 6rem;
+					}
 				}
 			`}</style>
 		</>

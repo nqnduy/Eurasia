@@ -32,6 +32,7 @@ export default function MainApiContextProvider({ children }) {
 	//brand
 	const [brandList, setBrandList] = useState();
 	const [brandListByCategory, setBrandListByCategory] = useState();
+	const [brandDetail, setBrandDetail] = useState();
 
 	const getInspirationCategories = async (order) => {
 		const res = await ApiCall({
@@ -278,6 +279,20 @@ export default function MainApiContextProvider({ children }) {
 		}
 	};
 
+	const getBrandDetail = async (slug) => {
+		const res = await ApiCall({
+			path: `/api/v1/brands/${slug}`,
+		});
+		if (res.data) {
+			console.log("brand detail", res.data);
+			setBrandDetail(res.data);
+		} else {
+			notification.error({
+				message: res.message || "Something went wrong",
+			});
+		}
+	};
+
 	return (
 		<MainApiContext.Provider
 			value={{
@@ -333,6 +348,9 @@ export default function MainApiContextProvider({ children }) {
 
 				brandListByCategory,
 				getBrandListByCategory,
+
+				brandDetail,
+				getBrandDetail,
 			}}>
 			{children}
 		</MainApiContext.Provider>

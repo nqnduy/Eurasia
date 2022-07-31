@@ -109,6 +109,15 @@ ArrowPrev.Line = ({ currentSlide, slideCount, ...props }) => {
 							transition: 0.3s ease-out;
 						}
 					}
+					@media (max-width: 820px) {
+						left: 5rem;
+					}
+					@media (max-width: 620px) {
+						left: 10rem;
+					}
+					@media (max-width: 500px) {
+						left: 6rem;
+					}
 				}
 			`}</style>
 		</>

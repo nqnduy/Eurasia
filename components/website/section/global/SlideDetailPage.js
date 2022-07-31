@@ -20,6 +20,32 @@ export default function SlideDetailPage({ data, explore }) {
 		lazyLoad: true,
 		nextArrow: <ArrowNext.Line />,
 		prevArrow: <ArrowPrev.Line />,
+		responsive: [
+			{
+				breakpoint: 1024,
+				settings: {
+					centerPadding: "250px",
+				},
+			},
+			{
+				breakpoint: 820,
+				settings: {
+					centerPadding: "150px",
+				},
+			},
+			{
+				breakpoint: 620,
+				settings: {
+					centerPadding: "100px",
+				},
+			},
+			{
+				breakpoint: 500,
+				settings: {
+					centerPadding: "50px",
+				},
+			},
+		],
 	};
 	return (
 		<>

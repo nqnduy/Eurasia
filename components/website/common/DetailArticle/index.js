@@ -16,8 +16,8 @@ export default function DetailArticle({data}) {
 				<GridLayout>
 					<ArticleIntroduction
 						name={name[`${languageCurrent}`]}
-						authorName={authorName[`${languageCurrent}`]}
-						description={description[`${languageCurrent}`]}
+						authorName={authorName ? authorName[`${languageCurrent}`] : ""}
+						description={description ? description[`${languageCurrent}`] : ""}
 					/>
 					<div className="DetailArticle__content">
 						{content[`${languageCurrent}`]?.map((item, i) => {

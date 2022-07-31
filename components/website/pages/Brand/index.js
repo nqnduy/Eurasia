@@ -9,6 +9,8 @@ import React, { useContext, useEffect } from "react";
 import { variable } from 'styles/variable';
 import { MainApiContext } from '@/website/contexts/MainApiContext';
 import { MainContext } from "@/website/contexts/MainContext";
+import asset from "@/plugins/assets/asset";
+import AppLink from "@/components/diginext/link/AppLink";
 
 export default function Brand() {
 	const {
@@ -67,9 +69,11 @@ export default function Brand() {
 										<div className="Brand__logoList">
 											{brandList?.map((item) => (
 												<React.Fragment key={item.id}>
-													<div className="Brand__logoList-item">
-														<img src={item.logo} alt="" />
-													</div>
+													<AppLink href={`/brand/${item.slug[languageCurrent]}`}>
+														<div className="Brand__logoList-item">
+															<img src={asset(item.logo)} alt="" />
+														</div>
+													</AppLink>
 												</React.Fragment>
 											))}
 										</div>
