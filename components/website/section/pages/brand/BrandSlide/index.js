@@ -17,6 +17,41 @@ export default function BrandSlide({ data }) {
 		infinite: true,
 		arrows: false,
 		autoplay: true,
+		responsive: [
+			{
+				breakpoint: 1260,
+				settings: {
+					centerPadding: "150px",
+				},
+			},
+			{
+				breakpoint: 1024,
+				settings: {
+					centerPadding: "50px",
+				},
+			},
+			{
+				breakpoint: 820,
+				settings: {
+					slidesToShow: 1,
+					centerPadding: "150px",
+				},
+			},
+			{
+				breakpoint: 720,
+				settings: {
+					slidesToShow: 1,
+					centerPadding: "100px",
+				},
+			},
+			{
+				breakpoint: 500,
+				settings: {
+					slidesToShow: 1,
+					centerPadding: "0",
+				},
+			},
+		],
 	};
     return (
 			<>

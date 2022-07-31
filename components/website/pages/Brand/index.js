@@ -27,7 +27,7 @@ export default function Brand() {
 	return (
 		<>
 			<div className="Brand">
-				<Banner image="/images/banner-4.jpg" headline="Furniture" title="Fendi Casa" link="#"/>
+				<Banner image="/images/banner-4.jpg" headline="Furniture" title="Fendi Casa" link="#" />
 				{pageContent?.content[`${languageCurrent}`]?.map((value, i) => {
 					switch (value.section) {
 						case "1":
@@ -88,10 +88,29 @@ export default function Brand() {
 					margin-bottom: 5rem;
 					&__intro {
 						grid-column: 3 / 14;
+
+						@media (max-width: 1366px) {
+							grid-column: 2 / 15;
+						}
+						@media (max-width: 1230px) {
+							padding: 0 5rem;
+							grid-column: 1 / 16;
+						}
+						@media (max-width: 820px) {
+							padding: 0;
+							grid-column: 2 / 15;
+						}
+						@media (max-width: 500px) {
+							padding: 0 1.5rem;
+							grid-column: 1 / 16;
+						}
 					}
 					&__slide {
 						grid-column: 2 / 16;
 						margin-bottom: 6rem;
+						@media (max-width: 500px){
+							padding-right: 3rem;
+						}
 					}
 					&__menu {
 						position: relative;
@@ -150,9 +169,29 @@ export default function Brand() {
 						&-item {
 							aspect-ratio: 1;
 							border: 0.1rem solid ${variable.color.grey};
+							cursor: pointer;
+
 							display: flex;
 							justify-content: center;
 							align-items: center;
+							padding: 3rem;
+							transition: 0.3s ease;
+							&:hover {
+								transition: 0.3s ease;
+								box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+							}
+						}
+						@media (max-width: 1366px) {
+							grid-template-columns: repeat(3, 1fr);
+						}
+						@media (max-width: 720px) {
+							grid-template-columns: repeat(2, 1fr);
+							gap: 5rem;
+						}
+						@media (max-width: 529px) {
+							grid-column: 1 / 16;
+							padding: 0 3rem;
+							gap: 3rem;
 						}
 					}
 					.load-more {

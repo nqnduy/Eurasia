@@ -62,6 +62,21 @@ export default function Inspiration() {
 					margin-bottom: 5rem;
 					&__content {
 						grid-column: 3 / 14;
+						@media (max-width: 1366px) {
+							grid-column: 2 / 15;
+						}
+						@media (max-width: 1230px) {
+							padding: 0 5rem;
+							grid-column: 1 / 16;
+						}
+						@media (max-width: 820px) {
+							padding: 0;
+							grid-column: 2 / 15;
+						}
+						@media (max-width: 500px) {
+							padding: 0 1.5rem;
+							grid-column: 1 / 16;
+						}
 						&-inSide {
 							margin-top: 5rem;
 							grid-column: 3 / 14;

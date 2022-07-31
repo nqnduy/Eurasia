@@ -11,9 +11,9 @@ import { MainApiContext } from "@/website/contexts/MainApiContext";
 import { MainContext } from "@/website/contexts/MainContext";
 
 export default function HomePage() {
-	const { homeContent, getHomeContent, featureProduct, getFeatureProduct } = useContext(MainApiContext);
+	const { pageContent, getPageContent, featureProduct, getFeatureProduct } = useContext(MainApiContext);
 	useEffect(() => {
-		getHomeContent();
+		getPageContent("HOME");
 		getFeatureProduct();
 	}, []);
 	const { languageCurrent } = useContext(MainContext);
@@ -21,7 +21,7 @@ export default function HomePage() {
 		<>
 			<Banner title="Home of Dolce Vita" category="Sống trọn chất Ý" image="/images/banner-1.png" link="#" />
 			<AllInspirations />
-			{homeContent?.content[`${languageCurrent}`].map((value, i) => {
+			{pageContent?.content[`${languageCurrent}`].map((value, i) => {
 				switch (value.section) {
 					case "2":
 						return (
