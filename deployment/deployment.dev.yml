@@ -71,7 +71,7 @@ spec:
     spec:
       containers:
         - name: eurasia-duy
-          image: 'asia.gcr.io/top-group-k8s/eurasia-duy:2022-06-22-11-51-29'
+          image: 'asia.gcr.io/top-group-k8s/eurasia-duy:2022-07-31-22-05-51'
           ports:
             - containerPort: 3000
           resources: {}
