@@ -45,6 +45,7 @@ export default function NewsCard({ data }) {
 						font-weight: 300;
 						letter-spacing: 0.3em;
 						text-transform: uppercase;
+						overflow: hidden;
 
 						margin-bottom: 3rem;
 					}
