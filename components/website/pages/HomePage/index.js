@@ -4,7 +4,6 @@ import Banner from "@/website/section/global/Banner";
 import AllInspirations from "@/website/section/pages/home/AllInspirations";
 import InspirationStyle from "@/website/section/pages/home/InspirationStyle ";
 import FeatureProduct from "@/website/section/global/FeatureProduct";
-import Products from "@/website/section/global/FeatureProduct/data.json";
 import AboutUs from "@/website/section/pages/home/AboutUs";
 import OurServices from "@/website/section/pages/home/OurServices";
 import { MainApiContext } from "@/website/contexts/MainApiContext";

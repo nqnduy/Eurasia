@@ -1,5 +1,5 @@
 # Base on offical Node.js Alpine image
-FROM  asia.gcr.io/top-group-k8s/framework/diginext:2.0.4
+FROM  asia.gcr.io/top-group-k8s/framework/diginext:2.0.5
 
 # Set working directory
 WORKDIR /usr/app
