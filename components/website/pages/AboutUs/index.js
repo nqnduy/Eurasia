@@ -1,84 +1,105 @@
 /* eslint-disable @next/next/no-img-element */
+import asset from "@/plugins/assets/asset";
 import MainTextWrap from "@/website/common/MainTextWrap";
 import MainTitle from "@/website/common/MainTitle";
+import { MainApiContext } from "@/website/contexts/MainApiContext";
+import { MainContext } from "@/website/contexts/MainContext";
 import GridLayout from "@/website/elements/GridLayout";
 import Banner from "@/website/section/global/Banner";
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import renderHTML from "react-render-html";
 import { variable } from "styles/variable";
 
 export default function AboutUs() {
+	const { pageContent, getPageContent } = useContext(MainApiContext);
+	const { languageCurrent } = useContext(MainContext);
+
+	useEffect(() => {
+		getPageContent("ABOUT");
+	}, []);
+
 	return (
 		<>
 			<div className="AboutUs">
-				<Banner image="/images/banner-7.jpg" />
+				<Banner image="/images/banner-7.jpg" link="#" />
 				<GridLayout>
-					<div className="AboutUs__firstSection">
-						<MainTextWrap className="AboutUs__firstSection-text" title="About us" typeTitle="main" isLarge={true}>
-							<p>
-								It takes fine taste and exceptional passion to bring Western aesthetic into the cradle of Asian culture. That is how Eurasia Concept is
-								conceived, with a mission to open myriad of doors for the crème de la crème of European interior design to enter Vietnam’s elite
-								customers’ homes and hearts.
-							</p>
-							<div className="quote">
-								<span>“</span>
-								<blockquote>This is the place where centuries-old heritages find new residence.</blockquote>
-							</div>
-							<p className="content">
-								It takes fine taste and exceptional passion to bring Western aesthetic into the cradle of Asian culture. That is how Eurasia Concept is
-								conceived, with a mission to open myriad of doors for the crème de la crème of European interior design to enter Vietnam’s elite
-								customers’ homes and hearts.
-							</p>
-						</MainTextWrap>
-						<div className="AboutUs__firstSection-img">
-							<img src="/images/aboutus-1.jpg" alt="" />
-						</div>
-					</div>
-					<div className="AboutUs__secondSection">
-						<div className="AboutUs__secondSection-img">
-							<img src="/images/aboutus-2.jpg" alt="" />
-						</div>
-						<div className="AboutUs__secondSection-text">
-							<MainTextWrap title="EXPERIENCE" typeTitle="main" isLarge={true}>
-								<p>
-									Eurasia Concept´s showrooms covers more than 6.000m2 and proudly showcases a portfolio of more than 50 finest home idea brands
-									imported from Europe at the retail podium of the iconic Times Square building in downtown Saigon. Our collection carries a wide range
-									of exquisite items from leading brands.
-								</p>
-								<div className="statistic">
-									<span>+50</span>
-									<MainTitle className="statistic__text">FINEST HOME IDEA</MainTitle>
-								</div>
-							</MainTextWrap>
-						</div>
-					</div>
-					<div className="AboutUs__thirdSection">
-						<div className="AboutUs__thirdSection-text">
-							<MainTextWrap title="AUTHENTICITY" typeTitle="main" isLarge={true}>
-								Being the distributor in Vietnam, Eurasia Concept can guarantee that all its products are authentic, made in Europe and by the original
-								manufacturer. We believe in the value of craftsmanship, where magnificence and sophistication manifest in the tiniest product details.
-							</MainTextWrap>
-						</div>
-						<div className="AboutUs__thirdSection-img">
-							<img src="/images/aboutus-3.jpg" alt="" />
-						</div>
-					</div>
-					<div className="AboutUs__fourthSection">
-						<div className="AboutUs__fourthSection-img">
-							<img src="/images/aboutus-5.jpg" alt="" />
-						</div>
-						<div className="AboutUs__fourthSection-text">
-							<MainTextWrap title="SELECTIVITY" typeTitle="main" isLarge={true}>
-								We have traveled the globe to hand-pick products from award-winning brands and designers. Our collection features a wide range of
-								exquisite and elegant products from esprit nouveau artworks to luxurious chic furniture.
-							</MainTextWrap>
-						</div>
-					</div>
+					{pageContent?.content[`${languageCurrent}`]?.map((value, i) => {
+						switch (value.section) {
+							case "1":
+								return (
+									<React.Fragment key={i}>
+										<div className="AboutUs__firstSection">
+											<MainTextWrap className="AboutUs__firstSection-text" title="Về chúng tôi" typeTitle="main" isLarge={true}>
+												<p>{renderHTML(value.text1)}</p>
+												<div className="quote">
+													<span>“</span>
+													<blockquote>{value.quote}</blockquote>
+												</div>
+												<p className="content">{renderHTML(value.text2)}</p>
+											</MainTextWrap>
+											<div className="AboutUs__firstSection-img">
+												<img src={asset(value.image)} alt="" />
+											</div>
+										</div>
+									</React.Fragment>
+								);
+							case "2":
+								return (
+									<div className="AboutUs__secondSection">
+										<div className="AboutUs__secondSection-img">
+											<img src={asset(value.image)} alt="" />
+										</div>
+										<div className="AboutUs__secondSection-text">
+											<MainTextWrap title={value.title} typeTitle="main" isLarge={true}>
+												<p>{renderHTML(value.text1)}</p>
+												<div className="statistic">
+													<span>+50</span>
+													<MainTitle className="statistic__text">{renderHTML(value.text2)}</MainTitle>
+												</div>
+											</MainTextWrap>
+										</div>
+									</div>
+								);
+							case "3":
+								return (
+									<div className="AboutUs__thirdSection">
+										<div className="AboutUs__thirdSection-text">
+											<MainTextWrap title={value.title} typeTitle="main" isLarge={true}>
+												{renderHTML(value.text)}
+											</MainTextWrap>
+										</div>
+										<div className="AboutUs__thirdSection-img">
+											<img src={asset(value.image)} alt="" />
+										</div>
+									</div>
+								);
+							case "4":
+								return (
+									<div className="AboutUs__fourthSection">
+										<div className="AboutUs__fourthSection-img">
+											<img src={asset(value.image)} alt="" />
+										</div>
+										<div className="AboutUs__fourthSection-text">
+											<MainTextWrap title={value.title} typeTitle="main" isLarge={true}>
+												{renderHTML(value.text)}
+											</MainTextWrap>
+										</div>
+									</div>
+								);
+						}
+					})}
 				</GridLayout>
 			</div>
 			<style jsx global>{`
 				.AboutUs {
 					img {
 						width: 100%;
+						height: 100%;
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						transform: translate(-50%, -50%);
+						object-fit: cover;
 					}
 					&__firstSection {
 						grid-column: 3 / 16;
@@ -87,7 +108,6 @@ export default function AboutUs() {
 						--widthContent: calc(50% - var(--gapFlex) / 2);
 						--gapFlex: 9.8rem;
 						margin-top: 13.7rem;
-
 						&-text {
 							width: var(--widthContent);
 							.title {
@@ -128,6 +148,8 @@ export default function AboutUs() {
 						}
 						&-img {
 							width: var(--widthContent);
+							position: relative;
+							overflow: hidden;
 						}
 					}
 					&__secondSection {
@@ -139,6 +161,8 @@ export default function AboutUs() {
 						margin-top: 10rem;
 						&-img {
 							width: calc(55% - var(--gapFlex) / 2);
+							position: relative;
+							overflow: hidden;
 						}
 						&-text {
 							width: calc(45% - var(--gapFlex) / 2);
@@ -175,7 +199,7 @@ export default function AboutUs() {
 					&__thirdSection {
 						--gapFlex: 11rem;
 						grid-column: 4 / 14;
-						margin: -5.5rem 0 10rem;
+						margin: 4rem 0 10rem;
 						display: flex;
 						justify-content: space-between;
 						align-items: flex-end;
@@ -195,6 +219,14 @@ export default function AboutUs() {
 						}
 						&-img {
 							width: calc(54% - var(--gapFlex) / 2);
+							img {
+								min-width: 100%;
+								min-height: 100%;
+								position: inherit;
+								transform: none;
+								top: inherit;
+								left: inherit;
+							}
 						}
 					}
 					&__fourthSection {
@@ -215,6 +247,69 @@ export default function AboutUs() {
 								line-height: 1.6em;
 								color: ${variable.color.dark_grey} !important;
 							}
+							@media (max-width: 1150px) {
+								width: 28%;
+							}
+							@media (max-width: 820px) {
+								width: 50%;
+							}
+						}
+						&-img {
+							position: relative;
+							overflow: hidden;
+							height: 100%;
+							@media (max-width: 820px) {
+								height: 60rem;
+							}
+							img {
+								min-width: 100%;
+								min-height: 100%;
+								position: inherit;
+								transform: none;
+								top: inherit;
+								left: inherit;
+							}
+						}
+					}
+					@media (max-width: 1024px) {
+						&__firstSection {
+							grid-column: 2 / 16;
+						}
+						&__secondSection {
+							grid-column: 2 / 15;
+						}
+						&__thirdSection {
+							grid-column: 2 / 15;
+							margin-top: 6rem;
+						}
+					}
+					@media (max-width: 820px) {
+						&__firstSection,
+						&__secondSection,
+						&__thirdSection {
+							display: flex;
+							flex-direction: column;
+							grid-column: 2 / 15;
+							&-text {
+								width: 100%;
+								margin-bottom: 5rem;
+							}
+							&-img {
+								width: 100%;
+								height: 100%;
+								img {
+									min-width: 100%;
+									min-height: 100%;
+									position: inherit;
+									transform: none;
+									top: inherit;
+									left: inherit;
+								}
+							}
+						}
+						&__secondSection {
+							margin-top: 4rem;
+							flex-direction: column-reverse;
 						}
 					}
 				}

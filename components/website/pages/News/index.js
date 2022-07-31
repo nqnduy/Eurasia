@@ -62,7 +62,7 @@ export default function News() {
 	return (
 		<>
 			<div className="News">
-				<Banner image="/images/banner-8.jpg" category="News" title="Chạm đến đỉnh cao thanh nhã cùng BST Black & White Refinement" />
+				<Banner image="/images/banner-8.jpg" category="News" title="Chạm đến đỉnh cao thanh nhã cùng BST Black & White Refinement" link="#"/>
 				<GridLayout>
 					<div className="News__content">
 						<div className="News__content-header">

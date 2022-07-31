@@ -30,7 +30,6 @@ export async function getServerSideProps(context) {
 
 export default function InspirationDetailPage(props) {
 	const {  banner, name, galleries } = props.data;
-    console.log("props.data:", props.data);
     return (
         <DetailLayout
             pageName={name.vi}
