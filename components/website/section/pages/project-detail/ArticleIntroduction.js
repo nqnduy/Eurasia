@@ -8,9 +8,12 @@ export default function ArticleIntroduction({ name, authorName, description }) {
 		<>
 			<div className="article-introduction">
 				<MainTitle.Large size="xLarge">{name}</MainTitle.Large>
-				<HeadlineText className="author" colorTitle={variable.color.gold}>
+				{authorName ?
+					(<HeadlineText className="author" colorTitle={variable.color.gold}>
 					DESIGNER: <span>{authorName}</span>
-				</HeadlineText>
+					</HeadlineText>) :
+					("")
+				}
 				<h3 className="description">{description}</h3>
 			</div>
 			<style jsx global>{`

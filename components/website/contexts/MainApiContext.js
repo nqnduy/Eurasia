@@ -37,6 +37,7 @@ export default function MainApiContextProvider({ children }) {
 	//news
 	const [newsList, setNewsList] = useState();
 	const [newsDetail, setNewsDetail] = useState();
+	const [otherNews, setOtherNews] = useState();
 
 	const getInspirationCategories = async (order) => {
 		const res = await ApiCall({
@@ -311,14 +312,27 @@ export default function MainApiContextProvider({ children }) {
 		}
 	};
 
-
 	const getNewsDetail = async (slug) => {
 		const res = await ApiCall({
 			path: `/api/v1/news/${slug}`,
 		});
 		if (res.data) {
-			console.log("news detail", res.data);
+			// console.log("news detail", res.data);
 			setNewsDetail(res.data);
+		} else {
+			notification.error({
+				message: res.message || "Something went wrong",
+			});
+		}
+	};
+
+	const getOtherNews = async () => {
+		const res = await ApiCall({
+			path: `/api/v1/news?order=-1&orderBy=publishedAt&limit=2&idNotIn=61dd2e3d555ba4002639043e&isRandom=true&categories=61bb1cd906a9c80025ec5005`,
+		});
+		if (res.data) {
+			console.log("other news", res.data.list);
+			setOtherNews(res.data.list);
 		} else {
 			notification.error({
 				message: res.message || "Something went wrong",
@@ -390,6 +404,9 @@ export default function MainApiContextProvider({ children }) {
 
 				newsDetail,
 				getNewsDetail,
+
+				otherNews,
+				getOtherNews
 			}}>
 			{children}
 		</MainApiContext.Provider>

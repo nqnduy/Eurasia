@@ -17,7 +17,7 @@ export default function DetailLayout({ children, pageName, imageBanner, dataFeat
 				</div>
 				<SlideDetailPage data={dataGallery} explore={explore} />
 				{dataFeatureProduct && <FeatureProduct data={dataFeatureProduct} />}
-				{/* {dataRelatedNews && <RelatedNews data={dataRelatedNews} />} */}
+				{dataRelatedNews && <RelatedNews data={dataRelatedNews} />}
 			</div>
 			<style jsx>{`
 				.DetailLayout {

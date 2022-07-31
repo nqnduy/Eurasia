@@ -13,16 +13,16 @@ export async function getServerSideProps(context) {
 	}
 
 	const res2 = await ApiCall({
-		path: `/api/v1/products?isHighlight=true&brands=&order=1&orderBy=sortOrder`,
+		path: `/api/v1/news?order=-1&orderBy=publishedAt&limit=2&idNotIn=61dd2e3d555ba4002639043e&isRandom=true&categories=61bb1cd906a9c80025ec5005`,
 	});
-	let productHighlightData = [];
+	let otherNewsData = [];
 	if (res2.status) {
-		productHighlightData = res2.data.list;
+		otherNewsData = res2.data.list;
 	}
 	return {
 		props: {
 			data,
-			productHighlightData,
+			otherNewsData,
 		},
 	};
 };
@@ -32,7 +32,7 @@ export default function NewsDetailPage(props) {
 	const { banner, name, galleries } = props.data;
 
 	return (
-		<DetailLayout pageName={name.vi} dataFeatureProduct={props.productHighlightData} dataGallery={galleries} imageBanner={banner}>
+		<DetailLayout pageName={name.vi} dataRelatedNews={props.otherNewsData} dataGallery={galleries} imageBanner={banner}>
 			<NewsDetail />
 		</DetailLayout>
 	);
