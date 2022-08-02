@@ -253,7 +253,8 @@ export default function MainApiContextProvider({ children }) {
 		}
 	};
 
-	const getInspirationHighlight = async (page, limit, isHighlight=false) => {
+	const getInspirationHighlight = async (filterObj = { limit: 99999, isHighlight: false, page: 1 }, functionCB) => {
+		const { limit, isHighlight, page } = filterObj;
 		const res = await ApiCall({
 			path: `/api/v1/frontend/inspirations?${limit ? `&limit=${limit}` : ""}&order=1&orderBy=sortOrder${
 				isHighlight ? `&isHighlight=${isHighlight}` : ""
@@ -261,8 +262,13 @@ export default function MainApiContextProvider({ children }) {
 		});
 		if (res.data) {
 			// console.log("inspiration highlight:", res.data);
-			setInspirationHighlight(res.data.list);
-			setPaginatorInspiration(res.data.paginator);
+			if (page) {
+				setPaginatorInspiration(res.data.paginator);
+				console.log("res.data.paginator:", res.data.paginator);
+			}
+			await functionCB(res.data.list);
+			console.log("inspiration data:", res.data)
+			// setInspirationHighlight(res.data.list);
 		} else {
 			notification.error({
 				message: res.message || "Something went wrong",

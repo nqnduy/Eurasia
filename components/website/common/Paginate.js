@@ -7,11 +7,10 @@ import ArrowNext from '@/website/common/ArrowNext';
 import { changeQueryURL } from 'modules/utils';
 import ArrowPrev from '@/website/common/ArrowPrev';
 
-export default function Paginate({ totalPage }) {
+export default function Paginate({ totalPage, onClickPaginate }) {
 	const router = useRouter();
 	const { query } = router;
 	const currentPage = parseInt(query.page || "1");
-
 	const renderPage = () => {
 		if (totalPage <= 1) return;
 
@@ -31,7 +30,7 @@ export default function Paginate({ totalPage }) {
 			list.push(
 				<React.Fragment key={i}>
 					<Link href={changeQueryURL({ ...query, page: i })} passHref replace>
-						<li className={`page-item none-select ${currentPage === i ? "active" : ""}`}>
+						<li className={`page-item none-select ${currentPage === i ? "active" : ""}`} onClick={onClickPaginate ? onClickPaginate : ""}>
 							<a className="page-link">{i < 10 ? `0${i}` : i}</a>
 						</li>
 					</Link>

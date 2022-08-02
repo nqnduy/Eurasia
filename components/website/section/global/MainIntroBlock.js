@@ -13,25 +13,30 @@ export default function MainIntroBlock(props) {
 		name,
 		description,
 		author,
+		authorName,
 		images,
 		type,
 		className,
 		isHaveAuthor = true,
 		positionControl,
-		arrowSlide = true } = props;
+		arrowSlide = true, ref } = props;
 	return (
 		<>
-			<div className={`MainIntroBlock ${className} ${type === "horizontal" ? "horizontal" : positionControl === "top" ? "vertical top" : "vertical"}`}>
+			<div className={`MainIntroBlock ${className} ${type === "horizontal" ? "horizontal" : positionControl === "top" ? "vertical top" : "vertical"}`} ref={ref}>
 				<div className="MainIntroBlock__text">
 					<AppLink href={slug}>
 						<MainTextWrap title={name} typeTitle="main" isLarge={true}>
 							<div className="content">{description}</div>
 							{author ? (
 								<HeadlineText className="author" colorTitle={variable.color.gold}>
-									Eurasia Concept: <span>Davide Sozzi</span>
+									Eurasia Concept: <span>{author}</span>
+								</HeadlineText>
+							) : authorName ? (
+								<HeadlineText className="author" colorTitle={variable.color.gold}>
+									Eurasia Concept: <span>{authorName}</span>
 								</HeadlineText>
 							) : (
-								<></>
+								""
 							)}
 							<MainTitle.CTA className="cta">ReadMore</MainTitle.CTA>
 						</MainTextWrap>
@@ -181,6 +186,7 @@ export default function MainIntroBlock(props) {
 							.content {
 								font-size: 1.2rem !important;
 							}
+
 						}
 					}
 					@media (max-width: 820px) {

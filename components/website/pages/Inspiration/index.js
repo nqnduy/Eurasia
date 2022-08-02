@@ -2,23 +2,59 @@ import GridLayout from "@/website/elements/GridLayout";
 import Banner from "@/website/section/global/Banner";
 import Introduction from "@/website/section/global/Introduction";
 import CardListInspiration from "@/website/section/pages/inspiration/CardList";
-import React, { useEffect,useContext } from "react";
+import React, { useEffect, useContext, useState, useRef } from "react";
 import Inspirations from "@/website/section/pages/home/AllInspirations/data.json";
 import { data } from "autoprefixer";
 import MainIntroBlock from "@/website/section/global/MainIntroBlock";
 import { MainApiContext } from "@/website/contexts/MainApiContext";
 import { MainContext } from "@/website/contexts/MainContext";
+import useScrollToPosition from "modules/hooks/useScrollToPosition";
+import { Pagination } from "antd";
+import AnimateHeight from "react-animate-height";
 
 export default function Inspiration() {
-	const { pageContent, getPageContent, inspirationHighlight, getInspirationHighlight } = useContext(MainApiContext);
+	const { pageContent, getPageContent, inspirationHighlight, paginatorInspiration, getInspirationHighlight } = useContext(MainApiContext);
 	const { languageCurrent } = useContext(MainContext);
+	const handleClickToTop = useScrollToPosition(2150);
+	const [heightList, setHeightList] = useState("auto");
+	const [height, setHeight] = useState(heightList);
+
+	const [list, setList] = useState();
+	const [listLimit, setListLimit] = useState();
+	const [currentPage, setCurrentPage] = useState(1);
+	const [filterPage, setFilterPage] = useState({
+		page: 1,
+		limit: 4,
+	})
+	const ref = useRef(null);
 
 	useEffect(() => {
+		setHeight(ref.current?.clientHeight);
+		console.log("height: ", ref.current?.clientHeight);
+
+		console.log("width: ", ref.current?.clientWidth);
+	}, []);
+	useEffect(() => {
 		getPageContent("INSPIRATION");
-		getInspirationHighlight("", 999999, true);
-		getInspirationHighlight(1, 4);
+		getInspirationHighlight({isHighlight: true, limit: 999999}, setList);
+		getInspirationHighlight(filterPage, setListLimit);
 	}, []);
 
+	// console.log("height:", height)
+	const onChangePaginate = (value) => {
+		setTimeout(() => {
+			document.getElementById("scrollIntoView")?.scrollIntoView({ behavior: "smooth" });
+		}, 200);
+		getInspirationHighlight({ ...filterPage, page: value }, setListLimit);
+		setCurrentPage(value);
+	};
+	useEffect(() => {
+		setHeightList(listLimit?.length * height);
+	}, [listLimit?.length]);
+
+	console.log("currentPage:", currentPage)
+	console.log("paginatorInspiration?.limit:", paginatorInspiration?.limit);
+	console.log("heightList:", heightList);
 	return (
 		<>
 			<div className="Inspiration">
@@ -39,23 +75,31 @@ export default function Inspiration() {
 							);
 					}
 				})}
-				<CardListInspiration data={inspirationHighlight} />
-				<GridLayout>
-					<div className="Inspiration__content-inSide">
-						{inspirationHighlight?.map((item, index) => (
-							<React.Fragment key={index}>
-								<MainIntroBlock
-									name={item.name[`${languageCurrent}`]}
-									images={item.images}
-									slug={`/inspiration/${item.slug[languageCurrent]}`}
-									description={item.description[`${languageCurrent}`]}
-									positionControl="top"
-									arrowSlide={false}
-								/>
-							</React.Fragment>
-						))}
-					</div>
-				</GridLayout>
+				<CardListInspiration data={list} />
+				<span id="scrollIntoView"></span>
+				<AnimateHeight duration={500} delay={300} height={heightList}>
+					<GridLayout>
+						<div className="Inspiration__content-inSide">
+							{listLimit?.map((item, index) => (
+								<React.Fragment key={index}>
+									<MainIntroBlock
+										name={item.name[`${languageCurrent}`]}
+										images={item.images}
+										slug={`/inspiration/${item.slug[languageCurrent]}`}
+										description={item.description[`${languageCurrent}`]}
+										authorName={item.authorName[`${languageCurrent}`]}
+										positionControl="top"
+										arrowSlide={false}
+										ref={ref}
+									/>
+								</React.Fragment>
+							))}
+						</div>
+					</GridLayout>
+				</AnimateHeight>
+				{paginatorInspiration && (
+					<Pagination total={paginatorInspiration.total} current={currentPage} pageSize={paginatorInspiration.limit} onChange={onChangePaginate} />
+				)}
 			</div>
 			<style jsx global>{`
 				.Inspiration {
@@ -77,9 +121,11 @@ export default function Inspiration() {
 							padding: 0 1.5rem;
 							grid-column: 1 / 16;
 						}
+
 						&-inSide {
 							margin-top: 5rem;
 							grid-column: 3 / 14;
+
 							.MainIntroBlock {
 								.ImageSlidePaging {
 									.slide-count {
